@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AI大穴競馬予測ツール - 初心者でもひと目でわかる波乱度判定と券種別おすすめ大穴買い目提案アプリ">
+  <title>大穴ナビゲーター | AI競馬波乱度・穴馬予測ツール</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- 背景エフェクト -->
+  <div class="bg-glow bg-glow-1"></div>
+  <div class="bg-glow bg-glow-2"></div>
+  <div class="bg-pattern"></div>
+
+  <!-- ヘッダー -->
+  <header class="app-header">
+    <div class="header-container">
+      <div class="brand">
+        <div class="brand-badge">
+          <span class="pulse-dot"></span> AI KEIBA RADAR
+        </div>
+        <h1 class="brand-title">大穴ナビゲーター <span>PRO</span></h1>
+        <p class="brand-subtitle">素人でも迷わない！波乱レース判定 ＆ 券種別おすすめ買い目AI</p>
+      </div>
+      <div class="header-actions">
+        <!-- 仮想馬券シミュレーター ウォレット -->
+        <div class="wallet-badge" id="wallet-badge" title="ノーリスクで楽しめる仮想資金">
+          <span class="wallet-icon">💰</span>
+          <div class="wallet-info">
+            <span class="wallet-label">仮想資金残高</span>
+            <span class="wallet-val" id="wallet-balance">10,000 pt</span>
+          </div>
+          <button class="wallet-reset-btn" id="wallet-reset-btn" title="資金を10,000ptにリセット">↺</button>
+        </div>
+
+        <!-- AI通算信頼性サマリーバッジ -->
+        <div class="ai-track-record-badge" title="直近100レースのバックテスト実績">
+          <div class="record-item">
+            <span class="record-label">AI穴馬回収率</span>
+            <span class="record-val highlight-green">146.8%</span>
+          </div>
+          <div class="record-divider"></div>
+          <div class="record-item">
+            <span class="record-label">大穴好走率</span>
+            <span class="record-val">36.2%</span>
+          </div>
+        </div>
+
+        <button id="btn-beginner-guide" class="btn btn-outline" aria-label="買い方初心者ガイドを開く">
+          <span class="icon">📖</span> 馬券の超基本ガイド
+        </button>
+        <div class="budget-selector">
+          <label for="budget-select">本日の予算：</label>
+          <select id="budget-select">
+            <option value="1000">1,000円（お試し）</option>
+            <option value="2000" selected>2,000円（おすすめ）</option>
+            <option value="3000">3,000円（しっかり）</option>
+            <option value="5000">5,000円（勝負）</option>
+          </select>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- メインコンテンツ -->
+  <main class="main-container">
+    <!-- レース選択バー（全競馬場・全レース対応） -->
+    <section class="race-selector-section" aria-label="レース選択">
+      <div class="selector-header">
+        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          <span class="section-label">全レース予想セレクター</span>
+          <!-- 競馬場タブ -->
+          <div class="venue-tabs" id="venue-tabs">
+            <button class="venue-btn active" data-venue="tokyo">東京競馬場 (天皇賞・秋 当日)</button>
+            <button class="venue-btn" data-venue="kyoto">京都競馬場</button>
+            <button class="venue-btn" data-venue="niigata">新潟（アーカイブ・特大波乱）</button>
+          </div>
+        </div>
+        <!-- 予想中 / 結果検証モード切り替えトグル -->
+        <div class="mode-toggle-group">
+          <button id="mode-prediction-btn" class="mode-btn active">🔮 事前予想モード</button>
+          <button id="mode-result-btn" class="mode-btn">🏁 確定結果・的中検証モード</button>
+        </div>
+      </div>
+
+      <!-- レース番号一覧（1R〜12R） -->
+      <div class="race-round-selector">
+        <span class="round-label">レース番号：</span>
+        <div class="round-buttons" id="round-buttons">
+          <!-- 1R〜12RのボタンをJSで生成 -->
+        </div>
+      </div>
+
+      <!-- レースカード一覧（波乱度サマリー） -->
+      <div class="race-cards-carousel" id="race-list-container">
+        <!-- JSでレースタブ/カードを生成 -->
+      </div>
+    </section>
+
+    <!-- レース結果・的中判定エリア（確定結果モード時に最優先表示） -->
+    <section class="result-verification-section" id="result-verification-section" style="display: none;" aria-label="レース結果と的中判定">
+      <!-- JSで動的レンダリング -->
+    </section>
+
+    <!-- レースヘッダー情報＆波乱度インジケーター -->
+    <section class="race-overview-card" id="race-overview">
+      <div class="overview-main">
+        <div class="race-meta-badge" id="race-badge">東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）</div>
+        <h2 class="race-name" id="race-title">第174回 天皇賞（秋）</h2>
+        <div class="race-conditions" id="race-conditions">
+          <span>天候: <strong>晴</strong></span>
+          <span class="sep">•</span>
+          <span>馬場: <strong class="badge-heavy tooltip-trigger" data-tip="馬場の水分量・荒れ具合。良＝走りやすい、重・不良＝滑りやすく波乱が起きやすい">良馬場（超高速芝）ℹ️</strong></span>
+          <span class="sep">•</span>
+          <span>展開: <strong class="badge-pace tooltip-trigger" data-tip="レースのペース。ハイペース＝前がバテて差し穴馬が有利、スロー＝前残り有利">ミドルペースℹ️</strong></span>
+        </div>
+
+        <!-- ⚠️ 危険な人気馬アラート（消し馬判定） -->
+        <div class="danger-horse-banner" id="danger-horse-banner">
+          <!-- 動的レンダリング -->
+        </div>
+      </div>
+
+      <!-- 波乱度メーター ＆ みんなの支持率バー -->
+      <div class="volatility-card">
+        <div class="volatility-header">
+          <span class="volatility-title">AI波乱度レーダー</span>
+          <span class="volatility-level-badge" id="volatility-badge">⚠️ 中波乱・混戦模様</span>
+        </div>
+        <div class="volatility-visual">
+          <div class="volatility-meter-outer">
+            <div class="volatility-meter-inner" id="volatility-bar" style="width: 68%;"></div>
+          </div>
+          <div class="volatility-score" id="volatility-score">68<span>%</span></div>
+        </div>
+        <p class="volatility-desc" id="volatility-desc">
+          実力伯仲の混戦模様！直線の瞬発力勝負で人気薄の追い込み馬が飛び込む大穴パターン。
+        </p>
+
+        <!-- 👥 みんなの支持率ソーシャルバー -->
+        <div class="community-poll-box" id="community-poll-box">
+          <div class="poll-header">
+            <span class="poll-title">👥 ファンの予想傾向</span>
+            <span class="poll-count" id="poll-voters-count">計 1,842 票</span>
+          </div>
+          <div class="poll-bar-wrapper">
+            <div class="poll-bar-seg favorite-seg" id="poll-fav-bar" style="width: 58%;">
+              <span>本命派 58%</span>
+            </div>
+            <div class="poll-bar-seg underdog-seg" id="poll-under-bar" style="width: 42%;">
+              <span>穴党派 42%</span>
+            </div>
+          </div>
+          <div class="poll-action-buttons">
+            <button class="poll-vote-btn" id="vote-fav-btn">👍 私は「本命派」</button>
+            <button class="poll-vote-btn" id="vote-under-btn">🔥 私は「穴党派」</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 初心者向け：今すぐ買えるおすすめ3コース -->
+    <section class="recommendation-section" aria-label="おすすめ買い方コース">
+      <div class="section-header">
+        <div>
+          <span class="section-badge">素人でも安心！</span>
+          <h3 class="section-title">あなたの予算に合わせた「3つの買い方プラン」</h3>
+        </div>
+        <p class="section-caption">「どの馬券を買えばいいか分からない…」という方は、この3つから好みのスタイルを選ぶだけでOKです！</p>
+      </div>
+
+      <div class="plans-grid" id="plans-container">
+        <!-- プランカード1: ローリスク安心コース -->
+        <!-- プランカード2: バランス一攫千金コース (イチオシ) -->
+        <!-- プランカード3: 夢の超特大万馬券コース -->
+      </div>
+    </section>
+
+    <!-- 本日の厳選激走穴馬（なぜこの馬なのか？） -->
+    <section class="dark-horses-section" aria-label="激走穴馬ピックアップ">
+      <div class="section-header">
+        <div>
+          <span class="section-badge bg-gold">AI激走シグナル検知</span>
+          <h3 class="section-title">なぜこの穴馬が狙い目なのか？（注目馬3選）</h3>
+        </div>
+        <p class="section-caption">過去のビッグ配当パターンと完全一致する「隠れた好走要因」を持つ人気薄を可視化。</p>
+      </div>
+
+      <div class="horses-grid" id="horses-container">
+        <!-- 穴馬カードが動的に生成されます -->
+      </div>
+    </section>
+
+    <!-- 券種別詳細シミュレーション（中・上級者向け＆比較） -->
+    <section class="bet-types-section" aria-label="各馬券種別の詳細予想">
+      <div class="section-header">
+        <div>
+          <span class="section-badge">各馬券ごとの徹底比較</span>
+          <h3 class="section-title">券種別大穴予想・買い目一覧</h3>
+        </div>
+        <p class="section-caption">券種ごとの「的中率」と「想定配当」のバランスを確認できます。</p>
+      </div>
+
+      <div class="bet-tabs" role="tablist">
+        <button class="bet-tab active" data-bet="tansho-fukusho">単勝・複勝 (安心)</button>
+        <button class="bet-tab" data-bet="wide">ワイド (1番人気)</button>
+        <button class="bet-tab" data-bet="umaren">馬連・馬単</button>
+        <button class="bet-tab" data-bet="sanrenpuku">3連複 (高配当)</button>
+        <button class="bet-tab" data-bet="sanrentan">3連単 (夢の万馬券)</button>
+      </div>
+
+      <div class="bet-tab-content-panel" id="bet-tab-content">
+        <!-- タブごとの買い目・期待配当・解説 -->
+      </div>
+    </section>
+
+    <!-- 出走全頭オッズ＆AIスコア表 -->
+    <section class="all-runners-section" aria-label="出走全頭表">
+      <details class="runners-accordion">
+        <summary class="runners-summary">
+          <span>出走全頭リストとAI期待値スコアを表示（全頭詳細）</span>
+          <span class="accordion-arrow">▼</span>
+        </summary>
+        <div class="table-responsive">
+          <table class="runners-table">
+            <thead>
+              <tr>
+                <th>枠/馬番</th>
+                <th>馬名</th>
+                <th><span class="tooltip-trigger" data-tip="騎手と背負う重さ。1kg軽いと約1馬身分有利とされます">騎手/斤量ℹ️</span></th>
+                <th>単勝オッズ/人気</th>
+                <th><span class="tooltip-trigger" data-tip="逃げ・先行・差し・追込など馬の得意な走り方。展開に大きく影響します">脚質ℹ️</span></th>
+                <th><span class="tooltip-trigger" data-tip="AIが算出した穴馬としての激走期待値。80点以上は激走要注意">AI穴馬指数ℹ️</span></th>
+                <th>評価判定</th>
+              </tr>
+            </thead>
+            <tbody id="runners-tbody">
+              <!-- 動的生成 -->
+            </tbody>
+          </table>
+        </div>
+      </details>
+    </section>
+
+  </main>
+
+  <!-- フッター -->
+  <footer class="app-footer">
+    <div class="footer-container">
+      <p class="footer-brand">大穴ナビゲーター PRO (AI Keiba Volatility & Longshot Radar)</p>
+      <p class="footer-note">※馬券の購入は自己責任でお願いいたします。未成年者の馬券購入は法律で禁止されています。</p>
+    </div>
+  </footer>
+
+  <!-- 初心者ガイドモーダル -->
+  <div class="modal-backdrop" id="guide-modal" hidden>
+    <div class="modal-window">
+      <div class="modal-header">
+        <h3>🔰 素人でも3分でわかる馬券選びのルール</h3>
+        <button class="modal-close" id="modal-close-btn" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="guide-item">
+          <div class="guide-badge green">基本のキ</div>
+          <h4>大穴を狙う初心者は「複勝」か「ワイド」から！</h4>
+          <p>
+            大穴馬は<strong>「1着になるのは難しいが、2着や3着に紛れ込む」</strong>確率が最も高いです。<br>
+            単勝（1着当て）ではなく、3着以内に入れば当たる<strong>「複勝」</strong>や、2頭が3着以内に入る<strong>「ワイド」</strong>を選ぶと、驚くほど的中率が上がり、数千円〜数万円の美味しい配当が手に入ります。
+          </p>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-badge orange">馬券の種類別：大穴狙いの相性</div>
+          <ul class="guide-list">
+            <li><strong>複勝（おすすめ度 ★★★★★）:</strong> 3着以内に入ればOK。穴馬なら100円が1,000円〜3,000円（10〜30倍）に化けます。最も負けにくい買い方。</li>
+            <li><strong>ワイド（おすすめ度 ★★★★★）:</strong> 3着以内に入る2頭を当てる。「人気馬＋大穴馬」の組み合わせを買うのが一番の勝ちパターン。</li>
+            <li><strong>3連複（おすすめ度 ★★★★☆）:</strong> 3着以内に入る3頭を着順不問で当てる。「軸馬1頭＋相手に大穴」を絡めると10万馬券も狙えます。</li>
+            <li><strong>3連単（おすすめ度 ★★☆☆☆）:</strong> 1〜3着を順番通り当てる。当たれば数百万円ですが、初心者が闇雲に買うと資金がすぐ尽きます。</li>
+          </ul>
+        </div>
+
+        <div class="guide-item">
+          <div class="guide-badge purple">大穴ナビゲーターの使い方</div>
+          <p>
+            1. 「波乱度」が<strong>70%以上</strong>のレースだけを狙う（堅いレースは見送る）。<br>
+            2. アプリの「おすすめ3プラン」から、自分の予算に合ったカードの買い目をそのまま買う。<br>
+            3. これだけで無理のない資金管理で超高額配当のワクワクを楽しめます！
+          </p>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-primary" id="modal-understand-btn">理解した！予想を見る</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 🔒 プレミアム買い目アンロック（note単発 300円 / 月額1,980円）モーダル -->
+  <div class="modal-backdrop" id="premium-modal" hidden>
+    <div class="modal-window" style="max-width: 520px;">
+      <div class="modal-header">
+        <h3 style="display:flex; align-items:center; gap:8px;">
+          <span>👑 特大万馬券・限定買い目アンロック</span>
+        </h3>
+        <button class="modal-close" id="premium-close-btn" aria-label="閉じる">&times;</button>
+      </div>
+      <div class="modal-body">
+        <p style="font-size:0.9rem; color:var(--text-muted); line-height:1.6;">
+          AIが厳選した<strong>「超特大万馬券（3連単完全フォーメーション）」</strong>は、note有料記事または月額メンバーシップ限定で公開しています。
+        </p>
+
+        <div style="display:grid; grid-template-columns:1fr 1fr; gap:14px; margin-top:8px;">
+          <!-- 単発プラン -->
+          <div style="background:rgba(255,255,255,0.03); border:1px solid var(--border-color); border-radius:12px; padding:16px; display:flex; flex-direction:column; justify-content:space-between; gap:10px;">
+            <div>
+              <span class="guide-badge green">お試し単発</span>
+              <h4 style="font-size:1.05rem; margin-top:6px;">このレースだけ</h4>
+              <p style="font-size:0.78rem; color:var(--text-dim); margin-top:4px;">G1や気になる勝負レースだけピンポイントで購入したい方向け。</p>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:900; color:var(--accent-gold);">
+                300 <span style="font-size:0.8rem; color:var(--text-muted);">円/レース</span>
+              </div>
+              <a href="https://note.com" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:8px; font-size:0.75rem;">
+                noteで単発購入 ↗
+              </a>
+            </div>
+          </div>
+
+          <!-- 月額プラン (イチオシ) -->
+          <div style="background:linear-gradient(135deg, rgba(245,158,11,0.1), rgba(239,68,68,0.05)); border:2px solid var(--accent-gold); border-radius:12px; padding:16px; display:flex; flex-direction:column; justify-content:space-between; gap:10px; position:relative;">
+            <div style="position:absolute; top:-10px; right:10px; background:var(--accent-gold); color:#000; font-size:0.65rem; font-weight:900; padding:2px 8px; border-radius:10px;">
+              一番人気！
+            </div>
+            <div>
+              <span class="guide-badge orange">月額読み放題</span>
+              <h4 style="font-size:1.05rem; margin-top:6px;">週末全勝負レース</h4>
+              <p style="font-size:0.78rem; color:var(--text-dim); margin-top:4px;">月8〜10レースの限定買い目がすべて見放題。1レースあたり実質約200円！</p>
+            </div>
+            <div>
+              <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:900; color:var(--accent-neon-green);">
+                1,980 <span style="font-size:0.8rem; color:var(--text-muted);">円/月</span>
+              </div>
+              <a href="https://note.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px; font-size:0.75rem;">
+                メンバーシップ参加 ↗
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <p style="font-size:0.75rem; color:var(--text-dim); text-align:center; margin-top:4px;">
+          ※noteのアカウントをお持ちであれば、クレジットカード等ですぐにご利用いただけます。
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js?v=20261026_3"></script>
+</body>
+</html>

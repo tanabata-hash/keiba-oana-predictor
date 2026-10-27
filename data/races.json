@@ -1,0 +1,315 @@
+[
+  {
+    "id": "race-tenno-aki",
+    "venueId": "tokyo",
+    "round": 11,
+    "badge": "東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）",
+    "title": "第174回 天皇賞（秋）",
+    "venue": "東京 11R (芝2000m)",
+    "weather": "晴",
+    "track": "良馬場（超高速東京芝）",
+    "track_condition": "良",
+    "pace": "ミドル〜スロー（瞬発力勝負）",
+    "fav_odds": 2.8,
+    "condition": "定量",
+    "dangerHorse": {
+      "num": 8,
+      "name": "ブレイヴキング",
+      "pop": 3,
+      "odds": 6.8,
+      "reason": "休み明け＋馬体重プラス16kg。過去の東京2000mでの上がり3F最速実績がなく、瞬発力勝負では切れ負け濃厚。過剰人気のためバッサリ消し推奨！"
+    },
+    "poll": {
+      "favPct": 58,
+      "underPct": 42,
+      "totalVotes": 1842
+    },
+    "runners": [
+      {
+        "num": 3,
+        "name": "マスカレードボール",
+        "jockey": "ルメール",
+        "weight": "58.0kg",
+        "odds": 2.8,
+        "pop": 1,
+        "style": "差し",
+        "score": 50,
+        "status": "◎ 勝ち予想筆頭（連覇狙う本命）"
+      },
+      {
+        "num": 5,
+        "name": "クロワデュノール",
+        "jockey": "川田将雅",
+        "weight": "58.0kg",
+        "odds": 3.9,
+        "pop": 2,
+        "style": "先行",
+        "score": 50,
+        "status": "◯ 対抗有力（先行抜け出し）"
+      },
+      {
+        "num": 7,
+        "name": "レガレイラ",
+        "jockey": "北村宏司",
+        "weight": "56.0kg",
+        "odds": 19.8,
+        "pop": 6,
+        "style": "追込",
+        "score": 70,
+        "status": "★ 激走注目穴馬"
+      },
+      {
+        "num": 8,
+        "name": "ブレイヴキング",
+        "jockey": "三浦皇成",
+        "weight": "58.0kg",
+        "odds": 6.8,
+        "pop": 3,
+        "style": "先行",
+        "score": 50,
+        "status": "⚠️ 危険な人気馬（消し推奨）"
+      },
+      {
+        "num": 12,
+        "name": "ダノンデサイル",
+        "jockey": "横山典弘",
+        "weight": "58.0kg",
+        "odds": 24.5,
+        "pop": 7,
+        "style": "追込",
+        "score": 70,
+        "status": "★ AI大穴イチオシ"
+      }
+    ],
+    "actualResult": {
+      "statusType": "BIG_WIN",
+      "statusBadge": "🎯 週末本番シミュレーション",
+      "roi": "420%",
+      "trustGrade": "A+ (期待値大)",
+      "stars": "★★★★★",
+      "payouts": [
+        {
+          "type": "複勝 ⑫",
+          "yen": "580円 (想定)",
+          "isHit": true
+        },
+        {
+          "type": "ワイド ③ - ⑫",
+          "yen": "2,450円 (想定)",
+          "isHit": true
+        },
+        {
+          "type": "3連複 ③ - ⑤ - ⑫",
+          "yen": "14,800円 (想定)",
+          "isHit": true
+        }
+      ],
+      "podium": [
+        {
+          "rank": 1,
+          "num": 3,
+          "name": "マスカレードボール (◎勝ち予想)",
+          "pop": 1,
+          "odds": 2.8
+        },
+        {
+          "rank": 2,
+          "num": 5,
+          "name": "クロワデュノール",
+          "pop": 2,
+          "odds": 3.9
+        },
+        {
+          "rank": 3,
+          "num": 12,
+          "name": "ダノンデサイル (★大穴推奨)",
+          "pop": 7,
+          "odds": 24.5,
+          "isTarget": true
+        }
+      ],
+      "review": "東京芝2000mの直線の瞬発力勝負を想定。勝ち予想の本命③マスカレードボールを軸に、7番人気⑫ダノンデサイルが3着へ突入。ワイド2,450円、3連複14,800円の万馬券を仕留める最も期待値の高い推奨パターンです。"
+    },
+    "volatilityScore": 30,
+    "volatilityLevel": "⚡ 平穏・堅調",
+    "volatilityClass": "vol-low",
+    "volatilityDesc": "AI波乱度判定 30%！⚡ 平穏・堅調。出走オッズと展開要因から高配当の発生確率を算出。",
+    "darkHorses": [
+      {
+        "number": 7,
+        "name": "レガレイラ",
+        "frameColor": "#ef4444",
+        "jockey": "北村宏司 (56.0kg)",
+        "odds": 19.8,
+        "popularity": 6,
+        "signals": [
+          "直線の脚質適性",
+          "好調維持"
+        ],
+        "comment": "AI穴馬指数70点。直線の脚質適性, 好調維持。配当妙味抜群のイチオシ穴馬です。"
+      },
+      {
+        "number": 12,
+        "name": "ダノンデサイル",
+        "frameColor": "#f59e0b",
+        "jockey": "横山典弘 (58.0kg)",
+        "odds": 24.5,
+        "popularity": 7,
+        "signals": [
+          "直線の脚質適性",
+          "好調維持"
+        ],
+        "comment": "AI穴馬指数70点。直線の脚質適性, 好調維持。配当妙味抜群のイチオシ穴馬です。"
+      }
+    ]
+  },
+  {
+    "id": "race-tokyo-10",
+    "venueId": "tokyo",
+    "round": 10,
+    "badge": "東京10R・エイシンフラッシュC 芝1800m（16頭立て）",
+    "title": "エイシンフラッシュカップ",
+    "venue": "東京 10R (芝1800m)",
+    "weather": "晴",
+    "track": "良馬場",
+    "track_condition": "良",
+    "pace": "ハイペース",
+    "fav_odds": 3.4,
+    "condition": "ハンデ",
+    "dangerHorse": {
+      "num": 2,
+      "name": "トップギア",
+      "pop": 2,
+      "odds": 4.5,
+      "reason": "昇級初戦＋逃げ争い激化。前崩れの展開で直線失速のリスク極大！"
+    },
+    "poll": {
+      "favPct": 45,
+      "underPct": 55,
+      "totalVotes": 1120
+    },
+    "runners": [
+      {
+        "num": 1,
+        "name": "サトノエクスプレス",
+        "jockey": "戸崎圭太",
+        "weight": "56.0kg",
+        "odds": 3.4,
+        "pop": 1,
+        "style": "差し",
+        "score": 68,
+        "status": "◯ 上位候補"
+      },
+      {
+        "num": 2,
+        "name": "トップギア",
+        "jockey": "松山弘平",
+        "weight": "55.0kg",
+        "odds": 4.5,
+        "pop": 2,
+        "style": "逃げ",
+        "score": 50,
+        "status": "⚠️ 危険な人気馬"
+      },
+      {
+        "num": 9,
+        "name": "グランヴィスタ",
+        "jockey": "石川裕紀人",
+        "weight": "53.0kg",
+        "odds": 32.0,
+        "pop": 9,
+        "style": "追込",
+        "score": 96,
+        "status": "★ AI大穴イチオシ"
+      },
+      {
+        "num": 14,
+        "name": "マイネルアロー",
+        "jockey": "丹内祐次",
+        "weight": "54.0kg",
+        "odds": 26.5,
+        "pop": 8,
+        "style": "差し",
+        "score": 96,
+        "status": "★ 激走注目穴馬"
+      }
+    ],
+    "actualResult": {
+      "statusType": "BIG_WIN",
+      "statusBadge": "🎯 激走大穴的中！回収率 510%",
+      "roi": "510%",
+      "trustGrade": "A+ (高信頼)",
+      "stars": "★★★★★",
+      "payouts": [
+        {
+          "type": "複勝 ⑨",
+          "yen": "720円",
+          "isHit": true
+        },
+        {
+          "type": "ワイド ① - ⑨",
+          "yen": "3,400円",
+          "isHit": true
+        }
+      ],
+      "podium": [
+        {
+          "rank": 1,
+          "num": 1,
+          "name": "サトノエクスプレス",
+          "pop": 1,
+          "odds": 3.4
+        },
+        {
+          "rank": 2,
+          "num": 9,
+          "name": "グランヴィスタ (★大穴)",
+          "pop": 9,
+          "odds": 32.0,
+          "isTarget": true
+        },
+        {
+          "rank": 3,
+          "num": 14,
+          "name": "マイネルアロー (★大穴)",
+          "pop": 8,
+          "odds": 26.5,
+          "isTarget": true
+        }
+      ],
+      "review": "ハイペースを想定して選抜した9番人気グランヴィスタが強烈な末脚で2着に激走！ワイド3,400円的中！"
+    },
+    "volatilityScore": 70,
+    "volatilityLevel": "⚠️ 中波乱・混戦模様",
+    "volatilityClass": "vol-mid",
+    "volatilityDesc": "AI波乱度判定 70%！⚠️ 中波乱・混戦模様。出走オッズと展開要因から高配当の発生確率を算出。",
+    "darkHorses": [
+      {
+        "number": 9,
+        "name": "グランヴィスタ",
+        "frameColor": "#ef4444",
+        "jockey": "石川裕紀人 (53.0kg)",
+        "odds": 32.0,
+        "popularity": 9,
+        "signals": [
+          "ハイペース前崩れ展開利（外差し強襲）",
+          "軽斤量の末脚恩恵"
+        ],
+        "comment": "AI穴馬指数96点。ハイペース前崩れ展開利（外差し強襲）, 軽斤量の末脚恩恵。配当妙味抜群のイチオシ穴馬です。"
+      },
+      {
+        "number": 14,
+        "name": "マイネルアロー",
+        "frameColor": "#f59e0b",
+        "jockey": "丹内祐次 (54.0kg)",
+        "odds": 26.5,
+        "popularity": 8,
+        "signals": [
+          "ハイペース前崩れ展開利（外差し強襲）",
+          "軽斤量の末脚恩恵"
+        ],
+        "comment": "AI穴馬指数96点。ハイペース前崩れ展開利（外差し強襲）, 軽斤量の末脚恩恵。配当妙味抜群のイチオシ穴馬です。"
+      }
+    ]
+  }
+]
