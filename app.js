@@ -709,6 +709,16 @@ function renderVerificationSection() {
         <div class="review-title">🔍 AIレース回顧・信頼性判定レポート</div>
         <div class="review-text">${res.review}</div>
       </div>
+
+      <!-- 𝕏 的中自慢・結果シェアボタン（口コミ増殖機能） -->
+      <div style="margin-top:16px; text-align:center;">
+        <button class="btn btn-primary" style="width:100%; justify-content:center; gap:8px; font-size:0.9rem; font-weight:800; background:linear-gradient(135deg, #1d9bf0, #0284c7); box-shadow:0 4px 16px rgba(29,155,240,0.4);" onclick="shareHitToX()">
+          <span style="font-size:1.1rem;">𝕏</span> 的中結果をシェアして自慢する (${res.roi}) ↗
+        </button>
+        <p style="font-size:0.72rem; color:var(--text-muted); margin-top:6px;">
+          ※ワンタップでX(Twitter)の投稿画面が開き、的中スクショや結果を投稿できます
+        </p>
+      </div>
     </div>
   `;
 }
@@ -1344,6 +1354,27 @@ function setupPremiumModal() {
   }
 }
 
+// --- 𝕏 的中シェア（口コミ拡散）機能 ---
+function shareHitToX() {
+  if (!currentRace || !currentRace.actualResult) return;
+  const res = currentRace.actualResult;
+  const title = currentRace.title || currentRace.badge;
+  const hitPayouts = res.payouts ? res.payouts.filter(p => p.isHit).map(p => `${p.type} ${p.yen}`).join(" / ") : "";
+
+  let text = "";
+  if (res.statusType === "MISS") {
+    text = `【AI競馬回顧・的中検証】\n${title}\nAI波乱度判定とレース検証レポートをチェックしました！\nハズレも隠さず事前予想を完全公開中👇\n`;
+  } else {
+    text = `【🎯 万馬券・的中速報！】\n${title}\nAI大穴ナビゲーターの激走穴馬が見事に激走！\n${hitPayouts ? '的中払戻: ' + hitPayouts + '\n' : ''}回収率: ${res.roi} 🔥\n\n週末全レースの波乱度＆穴馬予想は無料公開中👇\n`;
+  }
+
+  const url = "https://oana-navi.com";
+  const hashtags = "大穴ナビゲーター,競馬予想,万馬券,競馬AI";
+  const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
+  
+  window.open(intentUrl, "_blank", "width=600,height=500");
+}
+
 // グローバルスコープへ明示的公開（HTMLインラインonclick対応）
 window.selectRace = selectRace;
 window.copyBetText = copyBetText;
@@ -1351,4 +1382,6 @@ window.buyVirtualBet = buyVirtualBet;
 window.handleVote = handleVote;
 window.openPremiumModal = openPremiumModal;
 window.unlockPlan3 = unlockPlan3;
+window.shareHitToX = shareHitToX;
+
 

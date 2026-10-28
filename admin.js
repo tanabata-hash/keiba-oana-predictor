@@ -151,16 +151,21 @@ function setupRefreshButton() {
   });
 }
 
-// --- 手動コマンドコピー ---
-function setupCopyCommand() {
-  const btn = document.getElementById("copy-cmd-btn");
-  if (!btn) return;
+// --- 📢 X投稿コピペ機能 ---
+function copyXPost(type) {
+  const textareaId = type === 'friday' ? 'x-post-friday' : 'x-post-morning';
+  const textarea = document.getElementById(textareaId);
+  if (!textarea) return;
 
-  btn.addEventListener("click", () => {
-    navigator.clipboard.writeText("./run_pipeline.sh").then(() => {
-      const old = btn.textContent;
-      btn.textContent = "コピー完了！";
-      setTimeout(() => { btn.textContent = old; }, 2000);
-    });
+  const text = textarea.value;
+  navigator.clipboard.writeText(text).then(() => {
+    alert("📋 X(Twitter)用の投稿文をクリップボードにコピーしました！\nこの後開くXの画面に貼り付けて投稿してください。");
+    const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}`;
+    window.open(intentUrl, "_blank");
+  }).catch(() => {
+    prompt("以下の文章をコピーしてください：", text);
   });
 }
+
+window.copyXPost = copyXPost;
+

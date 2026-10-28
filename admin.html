@@ -92,7 +92,7 @@
         <div class="payout-details-grid">
           <div class="payout-item">
             <span class="payout-item-label">連携noteアカウント</span>
-            <span class="payout-item-val highlight"><a href="https://note.com/tanavata" target="_blank" style="color:#38bdf8; text-decoration:underline;">@tanavata ↗</a></span>
+            <span class="payout-item-val highlight"><a href="https://note.com/oana_navi" target="_blank" style="color:#38bdf8; text-decoration:underline;">@oana_navi ↗</a></span>
           </div>
           <div class="payout-item">
             <span class="payout-item-label">受取用銀行口座</span>
@@ -428,7 +428,62 @@
       </div>
     </section>
 
-    <!-- ⚙️ Section 5: システム監視＆パイプライン自動化ステータス -->
+    <!-- 📢 Section 5: 週末集客用 X(Twitter)ポスト作成ツール -->
+    <section class="admin-section">
+      <div class="panel-header">
+        <h2 class="section-title" style="margin-bottom:0;">📢 週末集客用 X(Twitter)ポスト自動生成（1秒コピペ）</h2>
+        <span class="panel-sub">週末のゴールデンタイムにコピペ投稿するだけで、広告費0円で競馬ファンを大量集客</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+        <!-- 金曜夜 20:00 用 -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge-admin" style="background:#1d9bf0;">金曜 20:00 投稿推奨</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">枠順確定直後の集客</span>
+            </div>
+            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【金曜夜】波乱度警報 ＆ 危険な人気馬アラート</h4>
+            <textarea id="x-post-friday" readonly style="width:100%; height:130px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">⚡【AI大穴警報】今週末の重賞レース波乱度を算出！
+
+■ 天皇賞（秋）: 波乱度 68%（混戦）
+■ スワンS: 波乱度 85%（🔥超大穴警報！）
+
+⚠️ 天皇賞の1番人気に危険サイン点滅中（休み明け＋瞬発力切れ負け懸念）。
+AI激走スコア90点超えの【激走穴馬】はサイトで無料公開中👇
+https://oana-navi.com
+#競馬予想 #天皇賞秋 #穴馬</textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center; background:#1d9bf0;" onclick="copyXPost('friday')">
+            📋 この投稿文をコピーしてXを開く ↗
+          </button>
+        </div>
+
+        <!-- 土日朝 08:30 用 -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge-admin" style="background:#10b981;">土日 08:30 投稿推奨</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">朝オッズ反映後の直前集客</span>
+            </div>
+            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【土日朝】最新オッズ急変 ＆ 妙味穴馬速報</h4>
+            <textarea id="x-post-morning" readonly style="width:100%; height:130px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">🏇【朝オッズ急変】最新単勝オッズからオッズの歪み（妙味馬）をAI検知しました！
+
+本日の勝負レースは「波乱度80%超え」の混戦模様。
+単勝30倍〜50倍台に潜む【激走シグナル点灯馬】の複勝・ワイド推奨買い目を更新！
+
+リアルタイム波乱度レーダーはこちら👇
+https://oana-navi.com
+#競馬 #穴馬 #万馬券</textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center; background:#10b981;" onclick="copyXPost('morning')">
+            📋 この投稿文をコピーしてXを開く ↗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⚙️ Section 6: システム監視＆パイプライン自動化ステータス -->
     <section class="admin-section">
       <h2 class="section-title">⚙️ システム監視 ＆ 自動化パイプライン状態</h2>
       <div class="system-monitor-card">
