@@ -4,43 +4,43 @@
 
 const ADMIN_DEFAULT_PIN = "7777";
 
-// 期間別データモック
+// 期間別データ（実運用初期状態）
 const METRICS_DATA = {
   this_month: {
-    pv: "48,250",
-    uu: "19,420",
-    revenue: "¥426,800",
-    profit: "¥371,316",
-    subscribers: "142",
-    tickets: "482",
-    cvr: "3.85"
+    pv: "0",
+    uu: "0",
+    revenue: "¥0",
+    profit: "¥0",
+    subscribers: "0",
+    tickets: "0",
+    cvr: "---"
   },
   last_30: {
-    pv: "52,180",
-    uu: "21,300",
-    revenue: "¥458,200",
-    profit: "¥398,634",
-    subscribers: "148",
-    tickets: "510",
-    cvr: "3.92"
+    pv: "0",
+    uu: "0",
+    revenue: "¥0",
+    profit: "¥0",
+    subscribers: "0",
+    tickets: "0",
+    cvr: "---"
   },
   weekend: {
-    pv: "18,650",
-    uu: "8,920",
-    revenue: "¥184,200",
-    profit: "¥160,254",
-    subscribers: "38",
-    tickets: "244",
-    cvr: "4.45"
+    pv: "0",
+    uu: "0",
+    revenue: "¥0",
+    profit: "¥0",
+    subscribers: "0",
+    tickets: "0",
+    cvr: "---"
   },
   all: {
-    pv: "128,400",
-    uu: "46,800",
-    revenue: "¥1,142,000",
-    profit: "¥993,540",
-    subscribers: "142",
-    tickets: "1,280",
-    cvr: "3.72"
+    pv: "0",
+    uu: "0",
+    revenue: "¥0",
+    profit: "¥0",
+    subscribers: "0",
+    tickets: "0",
+    cvr: "---"
   }
 };
 
