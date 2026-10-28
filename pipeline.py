@@ -11,7 +11,7 @@ Webサイト用の JSON (data/races.json) を出力します。
 import json
 import os
 import sys
-from datetime import datetime
+from datetime import datetime, timedelta
 
 OUTPUT_PATH = os.path.join(os.path.dirname(__file__), "data", "races.json")
 
@@ -115,19 +115,48 @@ def generate_plans(dark_horses, runners):
         "h2_num": h2["num"]
     }
 
+def get_upcoming_weekend_dates():
+    """
+    今週末の土曜日・日曜日の日付を自動算出
+    """
+    today = datetime.now()
+    weekday = today.weekday() # 0:月〜6:日
+    if weekday == 6: # 日曜
+        sat = today - timedelta(days=1)
+        sun = today
+    elif weekday == 5: # 土曜
+        sat = today
+        sun = today + timedelta(days=1)
+    else:
+        days_to_sat = (5 - weekday) % 7
+        days_to_sun = (6 - weekday) % 7
+        sat = today + timedelta(days=days_to_sat)
+        sun = today + timedelta(days=days_to_sun)
+
+    return {
+        "sat_full": f"{sat.year}年{sat.month}月{sat.day}日 (土)",
+        "sat_short": f"{sat.month}/{sat.day}(土)",
+        "sun_full": f"{sun.year}年{sun.month}月{sun.day}日 (日)",
+        "sun_short": f"{sun.month}/{sun.day}(日)",
+    }
+
 def run_pipeline():
     """
     今週末の全レースデータ生成パイプライン実行
     """
-    print(f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] 競馬データ自動取得 & AI解析パイプライン開始...")
+    now_str = datetime.now().strftime('%Y-%m-%d %H:%M:%S')
+    print(f"[{now_str}] 競馬データ自動取得 & AI解析パイプライン開始...")
+
+    weekend = get_upcoming_weekend_dates()
+    print(f"[{now_str}] 対象開催週: {weekend['sat_short']} 〜 {weekend['sun_short']}")
 
     # 本番用データセット（今週末の主要レースと各場データ）
     raw_races = [
         {
             "id": "race-tenno-aki",
             "venueId": "tokyo",
-            "date": "2024年10月27日 (日)",
-            "date_short": "10/27(日)",
+            "date": weekend["sun_full"],
+            "date_short": weekend["sun_short"],
             "postTime": "15:40発走",
             "round": 11,
             "badge": "東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）",
@@ -176,8 +205,8 @@ def run_pipeline():
         {
             "id": "race-tokyo-10",
             "venueId": "tokyo",
-            "date": "2024年10月27日 (日)",
-            "date_short": "10/27(日)",
+            "date": weekend["sun_full"],
+            "date_short": weekend["sun_short"],
             "postTime": "15:00発走",
             "round": 10,
             "badge": "東京10R・エイシンフラッシュC 芝1800m（16頭立て）",
@@ -224,8 +253,8 @@ def run_pipeline():
         {
             "id": "race-kyoto-11",
             "venueId": "kyoto",
-            "date": "2024年10月27日 (日)",
-            "date_short": "10/27(日)",
+            "date": weekend["sun_full"],
+            "date_short": weekend["sun_short"],
             "postTime": "15:30発走",
             "round": 11,
             "badge": "京都11R・L カシオペアS 芝1800m（18頭立て）",
@@ -272,8 +301,8 @@ def run_pipeline():
         {
             "id": "race-niigata-11",
             "venueId": "niigata",
-            "date": "2024年10月27日 (日)",
-            "date_short": "10/27(日)",
+            "date": weekend["sun_full"],
+            "date_short": weekend["sun_short"],
             "postTime": "15:20発走",
             "round": 11,
             "badge": "新潟11R・L ルミエールAD 芝1000m直（18頭立て・特大波乱）",

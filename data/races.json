@@ -2,8 +2,8 @@
   {
     "id": "race-tenno-aki",
     "venueId": "tokyo",
-    "date": "2024年10月27日 (日)",
-    "date_short": "10/27(日)",
+    "date": "2026年11月1日 (日)",
+    "date_short": "11/1(日)",
     "postTime": "15:40発走",
     "round": 11,
     "badge": "東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）",
@@ -169,8 +169,8 @@
   {
     "id": "race-tokyo-10",
     "venueId": "tokyo",
-    "date": "2024年10月27日 (日)",
-    "date_short": "10/27(日)",
+    "date": "2026年11月1日 (日)",
+    "date_short": "11/1(日)",
     "postTime": "15:00発走",
     "round": 10,
     "badge": "東京10R・エイシンフラッシュC 芝1800m（16頭立て）",
@@ -321,8 +321,8 @@
   {
     "id": "race-kyoto-11",
     "venueId": "kyoto",
-    "date": "2024年10月27日 (日)",
-    "date_short": "10/27(日)",
+    "date": "2026年11月1日 (日)",
+    "date_short": "11/1(日)",
     "postTime": "15:30発走",
     "round": 11,
     "badge": "京都11R・L カシオペアS 芝1800m（18頭立て）",
@@ -473,8 +473,8 @@
   {
     "id": "race-niigata-11",
     "venueId": "niigata",
-    "date": "2024年10月27日 (日)",
-    "date_short": "10/27(日)",
+    "date": "2026年11月1日 (日)",
+    "date_short": "11/1(日)",
     "postTime": "15:20発走",
     "round": 11,
     "badge": "新潟11R・L ルミエールAD 芝1000m直（18頭立て・特大波乱）",
