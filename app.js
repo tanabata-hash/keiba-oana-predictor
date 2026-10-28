@@ -339,6 +339,7 @@ let currentRace = RACE_DATABASE[0];
 let currentBudget = 2000;
 let currentBetTab = "tansho-fukusho";
 let isResultMode = false;
+let isPlan3Unlocked = false; // 夢の特大万馬券（3連単）のアンロック状態
 
 // 仮想資金ウォレット (localStorage連携)
 let virtualWalletBalance = parseInt(localStorage.getItem("oana_virtual_wallet") || "10000", 10);
@@ -850,10 +851,10 @@ function renderPlans() {
       </div>
     </div>
 
-    <!-- プラン3: 夢の特大万馬券 -->
-    <div class="plan-card">
+    <!-- プラン3: 夢の特大万馬券 (プレミアムロック付き) -->
+    <div class="plan-card" style="border: 1px solid rgba(236,72,153,0.35);">
       <div class="plan-header">
-        <span class="plan-level-tag" style="color: #ec4899;">🚀 一撃特大万馬券</span>
+        <span class="plan-level-tag" style="color: #ec4899;">🚀 夢の特大万馬券（VIP限定）</span>
         <h4 class="plan-title">3連単フォーメーション一攫千金</h4>
         <p class="plan-desc">大穴馬が激走した時に数十万〜数百万円の払い戻しを狙う、ハイリスク超ハイリターン型。</p>
       </div>
@@ -869,50 +870,74 @@ function renderPlans() {
         </div>
       </div>
 
-      <div class="plan-bet-sheet">
-        <div class="bet-sheet-title">
-          <span>購入買い目（厳選 ${p3_ticketCount}点）</span>
-          <span>合計: ${b.toLocaleString()}円</span>
-        </div>
-        <ul class="bet-lines-list">
-          <li class="bet-line">
-            <span class="bet-horses">1着: <span class="badge-h" style="background:#3b82f6;">${fav.num}</span>, <span class="badge-h" style="background:#f59e0b;">${h1.number}</span></span>
-            <span class="bet-amount">各100円</span>
-          </li>
-          <li class="bet-line">
-            <span class="bet-horses">2着: <span class="badge-h" style="background:#3b82f6;">${fav.num}</span>, <span class="badge-h" style="background:#f59e0b;">${h1.number}</span>, <span class="badge-h" style="background:#ef4444;">${h2.number}</span></span>
-            <span class="bet-amount">均等配分</span>
-          </li>
-          <li class="bet-line">
-            <span class="bet-horses">3着: 伏兵・穴馬へ手広く</span>
-            <span class="bet-amount">計${p3_ticketCount}点</span>
-          </li>
-        </ul>
+      <!-- 🔒 鍵（ロック）付き買い目エリア -->
+      <div class="plan-locked-wrapper ${isPlan3Unlocked ? 'is-unlocked' : ''}">
+        <!-- ぼかしのかかる買い目シート -->
+        <div class="plan-locked-content">
+          <div class="plan-bet-sheet">
+            <div class="bet-sheet-title">
+              <span>購入買い目（厳選 ${p3_ticketCount}点）</span>
+              <span>合計: ${b.toLocaleString()}円</span>
+            </div>
+            <ul class="bet-lines-list">
+              <li class="bet-line">
+                <span class="bet-horses">1着: <span class="badge-h" style="background:#3b82f6;">${fav.num}</span>, <span class="badge-h" style="background:#f59e0b;">${h1.number}</span></span>
+                <span class="bet-amount">各100円</span>
+              </li>
+              <li class="bet-line">
+                <span class="bet-horses">2着: <span class="badge-h" style="background:#3b82f6;">${fav.num}</span>, <span class="badge-h" style="background:#f59e0b;">${h1.number}</span>, <span class="badge-h" style="background:#ef4444;">${h2.number}</span></span>
+                <span class="bet-amount">均等配分</span>
+              </li>
+              <li class="bet-line">
+                <span class="bet-horses">3着: 伏兵・穴馬へ手広く</span>
+                <span class="bet-amount">計${p3_ticketCount}点</span>
+              </li>
+            </ul>
 
-        <!-- クリーンなデジタルマークシート風スリップ -->
-        <div class="digital-marksheet">
-          <div class="marksheet-header">
-            <span>🎫 マークカード確認 (1〜18番)</span>
-            <span>3連単フォーメーション</span>
+            <!-- クリーンなデジタルマークシート風スリップ -->
+            <div class="digital-marksheet">
+              <div class="marksheet-header">
+                <span>🎫 マークカード確認 (1〜18番)</span>
+                <span>3連単フォーメーション</span>
+              </div>
+              <div class="marksheet-grid">
+                ${generateMarksheetCells([fav.num], [h1.number, h2.number])}
+              </div>
+            </div>
           </div>
-          <div class="marksheet-grid">
-            ${generateMarksheetCells([fav.num], [h1.number, h2.number])}
-          </div>
+        </div>
+
+        <!-- すりガラス上のロックオーバーレイ -->
+        <div class="plan-lock-overlay">
+          <div class="plan-lock-icon">🔒</div>
+          <span class="plan-lock-badge">👑 VIP限定・高配当特化プラン</span>
+          <h5 class="plan-lock-title">このレースの特大万馬券<br>（3連単フォーメーション）を見る</h5>
+          <button class="plan-lock-btn" onclick="openPremiumModal()">
+            <span>🔑 ロックを解除して見る</span>
+          </button>
+          <span class="plan-lock-subtext">単発 300円〜 / 月額読み放題 1,980円</span>
         </div>
       </div>
 
-      <div style="display:flex; flex-direction:column; gap:8px;">
-        <button class="btn btn-primary" style="width:100%; justify-content:center; font-size:0.8rem; background:linear-gradient(135deg, #ec4899, #8b5cf6); box-shadow:0 4px 14px rgba(236,72,153,0.35);" onclick="openPremiumModal()">
-          🔒 完全版3連単を見る (単発300円 / 月額読み放題) ↗
-        </button>
-        <div style="display:flex; gap:8px;">
-          <button class="btn btn-outline" style="flex:1; justify-content:center; font-size:0.75rem;" onclick="copyBetText('3連単フォーメーション 1着:${fav.num},${h1.number} 2着:${fav.num},${h1.number},${h2.number}')">
-            📋 簡易版コピー
+      <!-- アクションボタン群 -->
+      <div style="display:flex; flex-direction:column; gap:8px; margin-top:12px;">
+        ${!isPlan3Unlocked ? `
+          <button class="btn btn-primary" style="width:100%; justify-content:center; font-size:0.85rem; font-weight:800; background:linear-gradient(135deg, #ec4899, #8b5cf6); box-shadow:0 4px 14px rgba(236,72,153,0.35);" onclick="openPremiumModal()">
+            🔒 このレースの特大万馬券買い目を見る (300円〜)
           </button>
-          <button class="btn btn-outline" style="flex:1.2; justify-content:center; font-size:0.75rem;" onclick="buyVirtualBet('3連単万馬券', ${b})">
-            🪙 仮想購入 (${b.toLocaleString()}pt)
-          </button>
-        </div>
+        ` : `
+          <div style="background:rgba(16,185,129,0.15); border:1px solid #10b981; border-radius:8px; padding:6px 10px; font-size:0.75rem; color:#10b981; text-align:center; font-weight:700;">
+            🎉 アンロック中：3連単完全買い目を閲覧できます
+          </div>
+          <div style="display:flex; gap:8px;">
+            <button class="btn btn-outline" style="flex:1; justify-content:center; font-size:0.75rem;" onclick="copyBetText('3連単フォーメーション 1着:${fav.num},${h1.number} 2着:${fav.num},${h1.number},${h2.number}')">
+              📋 買い目コピー
+            </button>
+            <button class="btn btn-primary" style="flex:1.2; justify-content:center; font-size:0.75rem; background:linear-gradient(135deg, #ec4899, #8b5cf6);" onclick="buyVirtualBet('3連単万馬券', ${b})">
+              🪙 仮想購入 (${b.toLocaleString()}pt)
+            </button>
+          </div>
+        `}
       </div>
     </div>
   `;
@@ -1299,6 +1324,15 @@ function openPremiumModal() {
   if (modal) modal.removeAttribute("hidden");
 }
 
+function unlockPlan3(closeModal = true) {
+  isPlan3Unlocked = true;
+  renderPlans();
+  if (closeModal) {
+    const modal = document.getElementById("premium-modal");
+    if (modal) modal.setAttribute("hidden", "true");
+  }
+}
+
 function setupPremiumModal() {
   const modal = document.getElementById("premium-modal");
   const closeBtn = document.getElementById("premium-close-btn");
@@ -1316,3 +1350,5 @@ window.copyBetText = copyBetText;
 window.buyVirtualBet = buyVirtualBet;
 window.handleVote = handleVote;
 window.openPremiumModal = openPremiumModal;
+window.unlockPlan3 = unlockPlan3;
+

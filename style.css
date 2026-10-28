@@ -1334,6 +1334,113 @@ body {
   justify-content: center;
 }
 
+/* --- 特大万馬券（3連単）プレミアムロック表示 --- */
+.plan-locked-wrapper {
+  position: relative;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  border: 1px solid rgba(236, 72, 153, 0.3);
+  box-shadow: 0 0 20px rgba(236, 72, 153, 0.1);
+}
+
+.plan-locked-content {
+  filter: blur(5px);
+  opacity: 0.3;
+  user-select: none;
+  pointer-events: none;
+  transition: filter 0.4s ease, opacity 0.4s ease;
+}
+
+.plan-locked-wrapper.is-unlocked .plan-locked-content {
+  filter: none;
+  opacity: 1;
+  user-select: auto;
+  pointer-events: auto;
+}
+
+.plan-lock-overlay {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at center, rgba(17, 24, 39, 0.7), rgba(8, 12, 20, 0.94));
+  backdrop-filter: blur(3px);
+  padding: 16px;
+  text-align: center;
+  gap: 10px;
+  z-index: 10;
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.plan-locked-wrapper.is-unlocked .plan-lock-overlay {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.plan-lock-icon {
+  font-size: 2rem;
+  filter: drop-shadow(0 0 10px rgba(245, 158, 11, 0.6));
+  animation: pulseLock 2s infinite ease-in-out;
+}
+
+@keyframes pulseLock {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.08); }
+}
+
+.plan-lock-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(139, 92, 246, 0.2));
+  border: 1px solid rgba(236, 72, 153, 0.5);
+  color: #f472b6;
+  font-size: 0.72rem;
+  font-weight: 800;
+  padding: 3px 10px;
+  border-radius: 999px;
+  letter-spacing: 0.5px;
+}
+
+.plan-lock-title {
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.plan-lock-btn {
+  background: linear-gradient(135deg, #ec4899 0%, #8b5cf6 100%);
+  color: #ffffff;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 0.85rem;
+  font-weight: 800;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(236, 72, 153, 0.45);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  text-decoration: none;
+}
+
+.plan-lock-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 22px rgba(236, 72, 153, 0.65);
+}
+
+.plan-lock-subtext {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+}
+
+
 /* 激走穴馬カード */
 .horses-grid {
   display: grid;
