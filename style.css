@@ -196,10 +196,21 @@ body {
   gap: 8px;
   background: var(--bg-secondary);
   border: 1px solid var(--border-color);
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: var(--radius-md);
   font-size: 0.85rem;
   color: var(--text-muted);
+}
+.budget-info {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+.budget-label {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  font-weight: 600;
+  line-height: 1.2;
 }
 .budget-selector select {
   background: transparent;
@@ -207,9 +218,11 @@ body {
   border: none;
   font-weight: 700;
   font-family: var(--font-display);
-  font-size: 0.95rem;
+  font-size: 0.88rem;
   outline: none;
   cursor: pointer;
+  padding: 0;
+  width: 100%;
 }
 .budget-selector select option {
   background: var(--bg-secondary);
@@ -1683,16 +1696,28 @@ body {
   }
   .budget-selector {
     padding: 6px 10px;
-    justify-content: center;
     font-size: 0.78rem;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+  }
+  .budget-info {
+    width: 100%;
+  }
+  .budget-label {
+    font-size: 0.65rem;
+    white-space: nowrap;
   }
   .budget-selector select {
-    font-size: 0.82rem;
+    font-size: 0.8rem;
+    width: 100%;
   }
   #btn-beginner-guide {
     padding: 6px 10px;
     font-size: 0.78rem;
     justify-content: center;
+    box-sizing: border-box;
+    height: 100%;
   }
 
   /* モード切り替えボタン（スマホ全幅・押しやすいピル型） */

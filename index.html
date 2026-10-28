@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=20261028_mobile">
+  <link rel="stylesheet" href="style.css?v=20261028_budget">
 </head>
 <body>
   <!-- 背景エフェクト -->
@@ -77,14 +77,16 @@
         <button id="btn-beginner-guide" class="btn btn-outline" aria-label="買い方初心者ガイドを開く">
           <span class="icon">📖</span> 馬券の超基本ガイド
         </button>
-        <div class="budget-selector">
-          <label for="budget-select">本日の予算：</label>
-          <select id="budget-select">
-            <option value="1000">1,000円（お試し）</option>
-            <option value="2000" selected>2,000円（おすすめ）</option>
-            <option value="3000">3,000円（しっかり）</option>
-            <option value="5000">5,000円（勝負）</option>
-          </select>
+        <div class="budget-selector" title="予算に応じたおすすめ買い目を自動計算">
+          <div class="budget-info">
+            <span class="budget-label">本日の予算</span>
+            <select id="budget-select">
+              <option value="1000">1,000円（お試し）</option>
+              <option value="2000" selected>2,000円（おすすめ）</option>
+              <option value="3000">3,000円（しっかり）</option>
+              <option value="5000">5,000円（勝負）</option>
+            </select>
+          </div>
         </div>
       </div>
     </div>
