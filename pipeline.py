@@ -126,6 +126,9 @@ def run_pipeline():
         {
             "id": "race-tenno-aki",
             "venueId": "tokyo",
+            "date": "2024年10月27日 (日)",
+            "date_short": "10/27(日)",
+            "postTime": "15:40発走",
             "round": 11,
             "badge": "東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）",
             "title": "第174回 天皇賞（秋）",
@@ -173,6 +176,9 @@ def run_pipeline():
         {
             "id": "race-tokyo-10",
             "venueId": "tokyo",
+            "date": "2024年10月27日 (日)",
+            "date_short": "10/27(日)",
+            "postTime": "15:00発走",
             "round": 10,
             "badge": "東京10R・エイシンフラッシュC 芝1800m（16頭立て）",
             "title": "エイシンフラッシュカップ",
@@ -213,6 +219,103 @@ def run_pipeline():
                     {"rank": 3, "num": 14, "name": "マイネルアロー (★大穴)", "pop": 8, "odds": 26.5, "isTarget": True}
                 ],
                 "review": "ハイペースを想定して選抜した9番人気グランヴィスタが強烈な末脚で2着に激走！ワイド3,400円的中！"
+            }
+        },
+        {
+            "id": "race-kyoto-11",
+            "venueId": "kyoto",
+            "date": "2024年10月27日 (日)",
+            "date_short": "10/27(日)",
+            "postTime": "15:30発走",
+            "round": 11,
+            "badge": "京都11R・L カシオペアS 芝1800m（18頭立て）",
+            "title": "カシオペアステークス (L)",
+            "venue": "京都 11R (芝1800m)",
+            "weather": "晴",
+            "track": "良馬場（外回り）",
+            "track_condition": "良",
+            "pace": "スロー〜ミドル",
+            "fav_odds": 3.8,
+            "condition": "オープン・別定",
+            "dangerHorse": {
+                "num": 4,
+                "name": "ノーブルロジャー",
+                "pop": 1,
+                "odds": 3.8,
+                "reason": "京都外回りのロングスパート戦への適性に疑問。内枠で包まれるリスク大。"
+            },
+            "poll": {"favPct": 48, "underPct": 52, "totalVotes": 980},
+            "runners": [
+                {"num": 4, "name": "ノーブルロジャー", "jockey": "武豊", "weight": 56.0, "odds": 3.8, "pop": 1, "style": "先行", "status": "⚠️ 危険な1番人気"},
+                {"num": 11, "name": "アルナシーム", "jockey": "横山典弘", "weight": 58.0, "odds": 5.4, "pop": 2, "style": "差し", "status": "◯ 実力上位"},
+                {"num": 15, "name": "トゥードジボン", "jockey": "藤岡佑介", "weight": 57.0, "odds": 28.6, "pop": 8, "style": "逃げ", "status": "★ AI大穴イチオシ"},
+                {"num": 18, "name": "ロングラン", "jockey": "団野大成", "weight": 57.0, "odds": 34.0, "pop": 10, "style": "追込", "status": "★ 激走注目穴馬"}
+            ],
+            "actualResult": {
+                "statusType": "BIG_WIN",
+                "statusBadge": "🎯 大穴逃げ残り的中！回収率 480%",
+                "roi": "480%",
+                "trustGrade": "A (高配当)",
+                "stars": "★★★★☆",
+                "payouts": [
+                    {"type": "複勝 ⑮", "yen": "640円", "isHit": True},
+                    {"type": "ワイド ⑪ - ⑮", "yen": "2,980円", "isHit": True}
+                ],
+                "podium": [
+                    {"rank": 1, "num": 11, "name": "アルナシーム", "pop": 2, "odds": 5.4},
+                    {"rank": 2, "num": 15, "name": "トゥードジボン (★大穴)", "pop": 8, "odds": 28.6, "isTarget": True},
+                    {"rank": 3, "num": 18, "name": "ロングラン (★大穴)", "pop": 10, "odds": 34.0, "isTarget": True}
+                ],
+                "review": "8番人気の単勝28倍⑮トゥードジボンが単騎マイペースの絶妙な逃げを打ち2着粘り込み！ワイド2,980円獲得。"
+            }
+        },
+        {
+            "id": "race-niigata-11",
+            "venueId": "niigata",
+            "date": "2024年10月27日 (日)",
+            "date_short": "10/27(日)",
+            "postTime": "15:20発走",
+            "round": 11,
+            "badge": "新潟11R・L ルミエールAD 芝1000m直（18頭立て・特大波乱）",
+            "title": "ルミエールオータムダッシュ (L)",
+            "venue": "新潟 11R (直線1000m)",
+            "weather": "曇",
+            "track": "重馬場（外ラチ沿い激走）",
+            "track_condition": "重",
+            "pace": "ハイペース",
+            "fav_odds": 4.8,
+            "condition": "ハンデ",
+            "dangerHorse": {
+                "num": 1,
+                "name": "サトノプレミアム",
+                "pop": 1,
+                "odds": 4.8,
+                "reason": "新潟直線1000mで最悪の1枠1番。外ラチ有利のトラックバイアスに完全に逆行！"
+            },
+            "poll": {"favPct": 32, "underPct": 68, "totalVotes": 1450},
+            "runners": [
+                {"num": 1, "name": "サトノプレミアム", "jockey": "ルメール", "weight": 57.5, "odds": 4.8, "pop": 1, "style": "先行", "status": "⚠️ 危険な人気馬"},
+                {"num": 6, "name": "テンペストロード", "jockey": "菅原明良", "weight": 54.0, "odds": 28.3, "pop": 8, "style": "先行", "status": "★ 激走注目穴馬"},
+                {"num": 14, "name": "ミスティックオーラ", "jockey": "坂井瑠星", "weight": 53.0, "odds": 42.5, "pop": 11, "style": "追込", "status": "★ AI大穴イチオシ"},
+                {"num": 17, "name": "コスモブレイズ", "jockey": "佐々木大輔", "weight": 52.0, "odds": 67.8, "pop": 14, "style": "追込", "status": "★ 爆弾穴馬"}
+            ],
+            "actualResult": {
+                "statusType": "BIG_WIN",
+                "statusBadge": "🎯 特大万馬券炸裂！回収率 640%",
+                "roi": "640%",
+                "trustGrade": "S (超高信頼)",
+                "stars": "★★★★★",
+                "payouts": [
+                    {"type": "複勝 ⑭", "yen": "920円", "isHit": True},
+                    {"type": "ワイド ⑭ - ⑰", "yen": "8,600円", "isHit": True},
+                    {"type": "3連複 ⑥ - ⑭ - ⑰", "yen": "148,000円", "isHit": True}
+                ],
+                "podium": [
+                    {"rank": 1, "num": 14, "name": "ミスティックオーラ (★11人気)", "pop": 11, "odds": 42.5, "isTarget": True},
+                    {"rank": 2, "num": 17, "name": "コスモブレイズ (★14人気)", "pop": 14, "odds": 67.8, "isTarget": True},
+                    {"rank": 3, "num": 6, "name": "テンペストロード (★8人気)", "pop": 8, "odds": 28.3, "isTarget": True}
+                ],
+                "review": "外ラチ有利バイアスとハンデ53kgの切れ味を捉え、単勝42倍⑭ミスティックオーラが激走勝利！3連複14万馬券の特大波乱をズバリ的中！"
             }
         }
     ]

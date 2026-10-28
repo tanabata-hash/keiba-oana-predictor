@@ -27,7 +27,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;800;900&family=Zen+Kaku+Gothic+New:wght@400;500;700;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css?v=20261028_mobile">
 </head>
 <body>
   <!-- 背景エフェクト -->
@@ -48,7 +48,7 @@
             <h1 class="brand-title">大穴ナビゲーター <span>PRO</span></h1>
           </div>
         </div>
-        <p class="brand-subtitle">素人でも迷わない！波乱レース判定 ＆ 券種別おすすめ買い目AI</p>
+        <p class="brand-subtitle">素人でも迷わない！波乱レース判定 ＆<br class="sp-only"> 券種別おすすめ買い目AI</p>
       </div>
       <div class="header-actions">
         <!-- 仮想馬券シミュレーター ウォレット -->
@@ -92,22 +92,28 @@
 
   <!-- メインコンテンツ -->
   <main class="main-container">
+    <!-- 予想中 / 結果検証モード切り替え（全幅モダンセグメントタブ） -->
+    <div class="mode-toggle-container">
+      <div class="mode-toggle-group">
+        <button id="mode-prediction-btn" class="mode-btn active">🔮 事前予想モード</button>
+        <button id="mode-result-btn" class="mode-btn">🏁 確定結果・的中検証</button>
+      </div>
+    </div>
+
     <!-- レース選択バー（全競馬場・全レース対応） -->
     <section class="race-selector-section" aria-label="レース選択">
       <div class="selector-header">
-        <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
-          <span class="section-label">全レース予想セレクター</span>
+        <div class="selector-title-row">
+          <div class="selector-title-with-date">
+            <span class="section-label">全レース予想セレクター</span>
+            <span class="race-date-pill" id="selector-date-pill">📅 2024年10月27日 (日)</span>
+          </div>
           <!-- 競馬場タブ -->
           <div class="venue-tabs" id="venue-tabs">
-            <button class="venue-btn active" data-venue="tokyo">東京競馬場 (天皇賞・秋 当日)</button>
-            <button class="venue-btn" data-venue="kyoto">京都競馬場</button>
-            <button class="venue-btn" data-venue="niigata">新潟（アーカイブ・特大波乱）</button>
+            <button class="venue-btn active" data-venue="tokyo">東京 (10/27 日)</button>
+            <button class="venue-btn" data-venue="kyoto">京都 (10/27 日)</button>
+            <button class="venue-btn" data-venue="niigata">新潟 (特大波乱アーカイブ)</button>
           </div>
-        </div>
-        <!-- 予想中 / 結果検証モード切り替えトグル -->
-        <div class="mode-toggle-group">
-          <button id="mode-prediction-btn" class="mode-btn active">🔮 事前予想モード</button>
-          <button id="mode-result-btn" class="mode-btn">🏁 確定結果・的中検証モード</button>
         </div>
       </div>
 
@@ -133,7 +139,10 @@
     <!-- レースヘッダー情報＆波乱度インジケーター -->
     <section class="race-overview-card" id="race-overview">
       <div class="overview-main">
-        <div class="race-meta-badge" id="race-badge">東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）</div>
+        <div class="race-date-badge-row">
+          <span class="race-date-highlight" id="race-date-badge">📅 2024年10月27日(日) 15:40発走</span>
+          <div class="race-meta-badge" id="race-badge">東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）</div>
+        </div>
         <h2 class="race-name" id="race-title">第174回 天皇賞（秋）</h2>
         <div class="race-conditions" id="race-conditions">
           <span>天候: <strong>晴</strong></span>
@@ -382,6 +391,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=20261026_3"></script>
+  <script src="app.js?v=20261028_mobile"></script>
 </body>
 </html>

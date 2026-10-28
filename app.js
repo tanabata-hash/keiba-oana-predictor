@@ -3,6 +3,9 @@ const RACE_DATABASE = [
   {
     id: "race-tenno-aki",
     venueId: "tokyo",
+    date: "2024年10月27日 (日)",
+    date_short: "10/27(日)",
+    postTime: "15:40発走",
     round: 11,
     badge: "東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）",
     title: "第174回 天皇賞（秋）",
@@ -424,10 +427,14 @@ function renderRaceCarousel() {
     card.innerHTML = `
       <div class="race-tab-header">
         <span class="race-tab-venue">${race.venue}</span>
+        <span class="race-tab-date-tag">${race.date_short || "10/27(日)"}</span>
         <span class="race-tab-volatility ${race.volatilityClass}">${race.volatilityLevel.split(" ")[1] || race.volatilityLevel}</span>
       </div>
       <div class="race-tab-title">${race.title}</div>
-      <div class="race-tab-meta">波乱度: ${race.volatilityScore}%</div>
+      <div class="race-tab-meta">
+        <span>波乱度: <strong>${race.volatilityScore}%</strong></span>
+        <span class="race-tab-time">${race.postTime || "15:40発走"}</span>
+      </div>
     `;
     container.appendChild(card);
   });
@@ -460,6 +467,19 @@ function selectRace(raceId) {
 
 // --- レース情報の読み込み & UI反映 ---
 function loadRace(raceId) {
+  // レース開催日付 & 発走時刻
+  const dateStr = currentRace.date || "2024年10月27日 (日)";
+  const postTimeStr = currentRace.postTime || "15:40発走";
+  
+  const dateBadgeEl = document.getElementById("race-date-badge");
+  if (dateBadgeEl) {
+    dateBadgeEl.innerHTML = `📅 <strong>${dateStr}</strong> <span class="post-time-badge">${postTimeStr}</span>`;
+  }
+  const selectorDatePill = document.getElementById("selector-date-pill");
+  if (selectorDatePill) {
+    selectorDatePill.textContent = `📅 ${dateStr}`;
+  }
+
   // レースヘッダー
   document.getElementById("race-badge").textContent = currentRace.badge;
   document.getElementById("race-title").textContent = currentRace.title;
