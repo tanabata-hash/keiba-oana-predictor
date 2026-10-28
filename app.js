@@ -356,12 +356,21 @@ document.addEventListener("DOMContentLoaded", async () => {
   setupVenueTabs();
 });
 
-// パイプライン生成JSONの自動読み込み
-async function loadRemoteRaceData() {
+// パイプライン生成JSONの自動読み込み・即時反映
+let lastLoadedDataHash = "";
+
+async function loadRemoteRaceData(autoRefresh = false) {
   try {
     const res = await fetch("data/races.json?t=" + new Date().getTime());
     if (res.ok) {
-      const data = await res.json();
+      const dataText = await res.text();
+      if (dataText === lastLoadedDataHash) {
+        // データに変更なし
+        return;
+      }
+      lastLoadedDataHash = dataText;
+      const data = JSON.parse(dataText);
+
       if (Array.isArray(data) && data.length > 0) {
         console.log("✅ パイプライン最新データをロードしました:", data.length, "件");
         // 最新データで上書き（先頭に追加）
@@ -373,13 +382,36 @@ async function loadRemoteRaceData() {
             RACE_DATABASE.unshift(remoteRace);
           }
         });
-        currentRace = RACE_DATABASE[0];
+        
+        // 自動更新時はUIを再描画
+        if (autoRefresh) {
+          const currentId = currentRace ? currentRace.id : RACE_DATABASE[0].id;
+          const updatedRace = RACE_DATABASE.find(r => r.id === currentId) || RACE_DATABASE[0];
+          currentRace = updatedRace;
+          renderRoundButtons();
+          renderRaceCarousel();
+          loadRace(currentRace.id);
+          console.log("🔄 Webサイトのレース情報を最新データへ自動更新しました！");
+        } else {
+          currentRace = RACE_DATABASE[0];
+        }
       }
     }
   } catch (err) {
     console.log("ℹ️ ローカルフォールバックデータを使用します");
   }
 }
+
+// 5分ごとの自動更新チェック ＆ タブ復帰（アクティブ化）時の即時チェック
+setInterval(() => {
+  loadRemoteRaceData(true);
+}, 5 * 60 * 1000);
+
+document.addEventListener("visibilitychange", () => {
+  if (document.visibilityState === "visible") {
+    loadRemoteRaceData(true);
+  }
+});
 
 // --- 仮想資金ウォレットUI更新 ---
 function updateWalletUI() {
