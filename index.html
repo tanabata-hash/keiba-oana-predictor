@@ -108,13 +108,13 @@
         <div class="selector-title-row">
           <div class="selector-title-with-date">
             <span class="section-label">全レース予想セレクター</span>
-            <span class="race-date-pill" id="selector-date-pill">📅 2024年10月27日 (日)</span>
+            <span class="race-date-pill" id="selector-date-pill">📅 2026年11月1日 (日)</span>
           </div>
           <!-- 競馬場タブ -->
           <div class="venue-tabs" id="venue-tabs">
-            <button class="venue-btn active" data-venue="tokyo">東京 (10/27 日)</button>
-            <button class="venue-btn" data-venue="kyoto">京都 (10/27 日)</button>
-            <button class="venue-btn" data-venue="niigata">新潟 (特大波乱アーカイブ)</button>
+            <button class="venue-btn active" data-venue="tokyo">東京 (10/31土・11/1日)</button>
+            <button class="venue-btn" data-venue="kyoto">京都 (10/31土・11/1日)</button>
+            <button class="venue-btn" data-venue="archive">特大波乱アーカイブ</button>
           </div>
         </div>
       </div>
@@ -142,10 +142,10 @@
     <section class="race-overview-card" id="race-overview">
       <div class="overview-main">
         <div class="race-date-badge-row">
-          <span class="race-date-highlight" id="race-date-badge">📅 2024年10月27日(日) 15:40発走</span>
-          <div class="race-meta-badge" id="race-badge">東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）</div>
+          <span class="race-date-highlight" id="race-date-badge">📅 2026年11月1日 (日) 15:40発走</span>
+          <div class="race-meta-badge" id="race-badge">東京11R・G1 芝2000m（定量・17頭立て・確定枠順反映）</div>
         </div>
-        <h2 class="race-name" id="race-title">第174回 天皇賞（秋）</h2>
+        <h2 class="race-name" id="race-title">第174回 天皇賞（秋）(G1)</h2>
         <div class="race-conditions" id="race-conditions">
           <span>天候: <strong>晴</strong></span>
           <span class="sep">•</span>
@@ -362,7 +362,7 @@
               <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:900; color:var(--accent-gold);">
                 300 <span style="font-size:0.8rem; color:var(--text-muted);">円/レース</span>
               </div>
-              <a href="https://note.com/oana_navi" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:8px; font-size:0.75rem;">
+              <a href="https://note.com/oana_navi" target="_blank" rel="noopener noreferrer" class="btn btn-outline" style="width:100%; justify-content:center; margin-top:8px; font-size:0.75rem;" onclick="window.OanaAnalytics && OanaAnalytics.trackEvent('note_click', { planType: 'single' })">
                 noteで単発購入 ↗
               </a>
             </div>
@@ -382,7 +382,7 @@
               <div style="font-family:var(--font-display); font-size:1.4rem; font-weight:900; color:var(--accent-neon-green);">
                 1,980 <span style="font-size:0.8rem; color:var(--text-muted);">円/月</span>
               </div>
-              <a href="https://note.com/oana_navi" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px; font-size:0.75rem;">
+              <a href="https://note.com/oana_navi" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="width:100%; justify-content:center; margin-top:8px; font-size:0.75rem;" onclick="window.OanaAnalytics && OanaAnalytics.trackEvent('note_click', { planType: 'monthly' })">
                 メンバーシップ参加 ↗
               </a>
             </div>
@@ -405,6 +405,7 @@
     </div>
   </div>
 
-  <script src="app.js?v=20261028_mobile"></script>
+  <script src="analytics.js?v=20261030_live"></script>
+  <script src="app.js?v=20261030_live"></script>
 </body>
 </html>

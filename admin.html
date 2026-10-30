@@ -57,7 +57,7 @@
         </div>
       </div>
       <div class="admin-controls">
-        <span class="live-indicator"><span class="live-dot"></span> 稼働中</span>
+        <span class="live-indicator"><span class="live-dot"></span> 実計測稼働中</span>
         <a href="index.html" target="_blank" class="btn btn-outline btn-sm">サイト表示 ↗</a>
         <button id="admin-logout-btn" class="btn btn-secondary btn-sm">ログアウト</button>
       </div>
@@ -73,7 +73,7 @@
         <button class="period-btn" data-period="all">全期間</button>
       </div>
       <div class="toolbar-actions">
-        <span id="last-updated-text" class="last-sync-time">最終同期: 2026-10-28 15:00</span>
+        <span id="last-updated-text" class="last-sync-time">最終同期: 読み込み中...</span>
         <button id="refresh-data-btn" class="btn btn-outline btn-sm">🔄 データ更新</button>
       </div>
     </div>
@@ -92,7 +92,7 @@
         <div class="payout-details-grid">
           <div class="payout-item">
             <span class="payout-item-label">連携noteアカウント</span>
-            <span class="payout-item-val highlight"><a href="https://note.com/oana_navi" target="_blank" style="color:#38bdf8; text-decoration:underline;">@oana_navi ↗</a></span>
+            <span class="payout-item-val highlight"><a href="https://note.com/oana_navi" target="_blank" rel="noopener noreferrer" style="color:#38bdf8; text-decoration:underline;">@oana_navi ↗</a></span>
           </div>
           <div class="payout-item">
             <span class="payout-item-label">受取用銀行口座</span>
@@ -100,7 +100,7 @@
           </div>
           <div class="payout-item">
             <span class="payout-item-label">今月振込見込額（純利益）</span>
-            <span class="payout-item-val" style="color:var(--accent-gold);">¥0</span>
+            <span class="payout-item-val" id="payout-net-profit" style="color:var(--accent-gold);">¥0</span>
           </div>
           <div class="payout-item">
             <span class="payout-item-label">振込タイミング</span>
@@ -117,21 +117,21 @@
         <!-- PV数 -->
         <div class="kpi-card">
           <div class="kpi-header">
-            <span class="kpi-label">月間PV (アクセス数)</span>
-            <span class="kpi-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">未集計</span>
+            <span class="kpi-label">アクセス数 (PV)</span>
+            <span class="kpi-trend" id="kpi-pv-trend" style="background:rgba(16,185,129,0.15); color:#10b981;">実計測中</span>
           </div>
           <div class="kpi-value" id="kpi-pv">0 <span class="kpi-unit">PV</span></div>
-          <div class="kpi-sub">運用開始後のアクセスログから集計されます</div>
+          <div class="kpi-sub" id="kpi-pv-sub">本番ページ閲覧時に自動カウントされます</div>
         </div>
 
         <!-- 訪問者数 (UU) -->
         <div class="kpi-card">
           <div class="kpi-header">
             <span class="kpi-label">ユニーク訪問者 (UU)</span>
-            <span class="kpi-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">未集計</span>
+            <span class="kpi-trend" id="kpi-uu-trend" style="background:rgba(16,185,129,0.15); color:#10b981;">実計測中</span>
           </div>
           <div class="kpi-value" id="kpi-uu">0 <span class="kpi-unit">人</span></div>
-          <div class="kpi-sub">リピート率: ---%</div>
+          <div class="kpi-sub" id="kpi-uu-sub">リピート率: ---%</div>
         </div>
 
         <!-- 総売上金額 -->
@@ -139,40 +139,40 @@
           <div class="kpi-ribbon">今月実績</div>
           <div class="kpi-header">
             <span class="kpi-label">今月総売上</span>
-            <span class="kpi-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">集計待機</span>
+            <span class="kpi-trend" id="kpi-rev-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">note連携</span>
           </div>
           <div class="kpi-value gold" id="kpi-revenue">¥0</div>
-          <div class="kpi-sub">純利益(手取り): <strong style="color:#10b981;">¥0</strong> (note売上連携)</div>
+          <div class="kpi-sub" id="kpi-rev-sub">純利益(手取り): <strong style="color:#10b981;">¥0</strong> (note売上連携)</div>
         </div>
 
         <!-- 有料会員数 (月額サブスク) -->
         <div class="kpi-card">
           <div class="kpi-header">
             <span class="kpi-label">月額サブスク会員 (1,980円)</span>
-            <span class="kpi-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">集計待機</span>
+            <span class="kpi-trend" id="kpi-subs-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">note連携</span>
           </div>
           <div class="kpi-value" id="kpi-subscribers">0 <span class="kpi-unit">名</span></div>
-          <div class="kpi-sub">毎月の固定継続売上: <strong>¥0/月</strong></div>
+          <div class="kpi-sub" id="kpi-subs-sub">毎月の固定継続売上: <strong>¥0/月</strong></div>
         </div>
 
         <!-- 単発チケット販売数 -->
         <div class="kpi-card">
           <div class="kpi-header">
             <span class="kpi-label">単発購入数 (300円〜)</span>
-            <span class="kpi-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">集計待機</span>
+            <span class="kpi-trend" id="kpi-tickets-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">note連携</span>
           </div>
           <div class="kpi-value" id="kpi-tickets">0 <span class="kpi-unit">回</span></div>
-          <div class="kpi-sub">単発売上: ¥0</div>
+          <div class="kpi-sub" id="kpi-tickets-sub">単発売上: ¥0</div>
         </div>
 
         <!-- 3連単ロックCVR -->
         <div class="kpi-card">
           <div class="kpi-header">
-            <span class="kpi-label">買い目アンロック転換率</span>
-            <span class="kpi-trend" style="background:rgba(255,255,255,0.08); color:var(--text-muted);">未計測</span>
+            <span class="kpi-label">課金導線・アンロック転換率</span>
+            <span class="kpi-trend" id="kpi-cvr-trend" style="background:rgba(16,185,129,0.15); color:#10b981;">自動算出</span>
           </div>
           <div class="kpi-value" id="kpi-cvr">--- <span class="kpi-unit">%</span></div>
-          <div class="kpi-sub">アクセスログ蓄積後に自動算出されます</div>
+          <div class="kpi-sub" id="kpi-cvr-sub">アクセスログ蓄積後に自動算出されます</div>
         </div>
       </div>
     </section>
@@ -183,7 +183,7 @@
       <section class="admin-panel">
         <div class="panel-header">
           <h3 class="panel-title">🧭 流入元チャネル（どこから来ているか）</h3>
-          <span class="panel-sub">運用開始後のアクセスログから自動集計されます</span>
+          <span class="panel-sub">Referrer / UTMパラメータから自動分類・集計</span>
         </div>
         <div class="traffic-list">
           <!-- X (Twitter) -->
@@ -193,9 +193,9 @@
               <span class="traffic-name">X (旧Twitter) - 大穴警報ポスト・的中速報</span>
             </div>
             <div class="traffic-bar-wrapper">
-              <div class="traffic-bar" style="width: 0%; background: linear-gradient(90deg, #1d9bf0, #38bdf8);"></div>
+              <div class="traffic-bar" id="bar-twitter" style="width: 0%; background: linear-gradient(90deg, #1d9bf0, #38bdf8);"></div>
             </div>
-            <div class="traffic-stats">
+            <div class="traffic-stats" id="stat-twitter">
               <strong>0.0%</strong> (0 PV)
             </div>
           </div>
@@ -207,9 +207,9 @@
               <span class="traffic-name">Google / Yahoo! 検索（SEO「競馬 大穴 予想」等）</span>
             </div>
             <div class="traffic-bar-wrapper">
-              <div class="traffic-bar" style="width: 0%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
+              <div class="traffic-bar" id="bar-search" style="width: 0%; background: linear-gradient(90deg, #10b981, #34d399);"></div>
             </div>
-            <div class="traffic-stats">
+            <div class="traffic-stats" id="stat-search">
               <strong>0.0%</strong> (0 PV)
             </div>
           </div>
@@ -221,9 +221,9 @@
               <span class="traffic-name">note 直接流入 / 執筆記事・プロフィール</span>
             </div>
             <div class="traffic-bar-wrapper">
-              <div class="traffic-bar" style="width: 0%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
+              <div class="traffic-bar" id="bar-note" style="width: 0%; background: linear-gradient(90deg, #f59e0b, #fbbf24);"></div>
             </div>
-            <div class="traffic-stats">
+            <div class="traffic-stats" id="stat-note">
               <strong>0.0%</strong> (0 PV)
             </div>
           </div>
@@ -235,9 +235,9 @@
               <span class="traffic-name">5ch / 競馬掲示板 / まとめブログの口コミ</span>
             </div>
             <div class="traffic-bar-wrapper">
-              <div class="traffic-bar" style="width: 0%; background: linear-gradient(90deg, #8b5cf6, #a78bfa);"></div>
+              <div class="traffic-bar" id="bar-forum" style="width: 0%; background: linear-gradient(90deg, #8b5cf6, #a78bfa);"></div>
             </div>
-            <div class="traffic-stats">
+            <div class="traffic-stats" id="stat-forum">
               <strong>0.0%</strong> (0 PV)
             </div>
           </div>
@@ -249,57 +249,39 @@
               <span class="traffic-name">直接 / ホーム画面アイコン追加 / LINE共有</span>
             </div>
             <div class="traffic-bar-wrapper">
-              <div class="traffic-bar" style="width: 0%; background: linear-gradient(90deg, #ec4899, #f472b6);"></div>
+              <div class="traffic-bar" id="bar-direct" style="width: 0%; background: linear-gradient(90deg, #ec4899, #f472b6);"></div>
             </div>
-            <div class="traffic-stats">
+            <div class="traffic-stats" id="stat-direct">
               <strong>0.0%</strong> (0 PV)
             </div>
           </div>
         </div>
       </section>
 
-      <!-- アクセス地域 (都道府県) ＆ デバイス比率 -->
+      <!-- アクセス地域 ＆ デバイス比率 -->
       <section class="admin-panel">
         <div class="panel-header">
           <h3 class="panel-title">📍 アクセス地域 ＆ デバイス環境</h3>
-          <span class="panel-sub">運用開始後のアクセスログから自動集計されます</span>
+          <span class="panel-sub">閲覧ブラウザ環境・タイムゾーンから自動集計</span>
         </div>
         
-        <!-- 都道府県ランキング -->
+        <!-- 地域ランキング -->
         <div class="geo-table-wrapper">
           <table class="admin-table">
             <thead>
               <tr>
                 <th>順位</th>
-                <th>都道府県</th>
+                <th>地域区分</th>
                 <th>割合</th>
-                <th>ユーザー数</th>
+                <th>PV数</th>
               </tr>
             </thead>
-            <tbody>
+            <tbody id="geo-tbody">
               <tr>
                 <td><span class="rank-badge r1">1</span></td>
                 <td><strong>集計待機中</strong></td>
                 <td>---%</td>
-                <td>0 人</td>
-              </tr>
-              <tr>
-                <td><span class="rank-badge r2">2</span></td>
-                <td><strong>集計待機中</strong></td>
-                <td>---%</td>
-                <td>0 人</td>
-              </tr>
-              <tr>
-                <td><span class="rank-badge r3">3</span></td>
-                <td><strong>集計待機中</strong></td>
-                <td>---%</td>
-                <td>0 人</td>
-              </tr>
-              <tr>
-                <td><span class="rank-badge">4</span></td>
-                <td><strong>その他</strong></td>
-                <td>---%</td>
-                <td>0 人</td>
+                <td>0 PV</td>
               </tr>
             </tbody>
           </table>
@@ -309,119 +291,167 @@
         <div class="device-ratio-box">
           <div class="device-header">
             <span>閲覧端末比率</span>
-            <span class="device-total">集計待機中</span>
+            <span class="device-total" id="device-total-label">集計待機中</span>
           </div>
           <div class="device-bar">
-            <div class="bar-segment mobile" style="width: 50%; opacity:0.5;">スマホ (---%)</div>
-            <div class="bar-segment pc" style="width: 50%; opacity:0.5;">PC (---%)</div>
+            <div class="bar-segment mobile" id="bar-mobile" style="width: 50%; opacity:0.5;">スマホ (---%)</div>
+            <div class="bar-segment pc" id="bar-pc" style="width: 50%; opacity:0.5;">PC (---%)</div>
           </div>
-          <p class="device-hint">※アクセスログが蓄積されると自動的にグラフが反映されます。</p>
+          <p class="device-hint">※本番サイト（index.html）への実アクセスに応じて自動更新されます。</p>
         </div>
       </section>
     </div>
 
-    <!-- 💰 Section 3: レース別売上 & 収益ポートフォリオ -->
+    <!-- 💰 Section 3: 今週末レース別売上 & 注目度ポートフォリオ -->
     <section class="admin-section">
       <div class="panel-header">
-        <h3 class="section-title" style="margin-bottom:0;">🏆 レース別売上実績</h3>
-        <span class="panel-sub">次回レース開催後に売上データが計上されます</span>
+        <h3 class="section-title" style="margin-bottom:0;">🏆 今週末（10/31土・11/1日）開催レース別実績</h3>
+        <span class="panel-sub">JRA確定出馬表・開催スケジュール同期済み</span>
       </div>
       <div class="race-sales-grid">
         <div class="race-sale-card g1">
           <div class="rsc-header">
-            <span class="badge-rsc gold">G1 注目戦</span>
-            <span class="rsc-date">次回開催</span>
+            <span class="badge-rsc gold">G1 秋古馬頂上決戦</span>
+            <span class="rsc-date">11/1(日) 15:40</span>
           </div>
-          <h4 class="rsc-name">天皇賞（秋）東京11R</h4>
-          <div class="rsc-price">¥0 <span class="rsc-count">(集計待機中)</span></div>
-          <div class="rsc-bar"><div class="rsc-fill" style="width:0%;"></div></div>
-          <p class="rsc-note">レース発走前：売上データ集計待機中。</p>
+          <h4 class="rsc-name">第174回 天皇賞（秋）東京11R</h4>
+          <div class="rsc-price" id="rsc-price-tenno">¥0 <span class="rsc-count">(17頭確定・波乱度66%)</span></div>
+          <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-tenno" style="width:0%;"></div></div>
+          <p class="rsc-note">①クロワデュノール・⑦マスカレードボール vs ⑰ダノンデサイル大外枠危険警報。</p>
         </div>
 
         <div class="race-sale-card">
           <div class="rsc-header">
-            <span class="badge-rsc purple">G2 重賞</span>
-            <span class="rsc-date">次回開催</span>
+            <span class="badge-rsc purple">G3 2歳牝馬重賞</span>
+            <span class="rsc-date">10/31(土) 15:45</span>
           </div>
-          <h4 class="rsc-name">スワンステークス 京都11R</h4>
-          <div class="rsc-price">¥0 <span class="rsc-count">(集計待機中)</span></div>
-          <div class="rsc-bar"><div class="rsc-fill" style="width:0%;"></div></div>
-          <p class="rsc-note">レース発走前：売上データ集計待機中。</p>
+          <h4 class="rsc-name">ファンタジーS 京都11R</h4>
+          <div class="rsc-price" id="rsc-price-fantasy">¥0 <span class="rsc-count">(11頭確定・波乱度84%)</span></div>
+          <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-fantasy" style="width:0%;"></div></div>
+          <p class="rsc-note">1番人気⑥イモージェン4倍台の混戦。⑪ツキミ（川田騎手）穴推奨。</p>
         </div>
 
         <div class="race-sale-card">
           <div class="rsc-header">
-            <span class="badge-rsc cyan">L 直線競馬</span>
-            <span class="rsc-date">次回開催</span>
+            <span class="badge-rsc cyan">OP ハンデ戦</span>
+            <span class="rsc-date">10/31(土) 15:35</span>
           </div>
-          <h4 class="rsc-name">ルミエールAD 新潟11R</h4>
-          <div class="rsc-price">¥0 <span class="rsc-count">(集計待機中)</span></div>
-          <div class="rsc-bar"><div class="rsc-fill" style="width:0%;"></div></div>
-          <p class="rsc-note">レース発走前：売上データ集計待機中。</p>
+          <h4 class="rsc-name">ペルセウスS 東京11R</h4>
+          <div class="rsc-price" id="rsc-price-perseus">¥0 <span class="rsc-count">(16頭確定・波乱度98%)</span></div>
+          <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-perseus" style="width:0%;"></div></div>
+          <p class="rsc-note">🔥超大穴警報！⑫クレーキング軸に⑪エスカル・④サフランヒーロー強襲。</p>
         </div>
 
         <div class="race-sale-card">
           <div class="rsc-header">
-            <span class="badge-rsc">G3 重賞</span>
-            <span class="rsc-date">次回開催</span>
+            <span class="badge-rsc">L ハンデ戦</span>
+            <span class="rsc-date">11/1(日) 15:20</span>
           </div>
-          <h4 class="rsc-name">アルテミスS 東京11R</h4>
-          <div class="rsc-price">¥0 <span class="rsc-count">(集計待機中)</span></div>
-          <div class="rsc-bar"><div class="rsc-fill" style="width:0%;"></div></div>
-          <p class="rsc-note">レース発走前：売上データ集計待機中。</p>
+          <h4 class="rsc-name">まほろばS 京都11R</h4>
+          <div class="rsc-price" id="rsc-price-mahoroba">¥0 <span class="rsc-count">(13頭予定・波乱度82%)</span></div>
+          <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-mahoroba" style="width:0%;"></div></div>
+          <p class="rsc-note">🔥超大穴警報！①スマートワイス（武豊）と軽ハンデ53kg⑧テリオスララ注目。</p>
         </div>
       </div>
     </section>
 
+    <!-- 📡 Section 4: 実アクセス解析（GA4）＆ note売上実績 設定パネル -->
+    <section class="admin-section">
+      <div class="panel-header">
+        <h2 class="section-title" style="margin-bottom:0;">📡 アクセス解析（GA4）＆ note売上実績 連携管理</h2>
+        <span class="panel-sub">Google Analytics 4 の測定ID設定と、note管理画面の実売上同期を行えます</span>
+      </div>
 
-    <!-- 🧠 Section 4: AI戦略分析・今後の対策（売上最大化アクション） -->
+      <div class="admin-two-cols">
+        <!-- GA4 / テレメトリ設定 -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; gap:14px;">
+          <h3 class="panel-title" style="font-size:1rem;">📈 Google Analytics 4 / 外部計測設定</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.6;">
+            本サイトには標準で<strong>ハイブリッド自動カウンター（PV/UU/流入元/CVR自動計測）</strong>が組み込まれています。さらに詳細なGA4解析を併用する場合は測定IDを入力して保存してください。
+          </p>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="input-ga4-id" style="font-size:0.78rem; color:var(--text-muted);">GA4 測定ID（任意: 例 <code>G-XXXXXXXXXX</code>）</label>
+            <input type="text" id="input-ga4-id" placeholder="G-XXXXXXXXXX" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 12px; color:#fff; font-size:0.88rem;">
+          </div>
+          <div style="display:flex; flex-direction:column; gap:8px;">
+            <label for="input-telemetry-url" style="font-size:0.78rem; color:var(--text-muted);">セッションテレメトリ送信先URL（任意: <code>fetchLater</code> エンドポイント）</label>
+            <input type="url" id="input-telemetry-url" placeholder="https://example.com/api/telemetry" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 12px; color:#fff; font-size:0.88rem;">
+          </div>
+          <div style="display:flex; gap:10px; margin-top:4px;">
+            <button id="save-analytics-cfg-btn" class="btn btn-primary btn-sm" style="flex:1; justify-content:center;">💾 計測設定を保存</button>
+            <button id="clear-local-logs-btn" class="btn btn-outline btn-sm" title="自分のブラウザのテスト閲覧履歴をクリアします">🧹 ローカルテスト履歴クリア</button>
+          </div>
+        </div>
+
+        <!-- note実売上同期入力 -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; gap:14px;">
+          <h3 class="panel-title" style="font-size:1rem;">💴 note（@oana_navi）売上実績・会員数反映</h3>
+          <p style="font-size:0.8rem; color:var(--text-muted); line-height:1.6;">
+            note公式ダッシュボードで確認した会員数・単発販売数を入力すると、総売上・手数料控除後の純利益（口座振込見込額）・実課金CVRが自動計算されます。
+          </p>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:12px;">
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <label for="input-subscribers" style="font-size:0.78rem; color:var(--text-muted);">月額メンバー数 (1,980円)</label>
+              <input type="number" id="input-subscribers" min="0" value="0" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 12px; color:#fff; font-size:0.95rem; font-weight:700;">
+            </div>
+            <div style="display:flex; flex-direction:column; gap:6px;">
+              <label for="input-tickets" style="font-size:0.78rem; color:var(--text-muted);">単発記事販売数 (300円)</label>
+              <input type="number" id="input-tickets" min="0" value="0" style="background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px 12px; color:#fff; font-size:0.95rem; font-weight:700;">
+            </div>
+          </div>
+          <button id="save-revenue-btn" class="btn btn-primary btn-sm" style="width:100%; justify-content:center; margin-top:auto;">💰 売上実績をダッシュボードに反映</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 🧠 Section 5: AI戦略分析・今後の対策（売上最大化アクション） -->
     <section class="admin-section strategy-section">
       <div class="strategy-header">
         <div class="strategy-title-wrapper">
           <span class="strategy-badge">AI GROWTH HACK</span>
           <h2 class="section-title" style="margin-bottom:0;">今後の対策 ＆ 売上爆増アクションプラン</h2>
         </div>
-        <p class="strategy-subtitle">アクセス解析データからAIが導き出した、今すぐ打つべき3つの具体施策</p>
+        <p class="strategy-subtitle">今週末（天皇賞・秋ウィーク）の収益最大化に向けた3つの具体施策</p>
       </div>
 
       <div class="strategy-cards-grid">
         <!-- 施策1 -->
         <div class="strategy-card">
           <div class="strategy-num">01</div>
-          <h3 class="strategy-card-title">X(Twitter)の投稿時刻を「金曜20時」と「日曜朝8時」に固定</h3>
+          <h3 class="strategy-card-title">X(Twitter)の投稿時刻を「金曜20時」と「土日朝8:30」に固定</h3>
           <p class="strategy-card-desc">
-            データ分析の結果、JRA枠順が確定した直後の<strong>「金曜20:00〜22:00」</strong>にアクセスが最初のピークを迎えます。この時間に『【危険な人気馬アラート】天皇賞の1番人気に危険信号！』というティザー投稿を行うと、PV数が通常時の<strong>1.6倍〜2.0倍</strong>に跳ね上がります。
+            枠順確定後の<strong>「今夜（金曜）20:00〜22:00」</strong>にアクセスが最初のピークを迎えます。『天皇賞(秋)の有力馬⑰ダノンデサイルが魔の大外8枠17番で危険サイン点滅！』というティザー投稿で一気に競馬ファンを集客できます。
           </p>
-          <div class="strategy-action-tag">アクション: 金曜20時にXポスト自動予約</div>
+          <div class="strategy-action-tag">アクション: 下の金曜20時用テンプレートを今夜投稿</div>
         </div>
 
         <!-- 施策2 -->
         <div class="strategy-card highlight">
           <div class="strategy-num">02</div>
-          <h3 class="strategy-card-title">「無料の複勝・ワイド」的中時の即時SNSシェアボタン設置</h3>
+          <h3 class="strategy-card-title">土曜メイン（ファンタジーS・ペルセウスS）の的中速報拡散</h3>
           <p class="strategy-card-desc">
-            無料プラン（複勝・ワイド）が的中した直後、ユーザーの信頼度はMAXになります。的中検証モードに『Xに的中を報告して自慢する』ボタンを配置し、的中実績を口コミ拡散させることで、<strong>完全無料で新規見込み客を雪だるま式に集客</strong>できます。
+            土曜15:35/15:45発走の2レース終了直後、的中検証モードの『𝕏 的中結果をシェア』ボタンから結果を発信することで、翌日のG1<strong>天皇賞（秋）に向けた新規見込み客</strong>を無料で大量獲得できます。
           </p>
-          <div class="strategy-action-tag">アクション: 的中シェア機能の追加導入</div>
+          <div class="strategy-action-tag">アクション: 土曜16時に結果検証シェアを実施</div>
         </div>
 
         <!-- 施策3 -->
         <div class="strategy-card">
           <div class="strategy-num">03</div>
-          <h3 class="strategy-card-title">単発購入者へ「差額で月額会員へ移行」するアップセルオファー</h3>
+          <h3 class="strategy-card-title">単発購入者へ「月額メンバーシップ（1,980円）」への誘導強化</h3>
           <p class="strategy-card-desc">
-            単発（300円）を購入してくれたユーザーに対して、「今週末の残りレースも全部見られる月額プラン（1,980円）に差額で参加可能」とnote上で案内することで、<strong>単発客の約28%を継続課金ファン（サブスク会員）へランクアップ</strong>させることが可能です。
+            単発（300円）記事の冒頭・末尾にて「天皇賞(秋)を含む今月の全重賞・ハンデ戦の3連単フォーメーションが読み放題の月額プラン（1,980円）が一番お得」と案内し、継続課金ファンを増やします。
           </p>
-          <div class="strategy-action-tag">アクション: note購読後サンクスページの導線強化</div>
+          <div class="strategy-action-tag">アクション: note記事内のメンバーシップ導線設置</div>
         </div>
       </div>
     </section>
 
-    <!-- 📢 Section 5: 週末集客用 X(Twitter)ポスト作成ツール -->
+    <!-- 📢 Section 6: 週末集客用 X(Twitter)ポスト作成ツール -->
     <section class="admin-section">
       <div class="panel-header">
-        <h2 class="section-title" style="margin-bottom:0;">📢 週末集客用 X(Twitter)ポスト自動生成（1秒コピペ）</h2>
-        <span class="panel-sub">週末のゴールデンタイムにコピペ投稿するだけで、広告費0円で競馬ファンを大量集客</span>
+        <h2 class="section-title" style="margin-bottom:0;">📢 今週末（10/31・11/1）集客用 Xポスト自動生成（1秒コピペ）</h2>
+        <span class="panel-sub">確定枠順・実際の開催レースに合わせて最新化済み（UTM計測パラメータ付き）</span>
       </div>
 
       <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
@@ -430,18 +460,19 @@
           <div>
             <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
               <span class="badge-admin" style="background:#1d9bf0;">金曜 20:00 投稿推奨</span>
-              <span style="font-size:0.75rem; color:var(--text-muted);">枠順確定直後の集客</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">枠順確定後の集客ピーク</span>
             </div>
-            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【金曜夜】波乱度警報 ＆ 危険な人気馬アラート</h4>
-            <textarea id="x-post-friday" readonly style="width:100%; height:130px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">⚡【AI大穴警報】今週末の重賞レース波乱度を算出！
+            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【金曜夜】天皇賞(秋) 確定枠順＆危険な人気馬アラート</h4>
+            <textarea id="x-post-friday" readonly style="width:100%; height:145px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">⚡【AI大穴警報】今週末の注目レース波乱度＆確定枠順を解析！
 
-■ 天皇賞（秋）: 波乱度 68%（混戦）
-■ スワンS: 波乱度 85%（🔥超大穴警報！）
+■ 天皇賞(秋) G1: 波乱度 66%（ヒモ荒れ警戒）
+■ ペルセウスS: 波乱度 98%（🔥超大穴警報！）
+■ ファンタジーS G3: 波乱度 84%（🔥2歳牝馬大混戦）
 
-⚠️ 天皇賞の1番人気に危険サイン点滅中（休み明け＋瞬発力切れ負け懸念）。
-AI激走スコア90点超えの【激走穴馬】はサイトで無料公開中👇
-https://oana-navi.com
-#競馬予想 #天皇賞秋 #穴馬</textarea>
+⚠️ 天皇賞(秋)の有力馬⑰ダノンデサイルは魔の「大外8枠17番」で危険サイン点滅中！
+AI穴馬指数90点超えの【内枠激走穴馬】は無料公開中👇
+https://oana-navi.com/?utm_source=twitter
+#競馬予想 #天皇賞秋 #ファンタジーS #穴馬</textarea>
           </div>
           <button class="btn btn-primary" style="width:100%; justify-content:center; background:#1d9bf0;" onclick="copyXPost('friday')">
             📋 この投稿文をコピーしてXを開く ↗
@@ -455,15 +486,15 @@ https://oana-navi.com
               <span class="badge-admin" style="background:#10b981;">土日 08:30 投稿推奨</span>
               <span style="font-size:0.75rem; color:var(--text-muted);">朝オッズ反映後の直前集客</span>
             </div>
-            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【土日朝】最新オッズ急変 ＆ 妙味穴馬速報</h4>
-            <textarea id="x-post-morning" readonly style="width:100%; height:130px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">🏇【朝オッズ急変】最新単勝オッズからオッズの歪み（妙味馬）をAI検知しました！
+            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【土日朝】最新オッズ歪み検知 ＆ 妙味穴馬速報</h4>
+            <textarea id="x-post-morning" readonly style="width:100%; height:145px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">🏇【朝オッズ歪み検知】最新オッズからAIが妙味穴馬をロックオン！
 
-本日の勝負レースは「波乱度80%超え」の混戦模様。
-単勝30倍〜50倍台に潜む【激走シグナル点灯馬】の複勝・ワイド推奨買い目を更新！
+今週末のハンデ戦（ペルセウスS・まほろばS）は「波乱度80%超え」の超大穴警報が点灯🔥
+天皇賞(秋)も2枠④レディネス(横山典弘)など単勝20〜30倍台に激走シグナル検知！
 
-リアルタイム波乱度レーダーはこちら👇
-https://oana-navi.com
-#競馬 #穴馬 #万馬券</textarea>
+無料推奨買い目＆波乱度レーダーはこちら👇
+https://oana-navi.com/?utm_source=twitter
+#競馬予想 #天皇賞秋 #万馬券 #競馬AI</textarea>
           </div>
           <button class="btn btn-primary" style="width:100%; justify-content:center; background:#10b981;" onclick="copyXPost('morning')">
             📋 この投稿文をコピーしてXを開く ↗
@@ -472,33 +503,33 @@ https://oana-navi.com
       </div>
     </section>
 
-    <!-- ⚙️ Section 6: システム監視＆パイプライン自動化ステータス -->
+    <!-- ⚙️ Section 7: システム監視＆パイプライン自動化ステータス -->
     <section class="admin-section">
       <h2 class="section-title">⚙️ システム監視 ＆ 自動化パイプライン状態</h2>
       <div class="system-monitor-card">
         <div class="monitor-row">
           <div class="monitor-item">
             <span class="m-label">Mac cron 自動起動</span>
-            <span class="m-val green">● 正常稼働中 (金曜18:00 / 土日08:30)</span>
+            <span class="m-val green" id="monitor-cron-status">● 正常登録済 (金曜18:00 / 土日08:30)</span>
           </div>
           <div class="monitor-item">
-            <span class="m-label">次回自動実行予定</span>
-            <span class="m-val highlight">今週金曜日 18:00 (枠順確定)</span>
+            <span class="m-label">最終パイプライン生成日時</span>
+            <span class="m-val highlight" id="monitor-last-run">読み込み中...</span>
           </div>
           <div class="monitor-item">
             <span class="m-label">本番サイト公開先</span>
-            <span class="m-val"><a href="https://oana-navi.com" target="_blank" style="color:var(--accent-cyan);">https://oana-navi.com</a></span>
+            <span class="m-val"><a href="https://oana-navi.com" target="_blank" rel="noopener noreferrer" style="color:var(--accent-cyan);">https://oana-navi.com</a></span>
           </div>
           <div class="monitor-item">
-            <span class="m-label">JSON生成ファイル</span>
-            <span class="m-val">data/races.json (全レース動的バインド)</span>
+            <span class="m-label">JSON生成データ状態</span>
+            <span class="m-val" id="monitor-json-status">data/races.json (確認中...)</span>
           </div>
         </div>
 
         <div class="manual-trigger-box">
           <div class="mt-left">
             <h4>⚡ 手動即時更新コマンド</h4>
-            <p>今すぐ手動で最新レース情報を取得・更新・デプロイしたい場合は、ターミナルで以下を実行します：</p>
+            <p>今すぐ手動で最新レース情報を更新・GitHubへ自動デプロイしたい場合は、ターミナルで以下を実行します：</p>
             <code>./run_pipeline.sh</code>
           </div>
           <button id="copy-cmd-btn" class="btn btn-outline btn-sm">コマンドをコピー</button>
@@ -512,6 +543,7 @@ https://oana-navi.com
     </footer>
   </div>
 
-  <script src="admin.js"></script>
+  <script src="analytics.js?v=20261030_live"></script>
+  <script src="admin.js?v=20261030_live"></script>
 </body>
 </html>

@@ -31,8 +31,8 @@ log "⚙️ ① 出馬表・オッズ取得 & AI解析 (pipeline.py) を実行�
 python3 pipeline.py >> "$LOG_FILE" 2>&1
 
 # 2. Git差分チェックとプッシュ
-log "📤 ② 生成データ (data/races.json) をコミット＆GitHubへプッシュ中..."
-git add data/races.json
+log "📤 ② 生成データ (data/races.json, data/pipeline_status.json) をコミット＆GitHubへプッシュ中..."
+git add data/races.json data/pipeline_status.json
 
 if git diff --staged --quiet; then
     log "ℹ️  データに変更はありませんでした（既に最新データです）。"

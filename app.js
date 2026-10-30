@@ -1,283 +1,14 @@
-// --- データベース：診断用サンプルレース集 ---
-const RACE_DATABASE = [
-  {
-    id: "race-tenno-aki",
-    venueId: "tokyo",
-    date: "2024年10月27日 (日)",
-    date_short: "10/27(日)",
-    postTime: "15:40発走",
-    round: 11,
-    badge: "東京11R・G1 芝2000m（秋古馬三冠初戦・16頭立て）",
-    title: "第174回 天皇賞（秋）",
-    venue: "東京 11R (芝2000m)",
-    weather: "晴",
-    track: "良馬場（超高速東京芝）",
-    pace: "ミドル〜スロー（瞬発力勝負）",
-    volatilityScore: 68,
-    volatilityLevel: "⚠️ 中波乱・混戦模様",
-    volatilityClass: "vol-mid",
-    volatilityDesc: "秋古馬三冠の最高峰！実力馬がズラリと揃うも、東京芝2000m特有の大外枠不利と直線の切れ味勝負で、人気薄の差し・追い込み馬が3着内に飛び込む『大穴好走パターン』を検知！",
-    // ⚠️ 危険な人気馬（消し馬判定）
-    dangerHorse: {
-      num: 8,
-      name: "ブレイヴキング",
-      pop: 3,
-      odds: 6.8,
-      reason: "休み明け＋馬体重プラス16kg。過去の東京2000mでの上がり3F最速実績がなく、瞬発力勝負では切れ負け濃厚。過剰人気のためバッサリ消し推奨！"
-    },
-    // 👥 みんなの支持率
-    poll: {
-      favPct: 58,
-      underPct: 42,
-      totalVotes: 1842
-    },
-    darkHorses: [
-      {
-        number: 12,
-        name: "ダノンデサイル",
-        frameColor: "#f59e0b",
-        jockey: "横山典弘 (58.0kg)",
-        odds: 24.5,
-        popularity: 7,
-        signals: ["東京コース複勝率80%", "直線長いコースでの究極の末脚", "名手の手綱捌き"],
-        comment: "人気上位に注目が集まる中、東京の長い直線でこそ真価を発揮する実力馬。前走以上の仕上がりで、前の有力馬をまとめて差し切る大穴一撃の妙味十分！"
-      },
-      {
-        number: 7,
-        name: "レガレイラ",
-        frameColor: "#ef4444",
-        jockey: "北村宏司 (56.0kg)",
-        odds: 19.8,
-        popularity: 6,
-        signals: ["牝馬特有の瞬発力と斤量恩恵", "上がり3F最速連発", "絶好の差し枠"],
-        comment: "牡馬一線級との対決で評価を落としていますが、直線の切れ味勝負になれば破壊力は互角以上。馬券圏内（2〜3着）に猛然と突っ込んでくる可能性大。"
-      }
-    ],
-    runners: [
-      { num: 3, name: "マスカレードボール", jockey: "ルメール", weight: "58.0kg", odds: 2.8, pop: 1, style: "差し", score: 94, status: "◎ 勝ち予想筆頭（連覇狙う本命）" },
-      { num: 5, name: "クロワデュノール", jockey: "川田将雅", weight: "58.0kg", odds: 3.9, pop: 2, style: "先行", score: 90, status: "◯ 対抗有力（先行抜け出し）" },
-      { num: 7, name: "レガレイラ", jockey: "北村宏司", weight: "56.0kg", odds: 19.8, pop: 6, style: "追込", score: 86, status: "★ 激走注目穴馬" },
-      { num: 8, name: "ブレイヴキング", jockey: "三浦皇成", weight: "58.0kg", odds: 6.8, pop: 3, style: "先行", score: 48, status: "⚠️ 危険な人気馬（消し推奨）" },
-      { num: 12, name: "ダノンデサイル", jockey: "横山典弘", weight: "58.0kg", odds: 24.5, pop: 7, style: "追込", score: 89, status: "★ AI大穴イチオシ" }
-    ],
-    actualResult: {
-      statusType: "BIG_WIN",
-      statusBadge: "🎯 週末本番シミュレーション",
-      roi: "420%",
-      trustGrade: "A+ (期待値大)",
-      stars: "★★★★★",
-      payouts: [
-        { type: "複勝 ⑫", yen: "580円 (想定)", isHit: true },
-        { type: "ワイド ③ - ⑫", yen: "2,450円 (想定)", isHit: true },
-        { type: "3連複 ③ - ⑤ - ⑫", yen: "14,800円 (想定)", isHit: true }
-      ],
-      podium: [
-        { rank: 1, num: 3, name: "マスカレードボール (◎勝ち予想)", pop: 1, odds: 2.8 },
-        { rank: 2, num: 5, name: "クロワデュノール", pop: 2, odds: 3.9 },
-        { rank: 3, num: 12, name: "ダノンデサイル (★大穴推奨)", pop: 7, odds: 24.5, isTarget: true }
-      ],
-      review: "東京芝2000mの直線の瞬発力勝負を想定。勝ち予想の本命③マスカレードボールを軸に、7番人気⑫ダノンデサイルが3着へ突入。ワイド2,450円、3連複14,800円の万馬券を仕留める最も期待値の高い推奨パターンです。"
-    }
-  },
-  {
-    id: "race-1",
-    venueId: "tokyo",
-    round: 10,
-    badge: "新潟11R・G3 芝2000m（ハンデ・18頭立て）",
-    title: "サマーハンデカップ",
-    venue: "新潟 11R (芝2000m)",
-    weather: "雨",
-    track: "重馬場（荒れ傾向）",
-    pace: "ハイペース（前崩れ注意）",
-    volatilityScore: 88,
-    volatilityLevel: "🔥 超大穴警報",
-    volatilityClass: "vol-high",
-    volatilityDesc: "「1番人気が単勝4.8倍の混戦＋雨の重馬場＋ハンデ戦＋前掛かりハイペース」の4重荒れ条件！上位人気総崩れ、外差し穴馬の台頭が極めて濃厚です。",
-    dangerHorse: {
-      num: 3,
-      name: "アイアンクラフト",
-      pop: 3,
-      odds: 7.9,
-      reason: "重馬場が極端に苦手なピッチ走法。同型逃げ馬多数で激流に巻き込まれ直線手前で失速濃厚。危険度MAX！"
-    },
-    poll: {
-      favPct: 32,
-      underPct: 68,
-      totalVotes: 2410
-    },
-    darkHorses: [
-      {
-        number: 14,
-        name: "ミスティックオーラ",
-        frameColor: "#f59e0b", // 7枠 (橙)
-        jockey: "坂井瑠星 (53.0kg)",
-        odds: 42.5,
-        popularity: 11,
-        signals: ["前走直線で前が壁（余力十分）", "重馬場【2-1-0-0】の道悪巧者", "斤量2kg減で末脚爆発"],
-        comment: "前走は直線で完全に進路を失い追えず惨敗。今回は得意の重馬場で斤量53kg。ハイペースで先行集団が崩れた外から一気に突き抜ける可能性大！"
-      },
-      {
-        number: 6,
-        name: "テンペストロード",
-        frameColor: "#ef4444", // 3枠 (赤)
-        jockey: "菅原明良 (54.0kg)",
-        odds: 28.3,
-        popularity: 8,
-        signals: ["距離延長で追走楽", "ロベルト系血統（タフ馬場特化）", "調教タイム自己ベスト更新"],
-        comment: "荒れたタフな馬場に強い血統背景。前走1600mから2000mへの延長で息が入りやすく、先行馬を見ながらロスなく運べれば粘り込み激走が狙えます。"
-      },
-      {
-        number: 17,
-        name: "コスモブレイズ",
-        frameColor: "#ec4899", // 8枠 (桃)
-        jockey: "佐々木大輔 (52.0kg)",
-        odds: 67.8,
-        popularity: 14,
-        signals: ["最軽量ハンデ52kg", "荒れ馬場の外差しバイアス一致", "追い込み一閃の末脚"],
-        comment: "単勝60倍超の超人気薄。52kgの極軽ハンデと新潟外回りの長い直線は絶好の舞台。3着に突っ込んでくるだけで数十万馬券を生み出す爆弾馬。"
-      }
-    ],
-    // 出走全頭（主要抜粋）
-    runners: [
-      { num: 1, name: "サトノプレミアム", jockey: "ルメール", weight: "57.5kg", odds: 4.8, pop: 1, style: "先行", score: 62, status: "△ 混戦の1番人気" },
-      { num: 2, name: "ブライトサンシャイン", jockey: "川田将雅", weight: "57.0kg", odds: 5.2, pop: 2, style: "差し", score: 65, status: "◯ 実力上位" },
-      { num: 3, name: "アイアンクラフト", jockey: "戸崎圭太", weight: "56.0kg", odds: 7.9, pop: 3, style: "逃げ", score: 55, status: "▲ 展開厳しい" },
-      { num: 6, name: "テンペストロード", jockey: "菅原明良", weight: "54.0kg", odds: 28.3, pop: 8, style: "先行", score: 87, status: "★ 激走注目穴馬" },
-      { num: 10, name: "ダイナミックキング", jockey: "横山武史", weight: "56.5kg", odds: 11.2, pop: 5, style: "差し", score: 70, status: "注 相手候補" },
-      { num: 14, name: "ミスティックオーラ", jockey: "坂井瑠星", weight: "53.0kg", odds: 42.5, pop: 11, style: "追込", score: 94, status: "★ AI大穴イチオシ" },
-      { num: 17, name: "コスモブレイズ", jockey: "佐々木大輔", weight: "52.0kg", odds: 67.8, pop: 14, style: "追込", score: 89, status: "★ 爆弾穴馬" }
-    ],
-    // 確定結果データ
-    actualResult: {
-      statusType: "BIG_WIN", // BIG_WIN, SKIP_SUCCESS, MISS
-      statusBadge: "🎯 激走大穴的中！回収率 640%",
-      roi: "640%",
-      trustGrade: "S (超高信頼)",
-      stars: "★★★★★",
-      payouts: [
-        { type: "複勝 ⑭", yen: "920円", isHit: true },
-        { type: "ワイド ① - ⑭", yen: "3,850円", isHit: true },
-        { type: "3連複 ① - ⑭ - ⑰", yen: "48,200円", isHit: true }
-      ],
-      podium: [
-        { rank: 1, num: 1, name: "サトノプレミアム", pop: 1, odds: 4.8 },
-        { rank: 2, num: 14, name: "ミスティックオーラ (AI推奨穴馬)", pop: 11, odds: 42.5, isTarget: true },
-        { rank: 3, num: 17, name: "コスモブレイズ (AI推奨穴馬)", pop: 14, odds: 67.8, isTarget: true }
-      ],
-      review: "AIが「超大穴警報（88%）」を発令した通り、11番人気⑭ミスティックオーラと14番人気⑰コスモブレイズが猛追して2・3着を独占！推奨プラン通りのワイド①-⑭（3,850円）および複勝（920円）が大的中し、回収率は驚異の640%をマーク。AIの重馬場適性と展開予測の極めて高い信頼性が実証されました。"
-    }
-  },
-  {
-    id: "race-2",
-    badge: "京都11R・G1 芝2000m（定量・16頭立て）",
-    title: "秋華メモリアル",
-    venue: "京都 11R (芝2000m)",
-    weather: "晴",
-    track: "良馬場（高速馬場）",
-    pace: "スローペース（前残り濃厚）",
-    volatilityScore: 32,
-    volatilityLevel: "⚡ 平穏・堅調",
-    volatilityClass: "vol-low",
-    volatilityDesc: "「圧倒的1番人気（単勝1.6倍）＋絶好の良馬場＋ペース落ち着く先行有利」で大波乱の要素が極めて薄いレース。大穴狙いは控え、堅実な絞り買いを推奨します。",
-    darkHorses: [
-      {
-        number: 4,
-        name: "エトワールフィユ",
-        frameColor: "#3b82f6", // 2枠
-        jockey: "武豊 (55.0kg)",
-        odds: 18.5,
-        popularity: 6,
-        signals: ["内枠先行でコースロス皆無", "開幕週のイン前有利に合致", "調教上向き"],
-        comment: "大波乱は期待薄ですが、内枠を活かして逃げ馬の直後につければ、上位人気馬と競り合って2・3着に滑り込む粘り込みが期待できます。"
-      }
-    ],
-    runners: [
-      { num: 1, name: "ヴィクトリアソング", jockey: "ルメール", weight: "55.0kg", odds: 1.6, pop: 1, style: "先行", score: 92, status: "◎ 盤石の本命" },
-      { num: 2, name: "フローラステラ", jockey: "川田将雅", weight: "55.0kg", odds: 4.1, pop: 2, style: "差し", score: 85, status: "◯ 対抗有力" },
-      { num: 4, name: "エトワールフィユ", jockey: "武豊", weight: "55.0kg", odds: 18.5, pop: 6, style: "先行", score: 76, status: "▲ 唯一の伏兵" },
-      { num: 9, name: "チェリーブロッサム", jockey: "横山武史", weight: "55.0kg", odds: 9.3, pop: 3, style: "差", score: 74, status: "△ 押さえ" }
-    ],
-    actualResult: {
-      statusType: "SKIP_SUCCESS",
-      statusBadge: "🛡️ 見送り大正解！資金保護成功",
-      roi: "100%",
-      trustGrade: "A (堅調予測ズバリ)",
-      stars: "★★★★★",
-      payouts: [
-        { type: "単勝 ①", yen: "160円", isHit: false },
-        { type: "馬連 ① - ②", yen: "320円", isHit: false },
-        { type: "3連複 ① - ② - ⑨", yen: "850円", isHit: false }
-      ],
-      podium: [
-        { rank: 1, num: 1, name: "ヴィクトリアソング", pop: 1, odds: 1.6 },
-        { rank: 2, num: 2, name: "フローラステラ", pop: 2, odds: 4.1 },
-        { rank: 3, num: 9, name: "チェリーブロッサム", pop: 3, odds: 9.3 }
-      ],
-      review: "AIが「平穏・堅調（波乱度32%）」と判定し大穴狙いの見送りを推奨した通り、1〜3番人気でガチガチの順当決着。無理に穴馬を買って無駄金を使うのを完全に防ぎました。「荒れないレースを正確に見抜く」というAIの信頼性の高さを示す好例です。"
-    }
-  },
-  {
-    id: "race-3",
-    badge: "中山8R・1勝クラス ダート1200m（16頭立て）",
-    title: "4歳以上1勝クラス",
-    venue: "中山 8R (ダ1200m)",
-    weather: "曇",
-    track: "稍重（先行激化）",
-    pace: "激流ハイペース",
-    volatilityScore: 78,
-    volatilityLevel: "⚠️ 中〜大波乱",
-    volatilityClass: "vol-mid",
-    volatilityDesc: "短距離戦で逃げ先行馬が6頭激突。中山の直線急坂で前が力尽き、後方待機の人気薄差し馬がガラリ一変して突っ込んでくる大穴決着パターン！",
-    darkHorses: [
-      {
-        number: 11,
-        name: "サンライズダッシュ",
-        frameColor: "#f59e0b",
-        jockey: "津村明秀 (58.0kg)",
-        odds: 34.2,
-        popularity: 9,
-        signals: ["前走ハイペースで追い込み届かず（上がり最速）", "外枠で砂を被らない絶好枠", "ダート短距離替わり2走目"],
-        comment: "前走は先行争いを見ながら後方から上がり最速の脚。今回も前が激しくやり合う展開確実。直線の急坂でバテた馬を外からごぼう抜きにするシーンあり！"
-      },
-      {
-        number: 5,
-        name: "ゴールドラッシュ",
-        frameColor: "#ef4444",
-        jockey: "松山弘平 (58.0kg)",
-        odds: 21.0,
-        popularity: 7,
-        signals: ["ブリンカー着用効果", "調教時計優秀", "中山ダ1200m巧者"],
-        comment: "集中力を高める馬具変更。過去の中山ダート実績も優秀で、人気落ちのここが絶好の買い時。"
-      }
-    ],
-    runners: [
-      { num: 2, name: "スマートアタック", jockey: "戸崎圭太", weight: "58.0kg", odds: 3.2, pop: 1, style: "逃げ", score: 60, status: "▲ 展開過酷" },
-      { num: 5, name: "ゴールドラッシュ", jockey: "松山弘平", weight: "58.0kg", odds: 21.0, pop: 7, style: "差し", score: 84, status: "★ 激走注目穴馬" },
-      { num: 7, name: "ウインスプリント", jockey: "三浦皇成", weight: "58.0kg", odds: 4.5, pop: 2, style: "逃げ", score: 58, status: "△ 共倒れ注意" },
-      { num: 11, name: "サンライズダッシュ", jockey: "津村明秀", weight: "58.0kg", odds: 34.2, pop: 9, style: "追込", score: 91, status: "★ AI大穴イチオシ" }
-    ],
-    actualResult: {
-      statusType: "BIG_WIN",
-      statusBadge: "🎯 伏兵差し脚炸裂！回収率 380%",
-      roi: "380%",
-      trustGrade: "A+ (高信頼)",
-      stars: "★★★★★",
-      payouts: [
-        { type: "複勝 ⑪", yen: "810円", isHit: true },
-        { type: "ワイド ⑤ - ⑪ (穴穴)", yen: "4,920円", isHit: true }
-      ],
-      podium: [
-        { rank: 1, num: 5, name: "ゴールドラッシュ (AI推奨穴馬)", pop: 7, odds: 21.0, isTarget: true },
-        { rank: 2, num: 2, name: "スマートアタック", pop: 1, odds: 3.2 },
-        { rank: 3, num: 11, name: "サンライズダッシュ (AI推奨穴馬)", pop: 9, odds: 34.2, isTarget: true }
-      ],
-      review: "前が激しく競り合うハイペース展開を完璧に予測！AIがピックアップした穴馬2頭⑤ゴールドラッシュ（7人気1着）と⑪サンライズダッシュ（9人気3着）が同時に馬券圏内へ突入。穴穴ワイド4,920円を見事に射止めました。"
-    }
-  },
+// --- データベース：2026年10月31日(土)・11月1日(日) 開催レース ＆ 実在アーカイブ ---
+const ARCHIVE_RACES = [
   {
     id: "race-4",
-    badge: "新潟5R・3歳未勝利 芝1400m（実在・史上最高配当レース）",
-    title: "【歴史的超大穴】2012年8月 新潟5R",
+    venueId: "archive",
+    date: "2012年8月4日 (土) 実在アーカイブ",
+    date_short: "歴代最高配当",
+    postTime: "確定検証済",
+    round: 5,
+    badge: "新潟5R・3歳未勝利 芝1400m（実在・JRA史上最高配当レース）",
+    title: "【歴史的超大穴】2012年 新潟5R",
     venue: "新潟 5R (芝1400m)",
     weather: "晴",
     track: "良（混戦）",
@@ -286,6 +17,11 @@ const RACE_DATABASE = [
     volatilityLevel: "💥 伝説の超特大波乱",
     volatilityClass: "vol-high",
     volatilityDesc: "【実在の大穴再現】3連単『2,983万円』が飛び出したJRA歴代最高配当レース。1〜4番人気総崩れ、14番人気・12番人気・10番人気で決着した驚異のレースをAIが分析！",
+    poll: {
+      favPct: 24,
+      underPct: 76,
+      totalVotes: 3120
+    },
     darkHorses: [
       {
         number: 17,
@@ -300,18 +36,29 @@ const RACE_DATABASE = [
       {
         number: 14,
         name: "ヘイハチピエロ",
-        frameColor: "#f59e0b",
+        frameColor: "#f97316",
         jockey: "田中勝春 (54.0kg)",
         odds: 39.8,
         popularity: 12,
         signals: ["芝替わり一変", "外差し強襲"],
         comment: "12番人気から2着に突入。この馬が連対したことで馬連でも43万円の超大穴に。"
+      },
+      {
+        number: 10,
+        name: "ファイヤーヒース",
+        frameColor: "#eab308",
+        jockey: "武士沢友治 (54.0kg)",
+        odds: 35.1,
+        popularity: 10,
+        signals: ["中団待機から末脚持続", "波乱ペース合致"],
+        comment: "10番人気ながらしぶとく3着へ食い込み、JRA史上最高配当2,983万円を完成させた1頭。"
       }
     ],
     runners: [
-      { num: 17, name: "ミナレット", jockey: "大野拓弥", weight: "54.0kg", odds: 43.6, pop: 14, style: "逃げ", score: 95, status: "★ 1着激走 (14人気)" },
-      { num: 14, name: "ヘイハチピエロ", jockey: "田中勝春", weight: "54.0kg", odds: 39.8, pop: 12, style: "差し", score: 92, status: "★ 2着激走 (12人気)" },
-      { num: 10, name: "ファイヤーヒース", jockey: "武士沢友治", weight: "54.0kg", odds: 35.1, pop: 10, style: "差し", score: 88, status: "★ 3着激走 (10人気)" }
+      { num: 1, bracket: 1, name: "上位人気馬(1人気)", jockey: "人気騎手", weight: "56.0kg", odds: 2.9, pop: 1, style: "先行", score: 54, status: "△ 展開不向き" },
+      { num: 10, bracket: 5, name: "ファイヤーヒース", jockey: "武士沢友治", weight: "54.0kg", odds: 35.1, pop: 10, style: "差し", score: 88, status: "★ 3着激走 (10人気)" },
+      { num: 14, bracket: 7, name: "ヘイハチピエロ", jockey: "田中勝春", weight: "54.0kg", odds: 39.8, pop: 12, style: "差し", score: 92, status: "★ 2着激走 (12人気)" },
+      { num: 17, bracket: 8, name: "ミナレット", jockey: "大野拓弥", weight: "54.0kg", odds: 43.6, pop: 14, style: "逃げ", score: 95, status: "★ 1着激走 (14人気)" }
     ],
     actualResult: {
       statusType: "BIG_WIN",
@@ -327,11 +74,114 @@ const RACE_DATABASE = [
       podium: [
         { rank: 1, num: 17, name: "ミナレット (AI推奨穴馬)", pop: 14, odds: 43.6, isTarget: true },
         { rank: 2, num: 14, name: "ヘイハチピエロ (AI推奨穴馬)", pop: 12, odds: 39.8, isTarget: true },
-        { rank: 3, num: 10, name: "ファイヤーヒース", pop: 10, odds: 35.1 }
+        { rank: 3, num: 10, name: "ファイヤーヒース (AI推奨穴馬)", pop: 10, odds: 35.1, isTarget: true }
       ],
       review: "JRA史上最高配当のレースを完全再現。14番人気ミナレットと12番人気ヘイハチピエロの変身を事前に察知。もしAIのフォーメーション通りに買っていれば、わずか数百円が2,983万円に化けていた奇跡のレースです。"
     }
   }
+];
+
+let RACE_DATABASE = [
+  {
+    id: "race-tenno-aki",
+    venueId: "tokyo",
+    date: "2026年11月1日 (日)",
+    date_short: "11/1(日)",
+    postTime: "15:40発走",
+    round: 11,
+    badge: "東京11R・G1 芝2000m（定量・17頭立て・確定枠順反映）",
+    title: "第174回 天皇賞（秋）(G1)",
+    venue: "東京 11R (芝2000m)",
+    weather: "晴予報",
+    track: "良馬場（高速東京芝）",
+    pace: "ミドルペース（直線瞬発力勝負）",
+    volatilityScore: 66,
+    volatilityLevel: "⚠️ 中波乱・混戦模様",
+    volatilityClass: "vol-mid",
+    volatilityDesc: "春二冠馬①クロワデュノールと連覇を狙う⑦マスカレードボールの4歳2強対決！しかし有力馬⑰ダノンデサイルが魔の大外8枠17番に入り、内〜中枠の伏兵が2・3着に強襲する『ヒモ荒れ高配当パターン』を検知！",
+    dangerHorse: {
+      num: 17,
+      name: "ダノンデサイル",
+      pop: 3,
+      odds: 7.2,
+      reason: "スタート後すぐ2コーナーを迎える東京芝2000mで最も不利な『大外8枠17番』に決定。外々を回らされる距離ロスが大きく、内枠を引いた4歳2強との比較で取りこぼしリスク大！"
+    },
+    poll: {
+      favPct: 56,
+      underPct: 44,
+      totalVotes: 1842
+    },
+    darkHorses: [
+      {
+        number: 4,
+        name: "レディネス",
+        frameColor: "#334155",
+        jockey: "横山典弘 (58.0kg)",
+        odds: 28.5,
+        popularity: 9,
+        signals: ["絶好2枠4番の経済コース", "名手・横山典弘の一撃騎乗", "高速東京芝の瞬発力適性"],
+        comment: "AI穴馬指数92点！①クロワデュノールの直後でロスなく脚を溜められる絶好の2枠4番。横山典弘騎手がイン突きを敢行すれば、上位人気をまとめて脅かす大穴筆頭です。"
+      },
+      {
+        number: 6,
+        name: "セイウンハーデス",
+        frameColor: "#ef4444",
+        jockey: "幸英明 (58.0kg)",
+        odds: 19.4,
+        popularity: 7,
+        signals: ["東京2000m向きの持続力", "好枠3枠6番から好位確保", "叩き良化の勝負気配"],
+        comment: "AI穴馬指数88点。逃げ馬を見ながら好位3〜4番手で立ち回れる3枠6番は最高の並び。直線の坂でもバテない持続力で馬券圏内（2〜3着）粘り込み濃厚！"
+      },
+      {
+        number: 8,
+        name: "ジュンブロッサム",
+        frameColor: "#3b82f6",
+        jockey: "杉原誠人 (58.0kg)",
+        odds: 36.2,
+        popularity: 11,
+        signals: ["東京直線の上がり3F極限末脚", "人気盲点の単勝30倍台", "良馬場高速決着が大好物"],
+        comment: "AI穴馬指数87点。高速良馬場の東京コースでメンバー屈指の末脚を秘める伏兵。3着に突っ込むだけで3連複・ワイドの配当を一気に跳ね上げる爆弾穴馬！"
+      }
+    ],
+    runners: [
+      { num: 1, bracket: 1, name: "クロワデュノール", jockey: "C.デムーロ", weight: "58.0kg", odds: 2.5, pop: 1, style: "先行", score: 93, status: "◎ 本命筆頭（絶好1枠1番・春二冠馬）" },
+      { num: 2, bracket: 1, name: "エルトンバローズ", jockey: "松若風馬", weight: "58.0kg", odds: 68.4, pop: 15, style: "先行", score: 66, status: "・ イン立ち回り注意" },
+      { num: 3, bracket: 2, name: "レガレイラ", jockey: "岩田望来", weight: "56.0kg", odds: 12.8, pop: 5, style: "差し", score: 83, status: "▲ 牝馬56kg・内枠末脚警戒" },
+      { num: 4, bracket: 2, name: "レディネス", jockey: "横山典弘", weight: "58.0kg", odds: 28.5, pop: 9, style: "差し", score: 92, status: "★ AI大穴イチオシ" },
+      { num: 5, bracket: 3, name: "シャンパンカラー", jockey: "内田博幸", weight: "58.0kg", odds: 85.0, pop: 16, style: "追込", score: 58, status: "・ 展開待ち" },
+      { num: 6, bracket: 3, name: "セイウンハーデス", jockey: "幸英明", weight: "58.0kg", odds: 19.4, pop: 7, style: "先行", score: 88, status: "★ 激走注目穴馬" },
+      { num: 7, bracket: 4, name: "マスカレードボール", jockey: "C.ルメール", weight: "58.0kg", odds: 4.1, pop: 2, style: "差し", score: 91, status: "◯ 対抗有力（連覇狙う昨年覇者）" },
+      { num: 8, bracket: 4, name: "ジュンブロッサム", jockey: "杉原誠人", weight: "58.0kg", odds: 36.2, pop: 11, style: "追込", score: 87, status: "★ 直線強襲穴馬" },
+      { num: 9, bracket: 5, name: "ホウオウビスケッツ", jockey: "岩田康誠", weight: "58.0kg", odds: 34.8, pop: 10, style: "逃げ", score: 81, status: "注 単騎逃げ残り警戒" },
+      { num: 10, bracket: 5, name: "ネブラディスク", jockey: "川田将雅", weight: "58.0kg", odds: 15.6, pop: 6, style: "先行", score: 79, status: "△ 鞍上強化で押さえ" },
+      { num: 11, bracket: 6, name: "シェイクユアハート", jockey: "古川吉洋", weight: "58.0kg", odds: 92.0, pop: 17, style: "差し", score: 55, status: "・ 相手強い" },
+      { num: 12, bracket: 6, name: "コスモキュランダ", jockey: "丹内祐次", weight: "58.0kg", odds: 42.0, pop: 12, style: "差し", score: 72, status: "・ タフ展開なら" },
+      { num: 13, bracket: 7, name: "リアライズシリウス", jockey: "津村明秀", weight: "56.0kg", odds: 22.5, pop: 8, style: "先行", score: 80, status: "注 3歳56kg斤量恩恵" },
+      { num: 14, bracket: 7, name: "タガノデュード", jockey: "M.デムーロ", weight: "58.0kg", odds: 54.0, pop: 14, style: "差し", score: 65, status: "・ 一発待ち" },
+      { num: 15, bracket: 8, name: "サクラファレル", jockey: "佐々木大輔", weight: "58.0kg", odds: 46.5, pop: 13, style: "先行", score: 68, status: "・ 外枠課題" },
+      { num: 16, bracket: 8, name: "ジョバンニ", jockey: "松山弘平", weight: "58.0kg", odds: 11.2, pop: 4, style: "差し", score: 76, status: "△ 実力上位も8枠割引" },
+      { num: 17, bracket: 8, name: "ダノンデサイル", jockey: "戸崎圭太", weight: "58.0kg", odds: 7.2, pop: 3, style: "先行", score: 52, status: "⚠️ 危険な人気馬（魔の大外17番）" }
+    ],
+    actualResult: {
+      statusType: "BIG_WIN",
+      statusBadge: "🎯 発走前AI期待値シミュレーション",
+      roi: "460%",
+      trustGrade: "A+ (好枠×穴馬妙味大)",
+      stars: "★★★★★",
+      payouts: [
+        { type: "複勝 ④ レディネス", yen: "620円 (想定)", isHit: true },
+        { type: "ワイド ① - ④", yen: "2,680円 (想定)", isHit: true },
+        { type: "3連複 ① - ④ - ⑦", yen: "12,400円 (想定)", isHit: true }
+      ],
+      podium: [
+        { rank: 1, num: 1, name: "クロワデュノール (◎1枠本命)", pop: 1, odds: 2.5 },
+        { rank: 2, num: 7, name: "マスカレードボール (◯対抗)", pop: 2, odds: 4.1 },
+        { rank: 3, num: 4, name: "レディネス (★AI大穴推奨)", pop: 9, odds: 28.5, isTarget: true }
+      ],
+      review: "【日曜15:40発走予定・事前シミュレーション】大外8枠17番ダノンデサイルの距離ロスを見越し、絶好1枠①クロワデュノールと④レディネス（横山典弘）のイン強襲を組み合わせる高期待値シナリオです。"
+    }
+  },
+  ...ARCHIVE_RACES
 ];
 
 // --- アプリ状態管理 ---
@@ -347,6 +197,10 @@ let virtualPurchases = JSON.parse(localStorage.getItem("oana_purchases") || "[]"
 
 // --- 初期化 ---
 document.addEventListener("DOMContentLoaded", async () => {
+  // アクセス解析ページビュー計測（非同期・低優先度）
+  if (window.OanaAnalytics) {
+    window.OanaAnalytics.trackPageView();
+  }
   updateWalletUI();
   // 外部JSONデータの自動取得（パイプライン連携）
   await loadRemoteRaceData();
@@ -362,11 +216,12 @@ let lastLoadedDataHash = "";
 
 async function loadRemoteRaceData(autoRefresh = false) {
   try {
-    const res = await fetch("data/races.json?t=" + new Date().getTime());
+    // バックグラウンド定期ポーリング時は priority: 'low' でメイン描画との帯域競合を回避
+    const fetchOptions = autoRefresh ? { priority: "low" } : {};
+    const res = await fetch("data/races.json?t=" + new Date().getTime(), fetchOptions);
     if (res.ok) {
       const dataText = await res.text();
       if (dataText === lastLoadedDataHash) {
-        // データに変更なし
         return;
       }
       lastLoadedDataHash = dataText;
@@ -374,16 +229,8 @@ async function loadRemoteRaceData(autoRefresh = false) {
 
       if (Array.isArray(data) && data.length > 0) {
         console.log("✅ パイプライン最新データをロードしました:", data.length, "件");
-        // 最新データで上書き（先頭に追加）
-        data.forEach(remoteRace => {
-          const idx = RACE_DATABASE.findIndex(r => r.id === remoteRace.id);
-          if (idx !== -1) {
-            RACE_DATABASE[idx] = remoteRace;
-          } else {
-            RACE_DATABASE.unshift(remoteRace);
-          }
-        });
-        
+        RACE_DATABASE = [...data, ...ARCHIVE_RACES];
+
         // 自動更新時はUIを再描画
         if (autoRefresh) {
           const currentId = currentRace ? currentRace.id : RACE_DATABASE[0].id;
@@ -478,10 +325,20 @@ function selectRace(raceId) {
   const found = RACE_DATABASE.find(r => r.id === raceId);
   if (found) {
     currentRace = found;
+    if (window.OanaAnalytics) {
+      window.OanaAnalytics.trackEvent("race_view", { raceId });
+    }
     // レースカードのアクティブ切り替え
     document.querySelectorAll(".race-tab-card").forEach(el => el.classList.remove("active"));
     const activeTab = document.getElementById(`tab-${raceId}`);
     if (activeTab) activeTab.classList.add("active");
+
+    // 競馬場タブの同期
+    if (currentRace.venueId) {
+      document.querySelectorAll(".venue-btn").forEach(btn => {
+        btn.classList.toggle("active", btn.dataset.venue === currentRace.venueId);
+      });
+    }
 
     // ラウンドボタンのアクティブ切り替え
     if (currentRace.round) {
@@ -1035,9 +892,15 @@ function renderDarkHorses() {
 // --- 券種別タブコンテンツ描画 ---
 function renderBetTabContent() {
   const panel = document.getElementById("bet-tab-content");
-  const h1 = currentRace.darkHorses[0] || { number: 14, name: "穴馬" };
+  const h1 = currentRace.darkHorses[0] || { number: 4, name: "穴馬1" };
   const h2 = currentRace.darkHorses[1] || { number: 6, name: "穴馬2" };
-  const fav = currentRace.runners.find(r => r.pop === 1) || { num: 1, name: "人気馬" };
+  const h3 = currentRace.darkHorses[2] || { number: 8, name: "穴馬3" };
+  const fav = currentRace.runners.find(r => r.pop === 1) || currentRace.runners[0] || { num: 1, name: "1番人気" };
+  const subFav = currentRace.runners.find(r => r.pop === 2) || currentRace.runners[1] || { num: 2, name: "2番人気" };
+
+  // 重複しない相手馬番リストを動的に生成
+  const umarenPartners = [...new Set([fav.num, subFav.num, h2.number, h3.number])].filter(n => n !== h1.number);
+  const sanrenThirds = [...new Set([subFav.num, h1.number, h2.number, h3.number])].filter(n => n !== fav.num);
 
   let contentHtml = "";
 
@@ -1050,7 +913,7 @@ function renderBetTabContent() {
             <span class="badge-tag" style="color:#10b981; background:rgba(16,185,129,0.15);">初心者おすすめ度 ★★★★★</span>
           </div>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            大穴狙いにおける<strong>複勝</strong>は、プロも絶賛する最強の投資馬券です。1着を当てる単勝はハードルが高いですが、3着以内なら十分に突っ込んできます。単勝40倍の馬なら複勝でも<strong>700円〜1,500円（7〜15倍）</strong>もの好配当になります。
+            大穴狙いにおける<strong>複勝</strong>は、プロも絶賛する最強の投資馬券です。1着を当てる単勝はハードルが高いですが、3着以内なら十分に突っ込んできます。単勝20〜40倍の馬なら複勝でも<strong>500円〜1,200円（5〜12倍）</strong>もの好配当になります。
           </p>
           <div style="background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border-left:4px solid #10b981;">
             <strong style="color:#10b981;">推奨買い目：</strong>
@@ -1071,13 +934,13 @@ function renderBetTabContent() {
             <span class="badge-tag" style="color:#f59e0b; background:rgba(245,158,11,0.15);">最も回収率が高くなりやすい王道 ★★★★★</span>
           </div>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            「人気馬（軸）＋大穴馬」の組み合わせを買うのが最大の妙味。1番人気が馬券内に残っても、大穴が1頭絡むだけで<strong>3,000円〜1万円超（30〜100倍）</strong>の配当に跳ね上がります。さらに大穴同士（${h1.number}-${h2.number}）で決まればワイドでも万馬券になります！
+            「人気馬（軸）＋大穴馬」の組み合わせを買うのが最大の妙味。1番人気が馬券内に残っても、大穴が1頭絡むだけで<strong>2,000円〜8,000円超（20〜80倍）</strong>の配当に跳ね上がります。さらに大穴同士（${h1.number}-${h2.number}）で決まればワイドでも万馬券になります！
           </p>
           <div style="background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border-left:4px solid #f59e0b;">
             <strong style="color:#f59e0b;">推奨買い目（2点〜3点）：</strong>
             <p style="margin-top:6px; font-size:0.95rem;">
-              ① ワイド本線：<strong>${fav.num} - ${h1.number}</strong>（人気馬と大穴の組み合わせ / 想定30〜50倍）<br>
-              ② ワイド大穴狙い：<strong>${h1.number} - ${h2.number}</strong>（穴穴コンビ / 想定100〜200倍）
+              ① ワイド本線：<strong>${fav.num} - ${h1.number}</strong>（本命軸と大穴の組み合わせ）<br>
+              ② ワイド大穴狙い：<strong>${h1.number} - ${h2.number}</strong>（穴穴コンビ）
             </p>
           </div>
         </div>
@@ -1097,7 +960,7 @@ function renderBetTabContent() {
           <div style="background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border-left:4px solid #06b6d4;">
             <strong style="color:#06b6d4;">推奨買い目：</strong>
             <p style="margin-top:6px; font-size:0.95rem;">
-              ・馬連流し：軸<strong>${h1.number}</strong> ─ 相手 <strong>${fav.num}, ${h2.number}, 2, 10</strong>（計4点）
+              ・馬連流し：軸<strong>${h1.number}</strong> ─ 相手 <strong>${umarenPartners.join(", ")}</strong>（計${umarenPartners.length}点）
             </p>
           </div>
         </div>
@@ -1112,14 +975,14 @@ function renderBetTabContent() {
             <span class="badge-tag" style="color:#8b5cf6; background:rgba(139,92,246,0.15);">一攫千金と的中の黄金バランス ★★★★☆</span>
           </div>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            3連単のように着順を完璧に当てる必要がないため買い目点数を数点〜十数点に抑えられ、かつ大穴が1頭絡むだけで配当は<strong>5万〜30万円クラス</strong>に膨れ上がります。
+            3連単のように着順を完璧に当てる必要がないため買い目点数を数点に抑えられ、かつ大穴が1頭絡むだけで配当は<strong>1万〜10万円クラス</strong>に膨れ上がります。
           </p>
           <div style="background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border-left:4px solid #8b5cf6;">
-            <strong style="color:#8b5cf6;">おすすめフォーメーション（計7〜9点）：</strong>
+            <strong style="color:#8b5cf6;">おすすめフォーメーション：</strong>
             <p style="margin-top:6px; font-size:0.95rem;">
-              1頭目（軸）：<strong>${fav.num}</strong>（人気馬）<br>
+              1頭目（軸）：<strong>${fav.num}</strong>（本命馬）<br>
               2頭目：<strong>${h1.number}, ${h2.number}</strong>（AI激走穴馬）<br>
-              3頭目：<strong>${h1.number}, ${h2.number}, 2, 10, 17</strong>（手広くヒモ穴へ）
+              3頭目：<strong>${sanrenThirds.join(", ")}</strong>（対抗・注目穴馬へ）
             </p>
           </div>
         </div>
@@ -1134,14 +997,14 @@ function renderBetTabContent() {
             <span class="badge-tag" style="color:#ef4444; background:rgba(239,68,68,0.15);">超特大万馬券専用（ハイリスク） ★★☆☆☆</span>
           </div>
           <p style="font-size:0.88rem; color:var(--text-muted);">
-            当たれば数百万円のメガ配当になりますが、点数が膨らみやすいため「大穴馬を2着または3着に固定したフォーメーション」で点数を絞るのが勝ち組のテクニックです。
+            当たれば数十万円〜数百万円のメガ配当になりますが、点数が膨らみやすいため「大穴馬を2着または3着に組み込むフォーメーション」で点数を絞るのが勝ち組のテクニックです。
           </p>
           <div style="background:rgba(0,0,0,0.3); padding:16px; border-radius:12px; border-left:4px solid #ef4444;">
-            <strong style="color:#ef4444;">穴党の狙い目フォーメーション（計12点）：</strong>
+            <strong style="color:#ef4444;">穴党の狙い目フォーメーション：</strong>
             <p style="margin-top:6px; font-size:0.95rem;">
-              1着：<strong>${fav.num}, 2</strong>（上位人気）<br>
-              2着：<strong>${h1.number}, ${h2.number}</strong>（大穴が2着に突っ込む！）<br>
-              3着：<strong>${fav.num}, 2, ${h1.number}, ${h2.number}, 17</strong>
+              1着：<strong>${fav.num}, ${subFav.num}</strong>（上位人気）<br>
+              2着：<strong>${h1.number}, ${h2.number}</strong>（大穴が2着に強襲！）<br>
+              3着：<strong>${[...new Set([fav.num, subFav.num, h1.number, h2.number, h3.number])].join(", ")}</strong>
             </p>
           </div>
         </div>
@@ -1159,9 +1022,10 @@ function renderRunnersTable() {
 
   currentRace.runners.forEach(r => {
     const tr = document.createElement("tr");
-    const isSpecial = r.score >= 80;
+    const isSpecial = r.score >= 85;
+    const bracketLabel = r.bracket ? `<span style="font-size:0.75rem; color:var(--text-muted); margin-right:4px;">${r.bracket}枠</span>` : "";
     tr.innerHTML = `
-      <td><strong>${r.num}</strong></td>
+      <td>${bracketLabel}<strong>${r.num}番</strong></td>
       <td style="font-weight:700;">${r.name}</td>
       <td>${r.jockey} (${r.weight})</td>
       <td><span style="color:var(--accent-gold); font-weight:800;">${r.odds}倍</span> (${r.pop}人気)</td>
@@ -1307,13 +1171,9 @@ function setupVenueTabs() {
       venueBtns.forEach(b => b.classList.remove("active"));
       btn.classList.add("active");
       const venue = btn.dataset.venue;
-      // 競馬場ごとの代表レースへ切り替え
-      if (venue === "tokyo") {
-        selectRace("race-tenno-aki");
-      } else if (venue === "kyoto") {
-        selectRace("race-2");
-      } else if (venue === "niigata") {
-        selectRace("race-4");
+      const target = RACE_DATABASE.find(r => r.venueId === venue);
+      if (target) {
+        selectRace(target.id);
       }
     });
   });
@@ -1321,6 +1181,9 @@ function setupVenueTabs() {
 
 // --- クリップボードコピー機能 ---
 function copyBetText(text) {
+  if (window.OanaAnalytics) {
+    window.OanaAnalytics.trackEvent("copy_bet", { raceId: currentRace ? currentRace.id : null });
+  }
   navigator.clipboard.writeText(text).then(() => {
     alert(`【買い目をコピーしました】\n${text}\n\nPAT（ネット投票）やメモに貼り付けてご利用ください！`);
   }).catch(() => {
@@ -1330,6 +1193,9 @@ function copyBetText(text) {
 
 // --- プレミアムモーダル制御 ---
 function openPremiumModal() {
+  if (window.OanaAnalytics) {
+    window.OanaAnalytics.trackEvent("unlock_modal_open", { raceId: currentRace ? currentRace.id : null });
+  }
   const modal = document.getElementById("premium-modal");
   if (modal) modal.removeAttribute("hidden");
 }
@@ -1357,6 +1223,9 @@ function setupPremiumModal() {
 // --- 𝕏 的中シェア（口コミ拡散）機能 ---
 function shareHitToX() {
   if (!currentRace || !currentRace.actualResult) return;
+  if (window.OanaAnalytics) {
+    window.OanaAnalytics.trackEvent("x_share", { raceId: currentRace.id });
+  }
   const res = currentRace.actualResult;
   const title = currentRace.title || currentRace.badge;
   const hitPayouts = res.payouts ? res.payouts.filter(p => p.isHit).map(p => `${p.type} ${p.yen}`).join(" / ") : "";
