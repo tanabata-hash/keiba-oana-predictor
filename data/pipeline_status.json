@@ -1,39 +1,48 @@
 {
-  "lastRunAt": "2026-10-30 15:57:56",
+  "lastRunAt": "2026-10-30 18:00:00",
+  "sourceMode": "live_netkeiba",
   "targetWeekend": "10/31(土) 〜 11/1(日)",
   "raceCount": 4,
   "races": [
     {
       "id": "race-tenno-aki",
-      "title": "第174回 天皇賞（秋）(G1)",
+      "title": "天皇賞(秋) (G1)",
       "date_short": "11/1(日)",
       "postTime": "15:40発走",
       "runnersCount": 17,
-      "volatilityScore": 66
+      "volatilityScore": 66,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": true
     },
     {
       "id": "race-fantasy-s",
-      "title": "第31回 ファンタジーステークス (G3)",
+      "title": "ファンタジーS (G3)",
       "date_short": "10/31(土)",
       "postTime": "15:45発走",
       "runnersCount": 11,
-      "volatilityScore": 84
-    },
-    {
-      "id": "race-perseus-s",
-      "title": "ペルセウスステークス (OP)",
-      "date_short": "10/31(土)",
-      "postTime": "15:35発走",
-      "runnersCount": 16,
-      "volatilityScore": 98
+      "volatilityScore": 76,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": true
     },
     {
       "id": "race-mahoroba-s",
-      "title": "まほろばステークス (L)",
+      "title": "まほろばS (L)",
       "date_short": "11/1(日)",
       "postTime": "15:20発走",
       "runnersCount": 13,
-      "volatilityScore": 82
+      "volatilityScore": 82,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": false
+    },
+    {
+      "id": "race-perseus-s",
+      "title": "ペルセウスS (OP)",
+      "date_short": "10/31(土)",
+      "postTime": "15:30発走",
+      "runnersCount": 16,
+      "volatilityScore": 98,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": true
     }
   ]
 }
