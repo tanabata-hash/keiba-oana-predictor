@@ -315,7 +315,7 @@
             <span class="rsc-date">11/1(日) 15:40</span>
           </div>
           <h4 class="rsc-name">第174回 天皇賞（秋）東京11R</h4>
-          <div class="rsc-price" id="rsc-price-tenno">¥0 <span class="rsc-count">(17頭確定・波乱度66%)</span></div>
+          <div class="rsc-price" id="rsc-price-tenno">¥0 <span class="rsc-count" id="rsc-meta-race-tenno-aki">(17頭確定・波乱度66%)</span></div>
           <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-tenno" style="width:0%;"></div></div>
           <p class="rsc-note">①クロワデュノール・⑦マスカレードボール vs ⑰ダノンデサイル大外枠危険警報。</p>
         </div>
@@ -326,20 +326,20 @@
             <span class="rsc-date">10/31(土) 15:45</span>
           </div>
           <h4 class="rsc-name">ファンタジーS 京都11R</h4>
-          <div class="rsc-price" id="rsc-price-fantasy">¥0 <span class="rsc-count">(11頭確定・波乱度84%)</span></div>
+          <div class="rsc-price" id="rsc-price-fantasy">¥0 <span class="rsc-count" id="rsc-meta-race-fantasy-s">(11頭確定・波乱度76%)</span></div>
           <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-fantasy" style="width:0%;"></div></div>
-          <p class="rsc-note">1番人気⑥イモージェン4倍台の混戦。⑪ツキミ（川田騎手）穴推奨。</p>
+          <p class="rsc-note">⑥イモージェン軸の混戦模様。⑪ツキミ（川田騎手）＆⑦シャンデヴァーグ穴推奨。</p>
         </div>
 
         <div class="race-sale-card">
           <div class="rsc-header">
             <span class="badge-rsc cyan">OP ハンデ戦</span>
-            <span class="rsc-date">10/31(土) 15:35</span>
+            <span class="rsc-date">10/31(土) 15:30</span>
           </div>
           <h4 class="rsc-name">ペルセウスS 東京11R</h4>
-          <div class="rsc-price" id="rsc-price-perseus">¥0 <span class="rsc-count">(16頭確定・波乱度98%)</span></div>
+          <div class="rsc-price" id="rsc-price-perseus">¥0 <span class="rsc-count" id="rsc-meta-race-perseus-s">(16頭確定・波乱度98%)</span></div>
           <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-perseus" style="width:0%;"></div></div>
-          <p class="rsc-note">🔥超大穴警報！⑫クレーキング軸に⑪エスカル・④サフランヒーロー強襲。</p>
+          <p class="rsc-note">🔥超大穴警報！⑫クレーキング軸に⑪エスカル・⑬クールブロン・④サフランヒーロー強襲。</p>
         </div>
 
         <div class="race-sale-card">
@@ -348,9 +348,9 @@
             <span class="rsc-date">11/1(日) 15:20</span>
           </div>
           <h4 class="rsc-name">まほろばS 京都11R</h4>
-          <div class="rsc-price" id="rsc-price-mahoroba">¥0 <span class="rsc-count">(13頭予定・波乱度82%)</span></div>
+          <div class="rsc-price" id="rsc-price-mahoroba">¥0 <span class="rsc-count" id="rsc-meta-race-mahoroba-s">(13頭予定・波乱度74%)</span></div>
           <div class="rsc-bar"><div class="rsc-fill" id="rsc-bar-mahoroba" style="width:0%;"></div></div>
-          <p class="rsc-note">🔥超大穴警報！①スマートワイス（武豊）と軽ハンデ53kg⑧テリオスララ注目。</p>
+          <p class="rsc-note">スマートワイス（武豊）＆レザベーションに軽ハンデ53kg⑧テリオスララ一撃注目。</p>
         </div>
       </div>
     </section>
@@ -447,7 +447,66 @@
       </div>
     </section>
 
-    <!-- 📢 Section 6: 週末集客用 X(Twitter)ポスト作成ツール -->
+    <!-- 📝 Section 6: note（@oana_navi）有料記事・メンバーシップ原稿 ワンクリックコピー＆投稿パネル -->
+    <section class="admin-section">
+      <div class="panel-header">
+        <h2 class="section-title" style="margin-bottom:0;">📝 note（@oana_navi）有料記事・メンバーシップ原稿（1秒コピー＆投稿）</h2>
+        <span class="panel-sub" id="note-draft-sync-label">pipeline.py 自動生成原稿（最新オッズ・買い目同期済み）</span>
+      </div>
+
+      <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.3); border-radius:12px; padding:12px 16px; margin-bottom:16px; font-size:0.82rem; color:#fde68a; line-height:1.6;">
+        💡 <strong>30秒でnote公開する手順：</strong> ① 下のボタンで原稿をコピーして投稿画面を開く ➔ ② 1行目をタイトル、残りを本文に貼り付ける ➔ ③ 本文中の <code>▼ ここから有料ライン ▼</code> の位置で<strong>「有料エリア指定（300円）」</strong>を設定して公開完了！（※noteは外部自動投稿API非公開のため、ワンクリック貼り付け方式を採用しています）
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap:16px;">
+        <!-- 日曜G1勝負記事（300円） -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px; border:1px solid rgba(245,158,11,0.35);">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge-admin" style="background:linear-gradient(135deg,#f59e0b,#ef4444);">👑 日曜G1勝負記事（単発300円）</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">最優先で公開推奨</span>
+            </div>
+            <h4 style="font-size:0.92rem; margin:0 0 8px; color:#fff;" id="note-title-sunday">天皇賞(秋) (G1) ＆ まほろばS (L) 完全予想</h4>
+            <textarea id="note-body-sunday" readonly style="width:100%; height:155px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px; font-size:0.76rem; color:#fff; font-family:var(--font-body); resize:vertical; line-height:1.5;">原稿データを読み込み中...</textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center;" onclick="copyNoteDraft('sunday')">
+            📋 日曜G1原稿をコピーしてnote投稿画面を開く ↗
+          </button>
+        </div>
+
+        <!-- 土曜メイン勝負記事（300円） -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge-admin" style="background:#8b5cf6;">🔥 土曜メイン記事（単発300円）</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">金曜夜〜土曜朝公開</span>
+            </div>
+            <h4 style="font-size:0.92rem; margin:0 0 8px; color:#fff;" id="note-title-saturday">ファンタジーS (G3) ＆ ペルセウスS (OP) 完全予想</h4>
+            <textarea id="note-body-saturday" readonly style="width:100%; height:155px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px; font-size:0.76rem; color:#fff; font-family:var(--font-body); resize:vertical; line-height:1.5;">原稿データを読み込み中...</textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center; background:#8b5cf6;" onclick="copyNoteDraft('saturday')">
+            📋 土曜メイン原稿をコピーしてnote投稿画面を開く ↗
+          </button>
+        </div>
+
+        <!-- 月額メンバーシップ（1,980円）設定テンプレート -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge-admin" style="background:#10b981;">💎 月額サブスク（1,980円/月）</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">初回のみ設定</span>
+            </div>
+            <h4 style="font-size:0.92rem; margin:0 0 8px; color:#fff;">VIP万馬券メンバーシップ 開設用説明文</h4>
+            <textarea id="note-body-membership" readonly style="width:100%; height:155px; background:rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding:10px; font-size:0.76rem; color:#fff; font-family:var(--font-body); resize:vertical; line-height:1.5;">原稿データを読み込み中...</textarea>
+          </div>
+          <button class="btn btn-outline" style="width:100%; justify-content:center; border-color:#10b981; color:#10b981;" onclick="copyNoteDraft('membership')">
+            📋 説明文をコピーしてメンバーシップ設定を開く ↗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 📢 Section 7: 週末集客用 X(Twitter)ポスト作成ツール -->
     <section class="admin-section">
       <div class="panel-header">
         <h2 class="section-title" style="margin-bottom:0;">📢 今週末（10/31・11/1）集客用 Xポスト自動生成（1秒コピペ）</h2>
@@ -467,11 +526,11 @@
 
 ■ 天皇賞(秋) G1: 波乱度 66%（ヒモ荒れ警戒）
 ■ ペルセウスS: 波乱度 98%（🔥超大穴警報！）
-■ ファンタジーS G3: 波乱度 84%（🔥2歳牝馬大混戦）
+■ ファンタジーS G3: 波乱度 76%（⚠️2歳牝馬混戦）
 
 ⚠️ 天皇賞(秋)の有力馬⑰ダノンデサイルは魔の「大外8枠17番」で危険サイン点滅中！
 AI穴馬指数90点超えの【内枠激走穴馬】は無料公開中👇
-https://oana-navi.com/?utm_source=twitter
+https://www.oana-navi.com/?utm_source=twitter
 #競馬予想 #天皇賞秋 #ファンタジーS #穴馬</textarea>
           </div>
           <button class="btn btn-primary" style="width:100%; justify-content:center; background:#1d9bf0;" onclick="copyXPost('friday')">
@@ -489,11 +548,11 @@ https://oana-navi.com/?utm_source=twitter
             <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【土日朝】最新オッズ歪み検知 ＆ 妙味穴馬速報</h4>
             <textarea id="x-post-morning" readonly style="width:100%; height:145px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">🏇【朝オッズ歪み検知】最新オッズからAIが妙味穴馬をロックオン！
 
-今週末のハンデ戦（ペルセウスS・まほろばS）は「波乱度80%超え」の超大穴警報が点灯🔥
-天皇賞(秋)も2枠④レディネス(横山典弘)など単勝20〜30倍台に激走シグナル検知！
+今週末のハンデ戦・ペルセウスSは「波乱度98%」の超大穴警報が点灯🔥
+天皇賞(秋)も2枠④レディネス(横山典弘)など単勝20倍台に激走シグナル検知！
 
 無料推奨買い目＆波乱度レーダーはこちら👇
-https://oana-navi.com/?utm_source=twitter
+https://www.oana-navi.com/?utm_source=twitter
 #競馬予想 #天皇賞秋 #万馬券 #競馬AI</textarea>
           </div>
           <button class="btn btn-primary" style="width:100%; justify-content:center; background:#10b981;" onclick="copyXPost('morning')">
@@ -503,7 +562,7 @@ https://oana-navi.com/?utm_source=twitter
       </div>
     </section>
 
-    <!-- ⚙️ Section 7: システム監視＆パイプライン自動化ステータス -->
+    <!-- ⚙️ Section 8: システム監視＆パイプライン自動化ステータス -->
     <section class="admin-section">
       <h2 class="section-title">⚙️ システム監視 ＆ 自動化パイプライン状態</h2>
       <div class="system-monitor-card">
@@ -518,7 +577,7 @@ https://oana-navi.com/?utm_source=twitter
           </div>
           <div class="monitor-item">
             <span class="m-label">本番サイト公開先</span>
-            <span class="m-val"><a href="https://oana-navi.com" target="_blank" rel="noopener noreferrer" style="color:var(--accent-cyan);">https://oana-navi.com</a></span>
+            <span class="m-val"><a href="https://www.oana-navi.com/" target="_blank" rel="noopener noreferrer" style="color:var(--accent-cyan);">https://www.oana-navi.com</a></span>
           </div>
           <div class="monitor-item">
             <span class="m-label">JSON生成データ状態</span>
@@ -543,7 +602,7 @@ https://oana-navi.com/?utm_source=twitter
     </footer>
   </div>
 
-  <script src="analytics.js?v=20261030_live"></script>
-  <script src="admin.js?v=20261030_live"></script>
+  <script src="analytics.js?v=20261030_v2"></script>
+  <script src="admin.js?v=20261030_v2"></script>
 </body>
 </html>

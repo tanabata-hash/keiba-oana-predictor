@@ -1237,7 +1237,7 @@ function shareHitToX() {
     text = `【🎯 万馬券・的中速報！】\n${title}\nAI大穴ナビゲーターの激走穴馬が見事に激走！\n${hitPayouts ? '的中払戻: ' + hitPayouts + '\n' : ''}回収率: ${res.roi} 🔥\n\n週末全レースの波乱度＆穴馬予想は無料公開中👇\n`;
   }
 
-  const url = "https://oana-navi.com";
+  const url = "https://www.oana-navi.com/";
   const hashtags = "大穴ナビゲーター,競馬予想,万馬券,競馬AI";
   const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
   

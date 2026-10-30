@@ -144,7 +144,8 @@ function setupPeriodSelector() {
 async function refreshAllDashboardData() {
   await Promise.all([
     updateAnalyticsAndRevenueUI(currentPeriod),
-    updatePipelineStatusUI()
+    updatePipelineStatusUI(),
+    loadNoteDraftsUI()
   ]);
   updateSyncTimestamp();
 }
@@ -298,7 +299,17 @@ async function updatePipelineStatusUI() {
         lastRunEl.textContent = `${info.lastRunAt} (${info.targetWeekend})`;
       }
       if (jsonStatusEl) {
-        jsonStatusEl.textContent = `data/races.json (${info.raceCount}レース最新反映済)`;
+        const modeLabel = info.sourceMode === "live_netkeiba" ? "netkeibaライブオッズ反映済" : "最新反映済";
+        jsonStatusEl.textContent = `data/races.json (${info.raceCount}レース・${modeLabel})`;
+      }
+      if (Array.isArray(info.races)) {
+        info.races.forEach(rc => {
+          const metaEl = document.getElementById(`rsc-meta-${rc.id}`);
+          if (metaEl) {
+            const drawLabel = rc.confirmedDraw ? "確定" : "予定";
+            metaEl.textContent = `(${rc.runnersCount}頭${drawLabel}・波乱度${rc.volatilityScore}%)`;
+          }
+        });
       }
       return;
     }
@@ -306,8 +317,63 @@ async function updatePipelineStatusUI() {
     // ローカル直接閲覧時フォールバック
   }
 
-  if (lastRunEl) lastRunEl.textContent = "2026-10-30 最新枠順反映済";
+  if (lastRunEl) lastRunEl.textContent = "2026-10-30 最新枠順・オッズ反映済";
   if (jsonStatusEl) jsonStatusEl.textContent = "data/races.json (全4レース動的バインド)";
+}
+
+// --- 📝 note投稿用原稿データの動的読み込み（バックグラウンド低優先度フェッチ） ---
+async function loadNoteDraftsUI() {
+  const syncLabel = document.getElementById("note-draft-sync-label");
+  try {
+    const res = await fetch("data/note_drafts.json?t=" + Date.now(), { priority: "low" });
+    if (!res.ok) return;
+    const drafts = await res.json();
+
+    if (syncLabel && drafts.generatedAt) {
+      syncLabel.textContent = `自動生成同期済: ${drafts.generatedAt}（${drafts.weekend || ""}）`;
+    }
+    if (drafts.sunday) {
+      const tSun = document.getElementById("note-title-sunday");
+      const bSun = document.getElementById("note-body-sunday");
+      if (tSun && drafts.sunday.title) tSun.textContent = drafts.sunday.title;
+      if (bSun && drafts.sunday.body) bSun.value = drafts.sunday.body;
+    }
+    if (drafts.saturday) {
+      const tSat = document.getElementById("note-title-saturday");
+      const bSat = document.getElementById("note-body-saturday");
+      if (tSat && drafts.saturday.title) tSat.textContent = drafts.saturday.title;
+      if (bSat && drafts.saturday.body) bSat.value = drafts.saturday.body;
+    }
+    if (drafts.membership) {
+      const bMem = document.getElementById("note-body-membership");
+      if (bMem) bMem.value = drafts.membership;
+    }
+  } catch {
+    if (syncLabel) {
+      syncLabel.textContent = "docs/note_articles_weekend.md からも原稿を参照できます";
+    }
+  }
+}
+
+// --- 📝 note原稿ワンクリックコピー＆投稿画面オープン ---
+function copyNoteDraft(kind) {
+  const el = document.getElementById(`note-body-${kind}`);
+  if (!el || !el.value) return;
+
+  const text = el.value;
+  const targetUrl = kind === "membership"
+    ? "https://note.com/membership"
+    : "https://note.com/notes/new";
+
+  navigator.clipboard.writeText(text).then(() => {
+    const msg = kind === "membership"
+      ? "📋 月額メンバーシップ（1,980円/月）の説明文をコピーしました！\n開くnote画面でプラン説明欄に貼り付けてください。"
+      : "📋 note有料記事（300円）の完成原稿をクリップボードにコピーしました！\n\n① 開くnote投稿画面に貼り付け\n② 本文中の『▼ ここから有料ライン ▼』で有料エリア指定（300円）を設定して公開してください！";
+    alert(msg);
+    window.open(targetUrl, "_blank", "noopener,noreferrer");
+  }).catch(() => {
+    prompt("以下の原稿をコピーしてnoteに貼り付けてください：", text);
+  });
 }
 
 // --- 最終同期時刻の更新 ---
@@ -371,3 +437,4 @@ function copyXPost(type) {
 }
 
 window.copyXPost = copyXPost;
+window.copyNoteDraft = copyNoteDraft;
