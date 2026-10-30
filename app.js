@@ -1220,7 +1220,7 @@ function setupPremiumModal() {
   }
 }
 
-// --- 𝕏 的中シェア（口コミ拡散）機能 ---
+// --- 𝕏 的中シェア（口コミ拡散・X無料枠140全角/280ウェイト制限厳守）機能 ---
 function shareHitToX() {
   if (!currentRace || !currentRace.actualResult) return;
   if (window.OanaAnalytics) {
@@ -1228,17 +1228,18 @@ function shareHitToX() {
   }
   const res = currentRace.actualResult;
   const title = currentRace.title || currentRace.badge;
-  const hitPayouts = res.payouts ? res.payouts.filter(p => p.isHit).map(p => `${p.type} ${p.yen}`).join(" / ") : "";
+  const bestHit = res.payouts ? res.payouts.filter(p => p.isHit).slice(-1)[0] : null;
+  const hitLine = bestHit ? `${bestHit.type} ${bestHit.yen}\n` : "";
 
   let text = "";
   if (res.statusType === "MISS") {
-    text = `【AI競馬回顧・的中検証】\n${title}\nAI波乱度判定とレース検証レポートをチェックしました！\nハズレも隠さず事前予想を完全公開中👇\n`;
+    text = `【AI競馬・的中検証】${title}\nハズレも隠さず事前予想と回顧を完全公開中👇\n`;
   } else {
-    text = `【🎯 万馬券・的中速報！】\n${title}\nAI大穴ナビゲーターの激走穴馬が見事に激走！\n${hitPayouts ? '的中払戻: ' + hitPayouts + '\n' : ''}回収率: ${res.roi} 🔥\n\n週末全レースの波乱度＆穴馬予想は無料公開中👇\n`;
+    text = `🎯【AI万馬券・的中速報】${title}\n推奨穴馬が激走！回収率 ${res.roi}🔥\n${hitLine}\n週末レースの波乱度＆無料買い目👇\n`;
   }
 
-  const url = "https://www.oana-navi.com/";
-  const hashtags = "大穴ナビゲーター,競馬予想,万馬券,競馬AI";
+  const url = "https://www.oana-navi.com/?utm_source=twitter";
+  const hashtags = "大穴ナビゲーター,競馬予想,万馬券";
   const intentUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}&hashtags=${encodeURIComponent(hashtags)}`;
   
   window.open(intentUrl, "_blank", "width=600,height=500");
