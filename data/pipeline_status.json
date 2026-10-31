@@ -1,5 +1,5 @@
 {
-  "lastRunAt": "2026-10-31 08:30:00",
+  "lastRunAt": "2026-11-01 08:30:00",
   "sourceMode": "live_netkeiba",
   "targetWeekend": "10/31(土) 〜 11/1(日)",
   "raceCount": 4,
@@ -31,8 +31,8 @@
       "postTime": "15:20発走",
       "runnersCount": 13,
       "volatilityScore": 82,
-      "oddsSource": "最新予想オッズ",
-      "confirmedDraw": false
+      "oddsSource": "JRA公式リアルタイムオッズ",
+      "confirmedDraw": true
     },
     {
       "id": "race-perseus-s",
