@@ -561,7 +561,60 @@ https://www.oana-navi.com/?utm_source=twitter
       </div>
     </section>
 
-    <!-- ⚙️ Section 8: システム監視＆パイプライン自動化ステータス -->
+    <!-- 📢 Section 8: レース結果・的中検証フォロー投稿ツール（X ＆ note） -->
+    <section class="admin-section">
+      <div class="panel-header">
+        <h2 class="section-title" style="margin-bottom:0;">🏁 レース結果・的中検証フォロー投稿（信頼獲得 ＆ 次週集客）</h2>
+        <span class="panel-sub">ハズレも隠さず誠実に回顧・検証を発信することで、フォロワー・購読者からの長期信頼を獲得できます</span>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:16px;">
+        <!-- X用フォローポスト（パターンA） -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge-admin" style="background:#1d9bf0;">𝕏 的中検証ポスト（パターンA）</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">文字数制限クリア済 (残り7文字)</span>
+            </div>
+            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【X用】まほろばSワンツー的中＆反省総括</h4>
+            <textarea id="x-follow-a" readonly style="width:100%; height:135px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.78rem; color:#fff; font-family:var(--font-body); resize:none; line-height:1.5;">🏇【週末レース回顧＆的中検証】
+まほろばSは◎レザベーション(1着)×◯スマートワイス(2着)のワンツー＆消し馬的中🎯
+一方、天皇賞秋(29万馬券)等の穴フォーメーションは悔しくもすり抜け。
+ハズレも隠さず精度向上へ繋げます！次週重賞も無料公開中👇
+https://www.oana-navi.com/?utm_source=twitter
+#競馬予想 #回顧</textarea>
+          </div>
+          <button class="btn btn-primary" style="width:100%; justify-content:center; background:#1d9bf0;" onclick="copyFollowPost('a')">
+            📋 この回顧文をコピーしてXを開く ↗
+          </button>
+        </div>
+
+        <!-- note用フォロー記事（無料公開・追記用） -->
+        <div class="admin-panel" style="display:flex; flex-direction:column; justify-content:space-between; gap:12px;">
+          <div>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">
+              <span class="badge-admin" style="background:#f59e0b;">📝 note用 回顧・検証レポート</span>
+              <span style="font-size:0.75rem; color:var(--text-muted);">無料記事 または 記事末尾追記</span>
+            </div>
+            <h4 style="font-size:0.95rem; margin:0 0 8px; color:#fff;">【note用】10/31・11/1 レース回顧と反省レポート</h4>
+            <textarea id="note-follow-text" readonly style="width:100%; height:135px; background:rgba(0,0,0,0.3); border:1px solid rgba(255,255,255,0.1); border-radius:8px; padding:10px; font-size:0.76rem; color:#fff; font-family:var(--font-body); resize:vertical; line-height:1.5;">いつも『大穴ナビゲーター PRO』（ https://www.oana-navi.com ）をご利用いただき、また予想記事をご購読いただき誠にありがとうございます！
+今週末の対象4レースが終了しましたので、結果の振り返りと検証レポートを包み隠さず公開いたします。
+
+■ 先週末の結果ハイライト
+🎯 【まほろばS】本命◎7番レザベーション（1着）× 対抗◯8番スマートワイス（2着）がワンツーフィニッシュ！
+🎯 【危険な人気馬アラート】ペルセウスS（1番人気ピエマンソン→4着）、まほろばS（3番人気ブエナオンダ→着外）と、過剰人気の消し馬指定が2鞍で完全的中！
+⚠️ 【大穴フォーメーション】天皇賞(秋)の29万馬券、ファンタジーSの38万馬券など波乱傾向自体は捉えていたものの、穴馬が掲示板止まりとなり3連単・3連複フォーメーションはすり抜け不的中となりました。
+
+（※全文はdocs/follow_up_messages.mdまたはコピーボタンで取得できます）</textarea>
+          </div>
+          <button class="btn btn-outline" style="width:100%; justify-content:center; border-color:#f59e0b; color:#f59e0b;" onclick="copyNoteFollow()">
+            📋 note用全文をコピーしてnoteを開く ↗
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ⚙️ Section 9: システム監視＆パイプライン自動化ステータス -->
     <section class="admin-section">
       <h2 class="section-title">⚙️ システム監視 ＆ 自動化パイプライン状態</h2>
       <div class="system-monitor-card">
