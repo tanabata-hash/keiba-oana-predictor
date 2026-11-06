@@ -1,167 +1,167 @@
 [
   {
-    "id": "race-tenno-aki",
-    "netkeibaRaceId": "202605041111",
-    "gradePriority": 1,
-    "gradeLabel": "G1",
+    "id": "race-tokyo-0211",
+    "netkeibaRaceId": "202605050211",
+    "gradePriority": 2,
+    "gradeLabel": "G2",
     "venueId": "tokyo",
-    "date": "2026年11月1日 (日)",
-    "date_short": "11/1(日)",
-    "postTime": "15:40発走",
+    "date": "2026年11月8日 (日)",
+    "date_short": "11/8(日)",
+    "postTime": "15:30発走",
     "round": 11,
-    "badge": "東京11R・G1 芝2000m 左（定量・17頭・確定枠順反映）",
-    "title": "天皇賞(秋) (G1)",
-    "venue": "東京 11R (芝2000m)",
+    "badge": "東京11R・G2 芝2500m 左（ハンデ・18頭・確定枠順反映）",
+    "title": "アルゼンチン共和国杯 (G2)",
+    "venue": "東京 11R (芝2500m)",
     "weather": "晴予報",
     "track": "良馬場（東京コース）",
     "track_condition": "良",
     "pace": "ミドルペース（直線瞬発力勝負）",
-    "fav_odds": 2.7,
-    "condition": "定量",
-    "oddsSource": "JRA公式リアルタイムオッズ",
-    "oddsUpdatedAt": "2026-11-01 07:35:26",
+    "fav_odds": 4.2,
+    "condition": "ハンデ",
+    "oddsSource": "最新予想オッズ",
+    "oddsUpdatedAt": "2026-11-06 17:46:09",
     "confirmedDraw": true,
     "runners": [
       {
         "num": 1,
         "bracket": 1,
-        "name": "クロワデュノール",
-        "jockey": "Ｃデムーロ",
-        "weight": "58.0kg",
-        "odds": 2.7,
-        "pop": 1,
-        "style": "先行",
-        "score": 93,
-        "status": "◎ 本命筆頭（絶好1枠1番・春二冠馬）"
+        "name": "ジーティーダーリン",
+        "jockey": "大野",
+        "weight": "55.0kg",
+        "odds": 57.4,
+        "pop": 13,
+        "style": "差し",
+        "score": 66,
+        "status": "・ 展開待ち"
       },
       {
         "num": 2,
         "bracket": 1,
-        "name": "エルトンバローズ",
-        "jockey": "松若",
+        "name": "ビザンチンドリーム",
+        "jockey": "国分優",
+        "weight": "59.5kg",
+        "odds": 24.5,
+        "pop": 10,
+        "style": "差し",
+        "score": 88,
+        "status": "★ AI大穴イチオシ"
+      },
+      {
+        "num": 3,
+        "bracket": 2,
+        "name": "マイネルエンペラー",
+        "jockey": "吉村",
+        "weight": "58.5kg",
+        "odds": 14.1,
+        "pop": 7,
+        "style": "追込",
+        "score": 82,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 4,
+        "bracket": 2,
+        "name": "ミラージュナイト",
+        "jockey": "西村淳",
+        "weight": "57.0kg",
+        "odds": 6.2,
+        "pop": 3,
+        "style": "逃げ",
+        "score": 60,
+        "status": "▲ 上位押さえ"
+      },
+      {
+        "num": 5,
+        "bracket": 3,
+        "name": "ドゥラドーレス",
+        "jockey": "ルメール",
         "weight": "58.0kg",
-        "odds": 217.5,
+        "odds": 6.7,
+        "pop": 4,
+        "style": "先行",
+        "score": 55,
+        "status": "⚠️ 危険な人気馬（過信禁物）"
+      },
+      {
+        "num": 6,
+        "bracket": 3,
+        "name": "ファミリータイム",
+        "jockey": "菅原明",
+        "weight": "56.0kg",
+        "odds": 68.2,
         "pop": 16,
         "style": "差し",
         "score": 66,
         "status": "・ 展開待ち"
       },
       {
-        "num": 3,
-        "bracket": 2,
-        "name": "レガレイラ",
+        "num": 7,
+        "bracket": 4,
+        "name": "ファイアンクランツ",
         "jockey": "岩田望",
+        "weight": "58.0kg",
+        "odds": 4.2,
+        "pop": 1,
+        "style": "差し",
+        "score": 95,
+        "status": "◎ 本命筆頭（軸候補）"
+      },
+      {
+        "num": 8,
+        "bracket": 4,
+        "name": "ジョイボーイ",
+        "jockey": "横山武",
+        "weight": "55.0kg",
+        "odds": 10.1,
+        "pop": 5,
+        "style": "追込",
+        "score": 74,
+        "status": "▲ 上位押さえ"
+      },
+      {
+        "num": 9,
+        "bracket": 5,
+        "name": "レッドバンデ",
+        "jockey": "佐々木",
+        "weight": "57.0kg",
+        "odds": 6.1,
+        "pop": 2,
+        "style": "逃げ",
+        "score": 86,
+        "status": "◯ 対抗有力"
+      },
+      {
+        "num": 10,
+        "bracket": 5,
+        "name": "ボーンディスウェイ",
+        "jockey": "マーカンド",
         "weight": "56.0kg",
-        "odds": 8.3,
-        "pop": 3,
-        "style": "差し",
-        "score": 83,
-        "status": "▲ 牝馬56kg・内枠末脚警戒"
-      },
-      {
-        "num": 4,
-        "bracket": 2,
-        "name": "レディネス",
-        "jockey": "横山典",
-        "weight": "58.0kg",
-        "odds": 56.3,
-        "pop": 10,
-        "style": "差し",
-        "score": 92,
-        "status": "★ AI大穴イチオシ"
-      },
-      {
-        "num": 5,
-        "bracket": 3,
-        "name": "シャンパンカラー",
-        "jockey": "内田博",
-        "weight": "58.0kg",
-        "odds": 159.7,
-        "pop": 15,
+        "odds": 87.0,
+        "pop": 17,
         "style": "先行",
         "score": 66,
         "status": "・ 展開待ち"
       },
       {
-        "num": 6,
-        "bracket": 3,
-        "name": "セイウンハーデス",
-        "jockey": "幸",
-        "weight": "58.0kg",
-        "odds": 23.3,
+        "num": 11,
+        "bracket": 6,
+        "name": "ウエストナウ",
+        "jockey": "横山典",
+        "weight": "57.5kg",
+        "odds": 13.4,
         "pop": 6,
-        "style": "先行",
-        "score": 88,
-        "status": "★ 激走注目穴馬"
-      },
-      {
-        "num": 7,
-        "bracket": 4,
-        "name": "マスカレードボール",
-        "jockey": "ルメール",
-        "weight": "58.0kg",
-        "odds": 2.7,
-        "pop": 2,
         "style": "差し",
-        "score": 91,
-        "status": "◯ 対抗有力（連覇狙う昨年覇者）"
-      },
-      {
-        "num": 8,
-        "bracket": 4,
-        "name": "ジュンブロッサム",
-        "jockey": "杉原",
-        "weight": "58.0kg",
-        "odds": 219.5,
-        "pop": 17,
-        "style": "追込",
-        "score": 87,
-        "status": "★ 激走注目穴馬"
-      },
-      {
-        "num": 9,
-        "bracket": 5,
-        "name": "ホウオウビスケッツ",
-        "jockey": "岩田康",
-        "weight": "58.0kg",
-        "odds": 61.4,
-        "pop": 11,
-        "style": "逃げ",
-        "score": 81,
-        "status": "注 単騎逃げ残り警戒"
-      },
-      {
-        "num": 10,
-        "bracket": 5,
-        "name": "ネブラディスク",
-        "jockey": "川田",
-        "weight": "58.0kg",
-        "odds": 46.2,
-        "pop": 8,
-        "style": "先行",
         "score": 88,
         "status": "注 伏兵注意"
       },
       {
-        "num": 11,
-        "bracket": 6,
-        "name": "シェイクユアハート",
-        "jockey": "古川吉",
-        "weight": "58.0kg",
-        "odds": 9.7,
-        "pop": 4,
-        "style": "差し",
-        "score": 80,
-        "status": "▲ 上位押さえ"
-      },
-      {
         "num": 12,
         "bracket": 6,
-        "name": "コスモキュランダ",
-        "jockey": "丹内",
+        "name": "メイショウゲキリン",
+        "jockey": "田辺",
         "weight": "58.0kg",
-        "odds": 102.3,
-        "pop": 13,
+        "odds": 59.6,
+        "pop": 14,
         "style": "差し",
         "score": 66,
         "status": "・ 展開待ち"
@@ -169,47 +169,47 @@
       {
         "num": 13,
         "bracket": 7,
-        "name": "リアライズシリウス",
+        "name": "マイネルカンパーナ",
         "jockey": "津村",
         "weight": "56.0kg",
-        "odds": 30.0,
-        "pop": 7,
-        "style": "先行",
-        "score": 80,
-        "status": "注 3歳斤量恩恵"
-      },
-      {
-        "num": 14,
-        "bracket": 7,
-        "name": "タガノデュード",
-        "jockey": "Ｍデムーロ",
-        "weight": "58.0kg",
-        "odds": 110.7,
-        "pop": 14,
-        "style": "逃げ",
+        "odds": 89.8,
+        "pop": 18,
+        "style": "追込",
         "score": 60,
         "status": "・ 展開待ち"
       },
       {
+        "num": 14,
+        "bracket": 7,
+        "name": "ミクニインスパイア",
+        "jockey": "岩田康",
+        "weight": "56.0kg",
+        "odds": 28.6,
+        "pop": 11,
+        "style": "逃げ",
+        "score": 82,
+        "status": "注 伏兵注意"
+      },
+      {
         "num": 15,
-        "bracket": 8,
-        "name": "サクラファレル",
-        "jockey": "佐々木",
-        "weight": "58.0kg",
-        "odds": 96.5,
-        "pop": 12,
+        "bracket": 7,
+        "name": "ホーエリート",
+        "jockey": "戸崎圭",
+        "weight": "56.5kg",
+        "odds": 21.6,
+        "pop": 9,
         "style": "先行",
-        "score": 66,
-        "status": "・ 展開待ち"
+        "score": 88,
+        "status": "★ 激走注目穴馬"
       },
       {
         "num": 16,
         "bracket": 8,
-        "name": "ジョバンニ",
-        "jockey": "松山",
-        "weight": "58.0kg",
-        "odds": 52.8,
-        "pop": 9,
+        "name": "キングズパレス",
+        "jockey": "松岡",
+        "weight": "57.0kg",
+        "odds": 37.6,
+        "pop": 12,
         "style": "差し",
         "score": 88,
         "status": "注 伏兵注意"
@@ -217,281 +217,281 @@
       {
         "num": 17,
         "bracket": 8,
-        "name": "ダノンデサイル",
-        "jockey": "戸崎圭",
+        "name": "キングスコール",
+        "jockey": "吉田豊",
+        "weight": "55.0kg",
+        "odds": 16.7,
+        "pop": 8,
+        "style": "差し",
+        "score": 88,
+        "status": "★ 激走注目穴馬"
+      },
+      {
+        "num": 18,
+        "bracket": 8,
+        "name": "ミステリーウェイ",
+        "jockey": "松本",
         "weight": "58.0kg",
-        "odds": 9.7,
-        "pop": 5,
-        "style": "先行",
-        "score": 52,
-        "status": "⚠️ 危険な人気馬（過信禁物）"
+        "odds": 67.9,
+        "pop": 15,
+        "style": "追込",
+        "score": 60,
+        "status": "・ 展開待ち"
       }
     ],
-    "volatilityScore": 66,
-    "volatilityLevel": "⚠️ 中波乱・混戦模様",
-    "volatilityClass": "vol-mid",
+    "volatilityScore": 96,
+    "volatilityLevel": "🔥 超大穴警報",
+    "volatilityClass": "vol-high",
     "dangerHorse": {
-      "num": 17,
-      "name": "ダノンデサイル",
-      "pop": 5,
-      "odds": 9.7,
-      "reason": "スタート後すぐ2コーナーを迎える東京芝2000mで最も不利な『大外8枠17番』。外々を回らされる距離ロスが大きく、内枠を引いた4歳2強との比較で取りこぼしリスク大！"
+      "num": 5,
+      "name": "ドゥラドーレス",
+      "pop": 4,
+      "odds": 6.7,
+      "reason": "上位人気（4番人気・6.7倍）に推されているものの、枠順・斤量（58.0kg）と展開面の噛み合わせに不安あり。オッズ妙味が薄く過信禁物！"
     },
-    "volatilityDesc": "1番人気クロワデュノールが単勝2.7倍（JRA公式リアルタイムオッズ）。AI波乱度66%（⚠️ 中波乱・混戦模様）を検知！レディネスなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
+    "volatilityDesc": "1番人気ファイアンクランツが単勝4.2倍（最新予想オッズ）。AI波乱度96%（🔥 超大穴警報）を検知！ビザンチンドリームなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
     "poll": {
-      "favPct": 57,
-      "underPct": 43,
-      "totalVotes": 1834
+      "favPct": 38,
+      "underPct": 62,
+      "totalVotes": 1886
     },
     "darkHorses": [
       {
-        "number": 4,
-        "name": "レディネス",
-        "frameColor": "#334155",
-        "jockey": "横山典 (58.0kg)",
-        "odds": 56.3,
+        "number": 2,
+        "name": "ビザンチンドリーム",
+        "frameColor": "#64748b",
+        "jockey": "国分優 (59.5kg)",
+        "odds": 24.5,
         "popularity": 10,
         "signals": [
-          "絶好2枠4番の経済コース",
-          "名手・横山典弘の一撃騎乗",
-          "高速東京芝の瞬発力適性"
+          "1枠2番の好条件",
+          "展開合致（差し脚質）",
+          "単勝24.5倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数92点！①クロワデュノールの直後でロスなく脚を溜められる絶好の2枠4番。横山典弘騎手がイン突きを敢行すれば、上位人気をまとめて脅かす大穴筆頭です。"
+        "comment": "AI穴馬指数88点！国分優騎手×斤量59.5kg。実力に対して単勝24.5倍（10番人気）は絶好の狙い目です。"
       },
       {
-        "number": 6,
-        "name": "セイウンハーデス",
-        "frameColor": "#ef4444",
-        "jockey": "幸 (58.0kg)",
-        "odds": 23.3,
-        "popularity": 6,
+        "number": 15,
+        "name": "ホーエリート",
+        "frameColor": "#f97316",
+        "jockey": "戸崎圭 (56.5kg)",
+        "odds": 21.6,
+        "popularity": 9,
         "signals": [
-          "東京2000m向きの持続力",
-          "好枠3枠6番から好位確保",
-          "叩き良化の勝負気配"
+          "7枠15番の好条件",
+          "展開合致（先行脚質）",
+          "単勝21.6倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数88点。逃げ馬を見ながら好位3〜4番手で立ち回れる3枠6番は最高の並び。直線の坂でもバテない持続力で馬券圏内（2〜3着）粘り込み濃厚！"
+        "comment": "AI穴馬指数88点！戸崎圭騎手×斤量56.5kg。実力に対して単勝21.6倍（9番人気）は絶好の狙い目です。"
       },
       {
-        "number": 8,
-        "name": "ジュンブロッサム",
-        "frameColor": "#3b82f6",
-        "jockey": "杉原 (58.0kg)",
-        "odds": 219.5,
-        "popularity": 17,
+        "number": 17,
+        "name": "キングスコール",
+        "frameColor": "#ec4899",
+        "jockey": "吉田豊 (55.0kg)",
+        "odds": 16.7,
+        "popularity": 8,
         "signals": [
-          "東京直線の上がり3F極限末脚",
-          "人気盲点の好配当ゾーン",
-          "良馬場高速決着が大好物"
+          "8枠17番の好条件",
+          "展開合致（差し脚質）",
+          "単勝16.7倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数87点。高速良馬場の東京コースでメンバー屈指の末脚を秘める伏兵。3着に突っ込むだけで3連複・ワイドの配当を一気に跳ね上げる爆弾穴馬！"
+        "comment": "AI穴馬指数88点！吉田豊騎手×斤量55.0kg。実力に対して単勝16.7倍（8番人気）は絶好の狙い目です。"
       }
     ],
     "actualResult": {
       "statusType": "BIG_WIN",
       "statusBadge": "🎯 発走前AI期待値シミュレーション",
-      "roi": "396%",
-      "trustGrade": "A+ (好枠×穴馬妙味)",
+      "roi": "576%",
+      "trustGrade": "S (超高期待値)",
       "stars": "★★★★★",
       "payouts": [
         {
-          "type": "複勝 4番 レディネス",
-          "yen": "1,240円 (想定)",
+          "type": "複勝 2番 ビザンチンドリーム",
+          "yen": "540円 (想定)",
           "isHit": true
         },
         {
-          "type": "ワイド 1 - 4",
-          "yen": "5,780円 (想定)",
+          "type": "ワイド 7 - 2",
+          "yen": "3,910円 (想定)",
           "isHit": true
         },
         {
-          "type": "3連複 1 - 7 - 4",
-          "yen": "22,570円 (想定)",
+          "type": "3連複 7 - 9 - 2",
+          "yen": "34,520円 (想定)",
           "isHit": true
         }
       ],
       "podium": [
         {
           "rank": 1,
-          "num": 1,
-          "name": "クロワデュノール (◎本命)",
+          "num": 7,
+          "name": "ファイアンクランツ (◎本命)",
           "pop": 1,
-          "odds": 2.7
+          "odds": 4.2
         },
         {
           "rank": 2,
-          "num": 7,
-          "name": "マスカレードボール (◯対抗)",
+          "num": 9,
+          "name": "レッドバンデ (◯対抗)",
           "pop": 2,
-          "odds": 2.7
+          "odds": 6.1
         },
         {
           "rank": 3,
-          "num": 4,
-          "name": "レディネス (★AI大穴推奨)",
+          "num": 2,
+          "name": "ビザンチンドリーム (★AI大穴推奨)",
           "pop": 10,
-          "odds": 56.3,
+          "odds": 24.5,
           "isTarget": true
         }
       ],
-      "review": "【11/1(日) 15:40発走予定・最新オッズ反映シミュレーション】本命◎1番クロワデュノール（2.7倍）を軸に、AI穴馬筆頭★4番レディネス（56.3倍）の激走を組み込む高期待値シナリオです。"
+      "review": "【11/8(日) 15:30発走予定・最新オッズ反映シミュレーション】本命◎7番ファイアンクランツ（4.2倍）を軸に、AI穴馬筆頭★2番ビザンチンドリーム（24.5倍）の激走を組み込む高期待値シナリオです。"
     },
-    "updatedAt": "2026-11-01 08:30:00"
+    "updatedAt": "2026-11-06 18:00:01"
   },
   {
-    "id": "race-fantasy-s",
-    "netkeibaRaceId": "202608041011",
-    "gradePriority": 3,
-    "gradeLabel": "G3",
-    "venueId": "kyoto",
-    "date": "2026年10月31日 (土)",
-    "date_short": "10/31(土)",
-    "postTime": "15:45発走",
+    "id": "race-tokyo-0111",
+    "netkeibaRaceId": "202605050111",
+    "gradePriority": 2,
+    "gradeLabel": "G2",
+    "venueId": "tokyo",
+    "date": "2026年11月7日 (土)",
+    "date_short": "11/7(土)",
+    "postTime": "15:35発走",
     "round": 11,
-    "badge": "京都11R・G3 芝1400m 右（2歳・馬齢・11頭・確定枠順反映）",
-    "title": "ファンタジーS (G3)",
-    "venue": "京都 11R (芝1400m)",
+    "badge": "東京11R・G2 芝1400m 左（2歳・馬齢・10頭・確定枠順反映）",
+    "title": "京王杯2歳S (G2)",
+    "venue": "東京 11R (芝1400m)",
     "weather": "晴予報",
-    "track": "良馬場（京都コース）",
+    "track": "良馬場（東京コース）",
     "track_condition": "良",
     "pace": "ハイペース（先行争い激化）",
-    "fav_odds": 2.4,
+    "fav_odds": 2.5,
     "condition": "2歳・馬齢",
-    "oddsSource": "JRA公式リアルタイムオッズ",
-    "oddsUpdatedAt": "2026-10-31 15:51:55",
+    "oddsSource": "最新予想オッズ",
+    "oddsUpdatedAt": "2026-11-06 17:45:30",
     "confirmedDraw": true,
     "runners": [
       {
         "num": 1,
         "bracket": 1,
-        "name": "レニュアージュ",
-        "jockey": "西村淳",
+        "name": "アテナブレイブ",
+        "jockey": "田辺",
         "weight": "55.0kg",
-        "odds": 18.7,
-        "pop": 6,
+        "odds": 27.1,
+        "pop": 8,
         "style": "差し",
         "score": 90,
-        "status": "注 伏兵注意"
+        "status": "★ AI大穴イチオシ"
       },
       {
         "num": 2,
         "bracket": 2,
-        "name": "セイウンマイラヴ",
-        "jockey": "田山",
-        "weight": "55.0kg",
-        "odds": 36.4,
-        "pop": 10,
+        "name": "フレイコン",
+        "jockey": "マーカンド",
+        "weight": "56.0kg",
+        "odds": 4.3,
+        "pop": 2,
         "style": "差し",
-        "score": 90,
-        "status": "注 伏兵注意"
+        "score": 94,
+        "status": "◯ 対抗有力"
       },
       {
         "num": 3,
         "bracket": 3,
-        "name": "ビスケットサンド",
-        "jockey": "北村友",
-        "weight": "55.0kg",
-        "odds": 7.9,
-        "pop": 4,
-        "style": "先行",
-        "score": 85,
-        "status": "★ 激走注目穴馬"
+        "name": "ニシノトラノスケ",
+        "jockey": "大野",
+        "weight": "56.0kg",
+        "odds": 119.4,
+        "pop": 10,
+        "style": "追込",
+        "score": 68,
+        "status": "・ 展開待ち"
       },
       {
         "num": 4,
         "bracket": 4,
-        "name": "ニクスルーナ",
-        "jockey": "岩田望",
-        "weight": "55.0kg",
-        "odds": 6.3,
-        "pop": 3,
-        "style": "逃げ",
-        "score": 60,
-        "status": "▲ 上位押さえ"
-      },
-      {
-        "num": 5,
-        "bracket": 5,
-        "name": "バタフライ",
-        "jockey": "原田和",
-        "weight": "55.0kg",
-        "odds": 147.0,
-        "pop": 11,
-        "style": "先行",
-        "score": 60,
-        "status": "・ 展開待ち"
-      },
-      {
-        "num": 6,
-        "bracket": 6,
-        "name": "イモージェン",
-        "jockey": "Ｃデムーロ",
-        "weight": "55.0kg",
-        "odds": 4.0,
-        "pop": 2,
-        "style": "差し",
-        "score": 89,
-        "status": "◎ 安定感抜群の本命軸"
-      },
-      {
-        "num": 7,
-        "bracket": 6,
-        "name": "シャンデヴァーグ",
-        "jockey": "鮫島駿",
-        "weight": "55.0kg",
-        "odds": 28.0,
-        "pop": 9,
-        "style": "差し",
-        "score": 88,
-        "status": "★ 激走注目穴馬"
-      },
-      {
-        "num": 8,
-        "bracket": 7,
-        "name": "ブライトスクリプト",
-        "jockey": "池添",
-        "weight": "55.0kg",
-        "odds": 2.4,
-        "pop": 1,
-        "style": "追込",
-        "score": 95,
-        "status": "◎ 本命筆頭（軸候補）"
-      },
-      {
-        "num": 9,
-        "bracket": 7,
-        "name": "ベニバナ",
-        "jockey": "幸",
-        "weight": "55.0kg",
-        "odds": 25.4,
-        "pop": 7,
+        "name": "ノーセット",
+        "jockey": "津村",
+        "weight": "56.0kg",
+        "odds": 13.1,
+        "pop": 6,
         "style": "逃げ",
         "score": 82,
         "status": "注 伏兵注意"
       },
       {
-        "num": 10,
-        "bracket": 8,
-        "name": "フェリチタ",
-        "jockey": "松山",
-        "weight": "55.0kg",
-        "odds": 9.2,
-        "pop": 5,
+        "num": 5,
+        "bracket": 5,
+        "name": "グルーヴェンス",
+        "jockey": "横山武",
+        "weight": "56.0kg",
+        "odds": 20.2,
+        "pop": 7,
         "style": "先行",
-        "score": 57,
-        "status": "⚠️ 危険な人気馬（過信禁物）"
+        "score": 82,
+        "status": "★ 激走注目穴馬"
       },
       {
-        "num": 11,
+        "num": 6,
+        "bracket": 6,
+        "name": "インパルスドライブ",
+        "jockey": "Ｃデムーロ",
+        "weight": "56.0kg",
+        "odds": 4.5,
+        "pop": 3,
+        "style": "差し",
+        "score": 68,
+        "status": "▲ 上位押さえ"
+      },
+      {
+        "num": 7,
+        "bracket": 7,
+        "name": "シルバーノリダー",
+        "jockey": "小林美",
+        "weight": "56.0kg",
+        "odds": 34.9,
+        "pop": 9,
+        "style": "差し",
+        "score": 90,
+        "status": "★ 激走注目穴馬"
+      },
+      {
+        "num": 8,
+        "bracket": 7,
+        "name": "ジオパークカツキ",
+        "jockey": "プーシャン",
+        "weight": "56.0kg",
+        "odds": 11.0,
+        "pop": 5,
+        "style": "追込",
+        "score": 82,
+        "status": "▲ 上位押さえ"
+      },
+      {
+        "num": 9,
         "bracket": 8,
-        "name": "ツキミ",
-        "jockey": "川田",
-        "weight": "55.0kg",
-        "odds": 27.2,
-        "pop": 8,
+        "name": "ブルージェイ",
+        "jockey": "ルメール",
+        "weight": "56.0kg",
+        "odds": 2.5,
+        "pop": 1,
         "style": "逃げ",
-        "score": 93,
-        "status": "★ AI大穴イチオシ"
+        "score": 90,
+        "status": "◎ 本命筆頭（軸候補）"
+      },
+      {
+        "num": 10,
+        "bracket": 8,
+        "name": "ロンドンガーズ",
+        "jockey": "三浦",
+        "weight": "56.0kg",
+        "odds": 5.0,
+        "pop": 4,
+        "style": "先行",
+        "score": 55,
+        "status": "⚠️ 危険な人気馬（過信禁物）"
       }
     ],
     "volatilityScore": 70,
@@ -499,59 +499,59 @@
     "volatilityClass": "vol-mid",
     "dangerHorse": {
       "num": 10,
-      "name": "フェリチタ",
-      "pop": 5,
-      "odds": 9.2,
-      "reason": "前走・函館2歳Sは時計のかかる洋芝＆重馬場での勝利。スピードと瞬発力が問われる高速京都芝1400m外回りへの条件替わりで切れ負けリスクあり！"
+      "name": "ロンドンガーズ",
+      "pop": 4,
+      "odds": 5.0,
+      "reason": "上位人気（4番人気・5.0倍）に推されているものの、枠順・斤量（56.0kg）と展開面の噛み合わせに不安あり。オッズ妙味が薄く過信禁物！"
     },
-    "volatilityDesc": "1番人気ブライトスクリプトが単勝2.4倍（JRA公式リアルタイムオッズ）。AI波乱度70%（⚠️ 中波乱・混戦模様）を検知！ツキミなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
+    "volatilityDesc": "1番人気ブルージェイが単勝2.5倍（最新予想オッズ）。AI波乱度70%（⚠️ 中波乱・混戦模様）を検知！アテナブレイブなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
     "poll": {
       "favPct": 54,
       "underPct": 46,
-      "totalVotes": 1522
+      "totalVotes": 1470
     },
     "darkHorses": [
       {
-        "number": 11,
-        "name": "ツキミ",
-        "frameColor": "#ec4899",
-        "jockey": "川田 (55.0kg)",
-        "odds": 27.2,
+        "number": 1,
+        "name": "アテナブレイブ",
+        "frameColor": "#64748b",
+        "jockey": "田辺 (55.0kg)",
+        "odds": 27.1,
         "popularity": 8,
         "signals": [
-          "川田将雅騎手確保の勝負気配",
-          "1500m→1400m距離短縮でスピード全開",
-          "揉まれない大外枠からの先行策"
+          "1枠1番の好条件",
+          "展開合致（差し脚質）",
+          "単勝27.1倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数93点！新馬戦を逃げ切ったスピード能力に加え、鞍上に川田将雅騎手を配した陣営の本気度が特大シグナル。マイペースに持ち込めば一発大駆け濃厚！"
+        "comment": "AI穴馬指数90点！田辺騎手×斤量55.0kg。実力に対して単勝27.1倍（8番人気）は絶好の狙い目です。"
       },
       {
         "number": 7,
-        "name": "シャンデヴァーグ",
-        "frameColor": "#10b981",
-        "jockey": "鮫島駿 (55.0kg)",
-        "odds": 28.0,
+        "name": "シルバーノリダー",
+        "frameColor": "#f97316",
+        "jockey": "小林美 (56.0kg)",
+        "odds": 34.9,
         "popularity": 9,
         "signals": [
-          "京都外回りの下り坂適性◎",
-          "上がり3F上位の鋭い切れ味",
-          "本命馬をマークできる好枠"
+          "7枠7番の好条件",
+          "展開合致（差し脚質）",
+          "単勝34.9倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数88点。本命⑥イモージェンのすぐ隣7番枠から同じ進路取りで伸びてこられる絶好の並び。直線外からまとめて差し込む激走候補！"
+        "comment": "AI穴馬指数90点！小林美騎手×斤量56.0kg。実力に対して単勝34.9倍（9番人気）は絶好の狙い目です。"
       },
       {
-        "number": 3,
-        "name": "ビスケットサンド",
-        "frameColor": "#ef4444",
-        "jockey": "北村友 (55.0kg)",
-        "odds": 7.9,
-        "popularity": 4,
+        "number": 5,
+        "name": "グルーヴェンス",
+        "frameColor": "#eab308",
+        "jockey": "横山武 (56.0kg)",
+        "odds": 20.2,
+        "popularity": 7,
         "signals": [
-          "ロス皆無の3枠3番",
-          "京都外回り向きの先行持続力",
-          "中穴ゾーンの妙味"
+          "5枠5番の好条件",
+          "展開合致（先行脚質）",
+          "単勝20.2倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数85点。内ラチ沿いで脚を温存できる3枠3番が魅力。上位人気が外を回す展開になれば、直線インからスルスルと馬券圏内に残るシーン十分。"
+        "comment": "AI穴馬指数82点！横山武騎手×斤量56.0kg。実力に対して単勝20.2倍（7番人気）は絶好の狙い目です。"
       }
     ],
     "actualResult": {
@@ -562,225 +562,588 @@
       "stars": "★★★★★",
       "payouts": [
         {
-          "type": "複勝 11番 ツキミ",
+          "type": "複勝 1番 アテナブレイブ",
           "yen": "600円 (想定)",
           "isHit": true
         },
         {
-          "type": "ワイド 8 - 11",
-          "yen": "2,480円 (想定)",
+          "type": "ワイド 9 - 1",
+          "yen": "2,570円 (想定)",
           "isHit": true
         },
         {
-          "type": "3連複 8 - 6 - 11",
-          "yen": "14,360円 (想定)",
+          "type": "3連複 9 - 2 - 1",
+          "yen": "16,020円 (想定)",
           "isHit": true
         }
       ],
       "podium": [
         {
           "rank": 1,
-          "num": 8,
-          "name": "ブライトスクリプト (◎本命)",
+          "num": 9,
+          "name": "ブルージェイ (◎本命)",
           "pop": 1,
-          "odds": 2.4
+          "odds": 2.5
         },
         {
           "rank": 2,
-          "num": 6,
-          "name": "イモージェン (◯対抗)",
+          "num": 2,
+          "name": "フレイコン (◯対抗)",
           "pop": 2,
-          "odds": 4.0
+          "odds": 4.3
         },
         {
           "rank": 3,
-          "num": 11,
-          "name": "ツキミ (★AI大穴推奨)",
+          "num": 1,
+          "name": "アテナブレイブ (★AI大穴推奨)",
           "pop": 8,
-          "odds": 27.2,
+          "odds": 27.1,
           "isTarget": true
         }
       ],
-      "review": "【10/31(土) 15:45発走予定・最新オッズ反映シミュレーション】本命◎8番ブライトスクリプト（2.4倍）を軸に、AI穴馬筆頭★11番ツキミ（27.2倍）の激走を組み込む高期待値シナリオです。"
+      "review": "【11/7(土) 15:35発走予定・最新オッズ反映シミュレーション】本命◎9番ブルージェイ（2.5倍）を軸に、AI穴馬筆頭★1番アテナブレイブ（27.1倍）の激走を組み込む高期待値シナリオです。"
     },
-    "updatedAt": "2026-11-01 08:30:00"
+    "updatedAt": "2026-11-06 18:00:01"
   },
   {
-    "id": "race-mahoroba-s",
-    "netkeibaRaceId": "202608041111",
-    "gradePriority": 4,
-    "gradeLabel": "L",
+    "id": "race-kyoto-0211",
+    "netkeibaRaceId": "202608050211",
+    "gradePriority": 3,
+    "gradeLabel": "G3",
     "venueId": "kyoto",
-    "date": "2026年11月1日 (日)",
-    "date_short": "11/1(日)",
-    "postTime": "15:20発走",
+    "date": "2026年11月8日 (日)",
+    "date_short": "11/8(日)",
+    "postTime": "15:45発走",
     "round": 11,
-    "badge": "京都11R・L 芝1600m 右（ハンデ・13頭・確定枠順反映）",
-    "title": "まほろばS (L)",
-    "venue": "京都 11R (芝1600m)",
+    "badge": "京都11R・G3 ダ1800m 右（別定・16頭・確定枠順反映）",
+    "title": "みやこS (G3)",
+    "venue": "京都 11R (ダ1800m)",
     "weather": "晴予報",
     "track": "良馬場（京都コース）",
     "track_condition": "良",
-    "pace": "ミドルペース（直線瞬発力勝負）",
-    "fav_odds": 5.0,
-    "condition": "ハンデ",
-    "oddsSource": "JRA公式リアルタイムオッズ",
-    "oddsUpdatedAt": "2026-11-01 08:16:51",
+    "pace": "ハイペース（先行争い激化）",
+    "fav_odds": 4.0,
+    "condition": "別定",
+    "oddsSource": "最新予想オッズ",
+    "oddsUpdatedAt": "2026-11-06 17:46:21",
     "confirmedDraw": true,
     "runners": [
       {
         "num": 1,
         "bracket": 1,
-        "name": "ガロンヌ",
-        "jockey": "池添",
-        "weight": "56.0kg",
-        "odds": 11.1,
-        "pop": 7,
+        "name": "トリポリタニア",
+        "jockey": "Ｃデムーロ",
+        "weight": "57.0kg",
+        "odds": 13.1,
+        "pop": 5,
         "style": "差し",
-        "score": 80,
-        "status": "注 伏兵注意"
+        "score": 90,
+        "status": "▲ 上位押さえ"
       },
       {
         "num": 2,
-        "bracket": 2,
-        "name": "ダイシンヤマト",
-        "jockey": "吉田豊",
+        "bracket": 1,
+        "name": "バスタードサフラン",
+        "jockey": "酒井",
         "weight": "55.0kg",
-        "odds": 22.2,
+        "odds": 19.8,
         "pop": 9,
         "style": "差し",
-        "score": 88,
-        "status": "注 伏兵注意"
+        "score": 90,
+        "status": "★ AI大穴イチオシ"
       },
       {
         "num": 3,
-        "bracket": 3,
-        "name": "ブエナオンダ",
-        "jockey": "鮫島駿",
-        "weight": "58.0kg",
-        "odds": 6.2,
+        "bracket": 2,
+        "name": "パシアンジャン",
+        "jockey": "田口",
+        "weight": "57.0kg",
+        "odds": 38.6,
+        "pop": 11,
+        "style": "追込",
+        "score": 90,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 4,
+        "bracket": 2,
+        "name": "ビービークローサー",
+        "jockey": "坂井",
+        "weight": "55.0kg",
+        "odds": 5.7,
         "pop": 3,
+        "style": "逃げ",
+        "score": 60,
+        "status": "◯ 対抗有力"
+      },
+      {
+        "num": 5,
+        "bracket": 3,
+        "name": "ヴァルツァーシャル",
+        "jockey": "斎藤",
+        "weight": "57.0kg",
+        "odds": 24.3,
+        "pop": 10,
+        "style": "先行",
+        "score": 82,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 6,
+        "bracket": 3,
+        "name": "シゲルショウグン",
+        "jockey": "太宰",
+        "weight": "57.0kg",
+        "odds": 82.5,
+        "pop": 14,
+        "style": "差し",
+        "score": 68,
+        "status": "・ 展開待ち"
+      },
+      {
+        "num": 7,
+        "bracket": 4,
+        "name": "マイノワール",
+        "jockey": "武豊",
+        "weight": "57.0kg",
+        "odds": 19.8,
+        "pop": 8,
+        "style": "差し",
+        "score": 90,
+        "status": "★ 激走注目穴馬"
+      },
+      {
+        "num": 8,
+        "bracket": 4,
+        "name": "テスティモーネ",
+        "jockey": "幸",
+        "weight": "57.0kg",
+        "odds": 14.7,
+        "pop": 7,
+        "style": "追込",
+        "score": 90,
+        "status": "★ 激走注目穴馬"
+      },
+      {
+        "num": 9,
+        "bracket": 5,
+        "name": "ラムジェット",
+        "jockey": "三浦",
+        "weight": "58.0kg",
+        "odds": 13.3,
+        "pop": 6,
+        "style": "逃げ",
+        "score": 82,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 10,
+        "bracket": 5,
+        "name": "ムルソー",
+        "jockey": "松山",
+        "weight": "57.0kg",
+        "odds": 4.0,
+        "pop": 1,
+        "style": "先行",
+        "score": 90,
+        "status": "◎ 本命筆頭（軸候補）"
+      },
+      {
+        "num": 11,
+        "bracket": 6,
+        "name": "ロードクロンヌ",
+        "jockey": "横山和",
+        "weight": "58.0kg",
+        "odds": 5.3,
+        "pop": 2,
         "style": "差し",
         "score": 55,
         "status": "⚠️ 危険な人気馬（過信禁物）"
       },
       {
-        "num": 4,
-        "bracket": 4,
-        "name": "テリオスララ",
-        "jockey": "田山",
-        "weight": "53.0kg",
-        "odds": 7.9,
-        "pop": 5,
+        "num": 12,
+        "bracket": 6,
+        "name": "サイモンザナドゥ",
+        "jockey": "富田",
+        "weight": "57.0kg",
+        "odds": 48.6,
+        "pop": 13,
         "style": "差し",
-        "score": 93,
-        "status": "★ AI大穴イチオシ"
+        "score": 90,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 13,
+        "bracket": 7,
+        "name": "レヴォントゥレット",
+        "jockey": "鮫島駿",
+        "weight": "57.0kg",
+        "odds": 87.1,
+        "pop": 15,
+        "style": "追込",
+        "score": 68,
+        "status": "・ 展開待ち"
+      },
+      {
+        "num": 14,
+        "bracket": 7,
+        "name": "ルシュヴァルドール",
+        "jockey": "北村友",
+        "weight": "57.0kg",
+        "odds": 44.5,
+        "pop": 12,
+        "style": "逃げ",
+        "score": 82,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 15,
+        "bracket": 8,
+        "name": "ショウナンバンライ",
+        "jockey": "池添",
+        "weight": "55.0kg",
+        "odds": 5.9,
+        "pop": 4,
+        "style": "先行",
+        "score": 60,
+        "status": "▲ 上位押さえ"
+      },
+      {
+        "num": 16,
+        "bracket": 8,
+        "name": "シリウスコルト",
+        "jockey": "浜中",
+        "weight": "57.0kg",
+        "odds": 111.1,
+        "pop": 16,
+        "style": "差し",
+        "score": 68,
+        "status": "・ 展開待ち"
+      }
+    ],
+    "volatilityScore": 90,
+    "volatilityLevel": "🔥 超大穴警報",
+    "volatilityClass": "vol-high",
+    "dangerHorse": {
+      "num": 11,
+      "name": "ロードクロンヌ",
+      "pop": 2,
+      "odds": 5.3,
+      "reason": "上位人気（2番人気・5.3倍）に推されているものの、枠順・斤量（58.0kg）と展開面の噛み合わせに不安あり。オッズ妙味が薄く過信禁物！"
+    },
+    "volatilityDesc": "1番人気ムルソーが単勝4.0倍（最新予想オッズ）。AI波乱度90%（🔥 超大穴警報）を検知！バスタードサフランなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
+    "poll": {
+      "favPct": 42,
+      "underPct": 58,
+      "totalVotes": 1782
+    },
+    "darkHorses": [
+      {
+        "number": 2,
+        "name": "バスタードサフラン",
+        "frameColor": "#64748b",
+        "jockey": "酒井 (55.0kg)",
+        "odds": 19.8,
+        "popularity": 9,
+        "signals": [
+          "1枠2番の好条件",
+          "展開合致（差し脚質）",
+          "単勝19.8倍のオッズ歪み検知"
+        ],
+        "comment": "AI穴馬指数90点！酒井騎手×斤量55.0kg。実力に対して単勝19.8倍（9番人気）は絶好の狙い目です。"
+      },
+      {
+        "number": 7,
+        "name": "マイノワール",
+        "frameColor": "#3b82f6",
+        "jockey": "武豊 (57.0kg)",
+        "odds": 19.8,
+        "popularity": 8,
+        "signals": [
+          "4枠7番の好条件",
+          "展開合致（差し脚質）",
+          "単勝19.8倍のオッズ歪み検知"
+        ],
+        "comment": "AI穴馬指数90点！武豊騎手×斤量57.0kg。実力に対して単勝19.8倍（8番人気）は絶好の狙い目です。"
+      },
+      {
+        "number": 8,
+        "name": "テスティモーネ",
+        "frameColor": "#3b82f6",
+        "jockey": "幸 (57.0kg)",
+        "odds": 14.7,
+        "popularity": 7,
+        "signals": [
+          "4枠8番の好条件",
+          "展開合致（追込脚質）",
+          "単勝14.7倍のオッズ歪み検知"
+        ],
+        "comment": "AI穴馬指数90点！幸騎手×斤量57.0kg。実力に対して単勝14.7倍（7番人気）は絶好の狙い目です。"
+      }
+    ],
+    "actualResult": {
+      "statusType": "BIG_WIN",
+      "statusBadge": "🎯 発走前AI期待値シミュレーション",
+      "roi": "540%",
+      "trustGrade": "S (超高期待値)",
+      "stars": "★★★★★",
+      "payouts": [
+        {
+          "type": "複勝 2番 バスタードサフラン",
+          "yen": "440円 (想定)",
+          "isHit": true
+        },
+        {
+          "type": "ワイド 10 - 2",
+          "yen": "3,010円 (想定)",
+          "isHit": true
+        },
+        {
+          "type": "3連複 10 - 4 - 2",
+          "yen": "24,830円 (想定)",
+          "isHit": true
+        }
+      ],
+      "podium": [
+        {
+          "rank": 1,
+          "num": 10,
+          "name": "ムルソー (◎本命)",
+          "pop": 1,
+          "odds": 4.0
+        },
+        {
+          "rank": 2,
+          "num": 4,
+          "name": "ビービークローサー (◯対抗)",
+          "pop": 3,
+          "odds": 5.7
+        },
+        {
+          "rank": 3,
+          "num": 2,
+          "name": "バスタードサフラン (★AI大穴推奨)",
+          "pop": 9,
+          "odds": 19.8,
+          "isTarget": true
+        }
+      ],
+      "review": "【11/8(日) 15:45発走予定・最新オッズ反映シミュレーション】本命◎10番ムルソー（4.0倍）を軸に、AI穴馬筆頭★2番バスタードサフラン（19.8倍）の激走を組み込む高期待値シナリオです。"
+    },
+    "updatedAt": "2026-11-06 18:00:01"
+  },
+  {
+    "id": "race-fukushima-0211",
+    "netkeibaRaceId": "202603030211",
+    "gradePriority": 5,
+    "gradeLabel": "OP",
+    "venueId": "fukushima",
+    "date": "2026年11月8日 (日)",
+    "date_short": "11/8(日)",
+    "postTime": "15:20発走",
+    "round": 11,
+    "badge": "福島11R・OP 芝1200m 右（別定・16頭・出走登録・最新オッズ反映）",
+    "title": "みちのくS (OP)",
+    "venue": "福島 11R (芝1200m)",
+    "weather": "晴予報",
+    "track": "良馬場（福島コース）",
+    "track_condition": "良",
+    "pace": "ハイペース（先行争い激化）",
+    "fav_odds": 3.4,
+    "condition": "別定",
+    "oddsSource": "最新予想オッズ",
+    "oddsUpdatedAt": "2026-11-06 17:45:56",
+    "confirmedDraw": false,
+    "runners": [
+      {
+        "num": 1,
+        "bracket": 1,
+        "name": "アスクワンタイム",
+        "jockey": "丸田",
+        "weight": "57.0kg",
+        "odds": 34.0,
+        "pop": 12,
+        "style": "差し",
+        "score": 90,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 2,
+        "bracket": 1,
+        "name": "アスティスプマンテ",
+        "jockey": "小沢",
+        "weight": "55.0kg",
+        "odds": 5.3,
+        "pop": 3,
+        "style": "差し",
+        "score": 68,
+        "status": "◯ 対抗有力"
+      },
+      {
+        "num": 3,
+        "bracket": 2,
+        "name": "アルセナール",
+        "jockey": "石川",
+        "weight": "55.0kg",
+        "odds": 32.9,
+        "pop": 11,
+        "style": "追込",
+        "score": 90,
+        "status": "★ 激走注目穴馬"
+      },
+      {
+        "num": 4,
+        "bracket": 2,
+        "name": "インブロリオ",
+        "jockey": "吉田隼",
+        "weight": "55.0kg",
+        "odds": 3.4,
+        "pop": 1,
+        "style": "逃げ",
+        "score": 90,
+        "status": "◎ 本命筆頭（軸候補）"
       },
       {
         "num": 5,
-        "bracket": 4,
-        "name": "ビップデイジー",
-        "jockey": "北村友",
-        "weight": "54.0kg",
-        "odds": 11.8,
-        "pop": 8,
+        "bracket": 3,
+        "name": "ウインモナーク",
+        "jockey": "黛",
+        "weight": "57.0kg",
+        "odds": 13.6,
+        "pop": 6,
         "style": "先行",
-        "score": 87,
+        "score": 82,
         "status": "注 伏兵注意"
       },
       {
         "num": 6,
-        "bracket": 5,
-        "name": "メイショウシンタケ",
-        "jockey": "藤懸",
-        "weight": "54.0kg",
-        "odds": 62.4,
-        "pop": 13,
+        "bracket": 3,
+        "name": "カンティーユ",
+        "jockey": "小崎",
+        "weight": "57.0kg",
+        "odds": 23.0,
+        "pop": 7,
         "style": "差し",
-        "score": 73,
-        "status": "・ 展開待ち"
+        "score": 90,
+        "status": "★ AI大穴イチオシ"
       },
       {
         "num": 7,
-        "bracket": 5,
-        "name": "レザベーション",
-        "jockey": "田口",
+        "bracket": 4,
+        "name": "ギリーズボール",
+        "jockey": "杉原",
         "weight": "55.0kg",
-        "odds": 5.0,
-        "pop": 1,
-        "style": "先行",
-        "score": 87,
-        "status": "◯ 3歳勢の勢い注目"
+        "odds": 5.1,
+        "pop": 2,
+        "style": "差し",
+        "score": 55,
+        "status": "⚠️ 危険な人気馬（過信禁物）"
       },
       {
         "num": 8,
-        "bracket": 6,
-        "name": "スマートワイス",
-        "jockey": "武豊",
-        "weight": "55.0kg",
-        "odds": 5.0,
-        "pop": 2,
-        "style": "差し",
-        "score": 89,
-        "status": "◎ 本命候補（武豊×京都マイル好相性）"
+        "bracket": 4,
+        "name": "クムシラコ",
+        "jockey": "嶋田",
+        "weight": "57.0kg",
+        "odds": 47.5,
+        "pop": 14,
+        "style": "追込",
+        "score": 90,
+        "status": "注 伏兵注意"
       },
       {
         "num": 9,
-        "bracket": 6,
-        "name": "ムイ",
-        "jockey": "富田",
-        "weight": "52.0kg",
-        "odds": 46.9,
-        "pop": 11,
+        "bracket": 5,
+        "name": "ショウナンハクラク",
+        "jockey": "荻野極",
+        "weight": "57.0kg",
+        "odds": 37.3,
+        "pop": 13,
         "style": "逃げ",
-        "score": 89,
+        "score": 82,
         "status": "注 伏兵注意"
       },
       {
         "num": 10,
-        "bracket": 7,
-        "name": "セオ",
-        "jockey": "菱田",
-        "weight": "56.0kg",
-        "odds": 33.7,
+        "bracket": 5,
+        "name": "シンバーシア",
+        "jockey": "丹内",
+        "weight": "55.0kg",
+        "odds": 32.4,
         "pop": 10,
         "style": "先行",
-        "score": 86,
-        "status": "★ 激走注目穴馬"
+        "score": 82,
+        "status": "注 伏兵注意"
       },
       {
         "num": 11,
-        "bracket": 7,
-        "name": "クファシル",
-        "jockey": "小沢",
-        "weight": "54.0kg",
-        "odds": 60.0,
-        "pop": 12,
+        "bracket": 6,
+        "name": "ブーケファロス",
+        "jockey": "横山琉",
+        "weight": "57.0kg",
+        "odds": 74.1,
+        "pop": 16,
         "style": "差し",
-        "score": 73,
+        "score": 68,
         "status": "・ 展開待ち"
       },
       {
         "num": 12,
-        "bracket": 8,
-        "name": "キョウエイブリッサ",
-        "jockey": "酒井",
+        "bracket": 6,
+        "name": "ベイビーキッス",
+        "jockey": "菊沢",
         "weight": "55.0kg",
-        "odds": 6.5,
-        "pop": 4,
+        "odds": 11.5,
+        "pop": 5,
         "style": "差し",
-        "score": 66,
+        "score": 82,
         "status": "▲ 上位押さえ"
       },
       {
         "num": 13,
-        "bracket": 8,
-        "name": "ショウナンアデイブ",
-        "jockey": "吉村",
-        "weight": "55.0kg",
-        "odds": 9.0,
-        "pop": 6,
+        "bracket": 7,
+        "name": "マイネルレノン",
+        "jockey": "国分恭",
+        "weight": "57.0kg",
+        "odds": 62.4,
+        "pop": 15,
         "style": "追込",
+        "score": 68,
+        "status": "・ 展開待ち"
+      },
+      {
+        "num": 14,
+        "bracket": 7,
+        "name": "マーブルパレス",
+        "jockey": "高杉",
+        "weight": "54.0kg",
+        "odds": 7.5,
+        "pop": 4,
+        "style": "逃げ",
+        "score": 81,
+        "status": "▲ 上位押さえ"
+      },
+      {
+        "num": 15,
+        "bracket": 8,
+        "name": "メイクセンス",
+        "jockey": "石神道",
+        "weight": "56.0kg",
+        "odds": 27.8,
+        "pop": 8,
+        "style": "先行",
+        "score": 82,
+        "status": "注 伏兵注意"
+      },
+      {
+        "num": 16,
+        "bracket": 8,
+        "name": "ルディック",
+        "jockey": "亀田",
+        "weight": "57.0kg",
+        "odds": 30.4,
+        "pop": 9,
+        "style": "差し",
         "score": 90,
         "status": "★ 激走注目穴馬"
       }
@@ -789,60 +1152,60 @@
     "volatilityLevel": "🔥 超大穴警報",
     "volatilityClass": "vol-high",
     "dangerHorse": {
-      "num": 3,
-      "name": "ブエナオンダ",
-      "pop": 3,
-      "odds": 6.2,
-      "reason": "メンバー唯一のトップハンデ58.0kgを背負う厳しい条件。軽ハンデの切れ者が揃った京都外回りマイル戦ではゴール前の甘さが懸念されます。"
+      "num": 7,
+      "name": "ギリーズボール",
+      "pop": 2,
+      "odds": 5.1,
+      "reason": "上位人気（2番人気・5.1倍）に推されているものの、枠順・斤量（55.0kg）と展開面の噛み合わせに不安あり。オッズ妙味が薄く過信禁物！"
     },
-    "volatilityDesc": "1番人気レザベーションが単勝5.0倍（JRA公式リアルタイムオッズ）。AI波乱度82%（🔥 超大穴警報）を検知！テリオスララなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
+    "volatilityDesc": "1番人気インブロリオが単勝3.4倍（最新予想オッズ）。AI波乱度82%（🔥 超大穴警報）を検知！カンティーユなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
     "poll": {
       "favPct": 47,
       "underPct": 53,
-      "totalVotes": 1626
+      "totalVotes": 1782
     },
     "darkHorses": [
       {
-        "number": 4,
-        "name": "テリオスララ",
-        "frameColor": "#3b82f6",
-        "jockey": "田山 (53.0kg)",
-        "odds": 7.9,
-        "popularity": 5,
+        "number": 6,
+        "name": "カンティーユ",
+        "frameColor": "#ef4444",
+        "jockey": "小崎 (57.0kg)",
+        "odds": 23.0,
+        "popularity": 7,
         "signals": [
-          "恵まれた軽ハンデ53.0kg",
-          "トップハンデと5kg差の末脚恩恵",
-          "京都外回りの瞬発力戦向き"
+          "3枠6番の好条件",
+          "展開合致（差し脚質）",
+          "単勝23.0倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数93点！ハンデ53.0kgはメンバー中でも圧倒的に恵まれた勝負斤量。3コーナーの下り坂から勢いをつければ一気に突き抜けるAIイチオシ穴馬です。"
+        "comment": "AI穴馬指数90点！小崎騎手×斤量57.0kg。実力に対して単勝23.0倍（7番人気）は絶好の狙い目です。"
       },
       {
-        "number": 13,
-        "name": "ショウナンアデイブ",
+        "number": 16,
+        "name": "ルディック",
         "frameColor": "#ec4899",
-        "jockey": "吉村 (55.0kg)",
-        "odds": 9.0,
-        "popularity": 6,
+        "jockey": "亀田 (57.0kg)",
+        "odds": 30.4,
+        "popularity": 9,
         "signals": [
-          "重賞戦線で揉まれた地力上位",
-          "手頃なハンデ55.0kg",
-          "若手有望株・吉村騎手の一発"
+          "8枠16番の好条件",
+          "展開合致（差し脚質）",
+          "単勝30.4倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数90点。重賞でも好勝負してきた実績馬がハンデ55kgで人気盲点となっているオッズの歪み！直線外から強襲する高配当の使者。"
+        "comment": "AI穴馬指数90点！亀田騎手×斤量57.0kg。実力に対して単勝30.4倍（9番人気）は絶好の狙い目です。"
       },
       {
-        "number": 10,
-        "name": "セオ",
-        "frameColor": "#f97316",
-        "jockey": "菱田 (56.0kg)",
-        "odds": 33.7,
-        "popularity": 10,
+        "number": 3,
+        "name": "アルセナール",
+        "frameColor": "#334155",
+        "jockey": "石川 (55.0kg)",
+        "odds": 32.9,
+        "popularity": 11,
         "signals": [
-          "京都外回りマイルの先行巧者",
-          "妙味ある中穴オッズ",
-          "マイペース粘り込み型"
+          "2枠3番の好条件",
+          "展開合致（追込脚質）",
+          "単勝32.9倍のオッズ歪み検知"
         ],
-        "comment": "AI穴馬指数86点。京都芝1600mでしぶとい先行力を発揮する実力馬。前が楽になる展開ならそのまま2〜3着に粘り込むシーン濃厚！"
+        "comment": "AI穴馬指数90点！石川騎手×斤量55.0kg。実力に対して単勝32.9倍（11番人気）は絶好の狙い目です。"
       }
     ],
     "actualResult": {
@@ -853,374 +1216,47 @@
       "stars": "★★★★★",
       "payouts": [
         {
-          "type": "複勝 4番 テリオスララ",
-          "yen": "280円 (想定)",
+          "type": "複勝 6番 カンティーユ",
+          "yen": "510円 (想定)",
           "isHit": true
         },
         {
-          "type": "ワイド 7 - 4",
-          "yen": "1,500円 (想定)",
+          "type": "ワイド 4 - 6",
+          "yen": "2,970円 (想定)",
           "isHit": true
         },
         {
-          "type": "3連複 7 - 8 - 4",
-          "yen": "10,860円 (想定)",
+          "type": "3連複 4 - 2 - 6",
+          "yen": "22,800円 (想定)",
           "isHit": true
         }
       ],
       "podium": [
         {
           "rank": 1,
-          "num": 7,
-          "name": "レザベーション (◎本命)",
-          "pop": 1,
-          "odds": 5.0
-        },
-        {
-          "rank": 2,
-          "num": 8,
-          "name": "スマートワイス (◯対抗)",
-          "pop": 2,
-          "odds": 5.0
-        },
-        {
-          "rank": 3,
           "num": 4,
-          "name": "テリオスララ (★AI大穴推奨)",
-          "pop": 5,
-          "odds": 7.9,
-          "isTarget": true
-        }
-      ],
-      "review": "【11/1(日) 15:20発走予定・最新オッズ反映シミュレーション】本命◎7番レザベーション（5.0倍）を軸に、AI穴馬筆頭★4番テリオスララ（7.9倍）の激走を組み込む高期待値シナリオです。"
-    },
-    "updatedAt": "2026-11-01 08:30:00"
-  },
-  {
-    "id": "race-perseus-s",
-    "netkeibaRaceId": "202605041011",
-    "gradePriority": 5,
-    "gradeLabel": "OP",
-    "venueId": "tokyo",
-    "date": "2026年10月31日 (土)",
-    "date_short": "10/31(土)",
-    "postTime": "15:30発走",
-    "round": 11,
-    "badge": "東京11R・OP ダ1600m 左（ハンデ・16頭・確定枠順反映）",
-    "title": "ペルセウスS (OP)",
-    "venue": "東京 11R (ダ1600m)",
-    "weather": "晴予報",
-    "track": "良馬場（東京コース）",
-    "track_condition": "良",
-    "pace": "ハイペース（先行争い激化）",
-    "fav_odds": 3.3,
-    "condition": "ハンデ",
-    "oddsSource": "JRA公式リアルタイムオッズ",
-    "oddsUpdatedAt": "2026-10-31 15:38:10",
-    "confirmedDraw": true,
-    "runners": [
-      {
-        "num": 1,
-        "bracket": 1,
-        "name": "ハセドン",
-        "jockey": "中井",
-        "weight": "55.0kg",
-        "odds": 93.1,
-        "pop": 14,
-        "style": "差し",
-        "score": 68,
-        "status": "・ 展開待ち"
-      },
-      {
-        "num": 2,
-        "bracket": 1,
-        "name": "シーズンリッチ",
-        "jockey": "荻野極",
-        "weight": "55.0kg",
-        "odds": 76.4,
-        "pop": 13,
-        "style": "差し",
-        "score": 68,
-        "status": "・ 展開待ち"
-      },
-      {
-        "num": 3,
-        "bracket": 2,
-        "name": "ロードラビリンス",
-        "jockey": "菊沢",
-        "weight": "55.0kg",
-        "odds": 41.2,
-        "pop": 11,
-        "style": "追込",
-        "score": 90,
-        "status": "注 伏兵注意"
-      },
-      {
-        "num": 4,
-        "bracket": 2,
-        "name": "サフランヒーロー",
-        "jockey": "黛",
-        "weight": "53.0kg",
-        "odds": 112.9,
-        "pop": 16,
-        "style": "差し",
-        "score": 87,
-        "status": "★ 激走注目穴馬"
-      },
-      {
-        "num": 5,
-        "bracket": 3,
-        "name": "イムホテプ",
-        "jockey": "横山武",
-        "weight": "55.0kg",
-        "odds": 15.7,
-        "pop": 8,
-        "style": "先行",
-        "score": 82,
-        "status": "注 伏兵注意"
-      },
-      {
-        "num": 6,
-        "bracket": 3,
-        "name": "ジェイパームス",
-        "jockey": "大野",
-        "weight": "57.0kg",
-        "odds": 6.9,
-        "pop": 3,
-        "style": "差し",
-        "score": 68,
-        "status": "◯ 対抗有力"
-      },
-      {
-        "num": 7,
-        "bracket": 4,
-        "name": "シュラザック",
-        "jockey": "田口",
-        "weight": "56.0kg",
-        "odds": 9.5,
-        "pop": 5,
-        "style": "差し",
-        "score": 82,
-        "status": "▲ 上位押さえ"
-      },
-      {
-        "num": 8,
-        "bracket": 4,
-        "name": "ハワイアンタイム",
-        "jockey": "太宰",
-        "weight": "55.0kg",
-        "odds": 30.6,
-        "pop": 10,
-        "style": "追込",
-        "score": 90,
-        "status": "注 伏兵注意"
-      },
-      {
-        "num": 9,
-        "bracket": 5,
-        "name": "リサシテーション",
-        "jockey": "菱田",
-        "weight": "54.0kg",
-        "odds": 12.9,
-        "pop": 7,
-        "style": "逃げ",
-        "score": 89,
-        "status": "注 伏兵注意"
-      },
-      {
-        "num": 10,
-        "bracket": 5,
-        "name": "アドマイヤデイトナ",
-        "jockey": "プーシャン",
-        "weight": "57.5kg",
-        "odds": 24.9,
-        "pop": 9,
-        "style": "先行",
-        "score": 82,
-        "status": "注 伏兵注意"
-      },
-      {
-        "num": 11,
-        "bracket": 6,
-        "name": "エスカル",
-        "jockey": "戸崎圭",
-        "weight": "55.0kg",
-        "odds": 104.6,
-        "pop": 15,
-        "style": "差し",
-        "score": 94,
-        "status": "★ AI大穴イチオシ"
-      },
-      {
-        "num": 12,
-        "bracket": 6,
-        "name": "クレーキング",
-        "jockey": "ルメール",
-        "weight": "57.5kg",
-        "odds": 5.1,
-        "pop": 2,
-        "style": "差し",
-        "score": 90,
-        "status": "◎ 本命軸（ルメール×実力最上位）"
-      },
-      {
-        "num": 13,
-        "bracket": 7,
-        "name": "クールブロン",
-        "jockey": "三浦",
-        "weight": "55.0kg",
-        "odds": 10.5,
-        "pop": 6,
-        "style": "差し",
-        "score": 89,
-        "status": "★ 激走注目穴馬"
-      },
-      {
-        "num": 14,
-        "bracket": 7,
-        "name": "ナイトアクアリウム",
-        "jockey": "長岡",
-        "weight": "55.0kg",
-        "odds": 8.4,
-        "pop": 4,
-        "style": "逃げ",
-        "score": 74,
-        "status": "▲ 上位押さえ"
-      },
-      {
-        "num": 15,
-        "bracket": 8,
-        "name": "ショウナンライシン",
-        "jockey": "原",
-        "weight": "56.0kg",
-        "odds": 76.0,
-        "pop": 12,
-        "style": "先行",
-        "score": 60,
-        "status": "・ 展開待ち"
-      },
-      {
-        "num": 16,
-        "bracket": 8,
-        "name": "ピエマンソン",
-        "jockey": "Ｍデムーロ",
-        "weight": "56.0kg",
-        "odds": 3.3,
-        "pop": 1,
-        "style": "先行",
-        "score": 56,
-        "status": "⚠️ 危険な人気馬（過信禁物）"
-      }
-    ],
-    "volatilityScore": 98,
-    "volatilityLevel": "🔥 超大穴警報",
-    "volatilityClass": "vol-high",
-    "dangerHorse": {
-      "num": 16,
-      "name": "ピエマンソン",
-      "pop": 1,
-      "odds": 3.3,
-      "reason": "先行激化のハイペース想定の中、外から脚を使って位置を取りに行くと直線坂で甘くなる懸念。上位人気のオッズ妙味は薄く過信禁物！"
-    },
-    "volatilityDesc": "1番人気クレーキングが単勝5.1倍（JRA公式リアルタイムオッズ）。AI波乱度98%（🔥 超大穴警報）を検知！エスカルなど妙味抜群の穴馬が馬券圏内へ突入する高期待値レースです。",
-    "poll": {
-      "favPct": 36,
-      "underPct": 64,
-      "totalVotes": 1782
-    },
-    "darkHorses": [
-      {
-        "number": 11,
-        "name": "エスカル",
-        "frameColor": "#10b981",
-        "jockey": "戸崎圭 (55.0kg)",
-        "odds": 104.6,
-        "popularity": 15,
-        "signals": [
-          "東京ダ1600m名手・戸崎圭太",
-          "手頃なハンデ55.0kg",
-          "ハイペース差し決着に完全合致"
-        ],
-        "comment": "AI穴馬指数94点！戸崎圭太騎手が騎乗しハンデ55kgと好条件が揃ったイチオシ穴馬。芝スタートの外目6枠からスムーズに流れに乗れば頭まで狙えます！"
-      },
-      {
-        "number": 13,
-        "name": "クールブロン",
-        "frameColor": "#f97316",
-        "jockey": "三浦 (55.0kg)",
-        "odds": 10.5,
-        "popularity": 6,
-        "signals": [
-          "芝スタート有利の7枠13番",
-          "ワンターン東京マイル巧者",
-          "砂を被らず末脚発揮"
-        ],
-        "comment": "AI穴馬指数89点。芝スタートが長い東京ダート1600mで絶好の7枠13番を獲得。本命馬の直後を外からスムーズに追走でき、連対圏突入の期待大！"
-      },
-      {
-        "number": 4,
-        "name": "サフランヒーロー",
-        "frameColor": "#334155",
-        "jockey": "黛 (53.0kg)",
-        "odds": 112.9,
-        "popularity": 16,
-        "signals": [
-          "最軽量ハンデ53.0kgの恩恵",
-          "ハイペース前崩れの展開利",
-          "イン溜め直線強襲型"
-        ],
-        "comment": "AI穴馬指数87点。トップハンデと4.5kg差の超軽量53kg！前が激しくやり合う展開で脚を温存できれば、高配当ゾーンから3着内へ突っ込む爆弾馬です。"
-      }
-    ],
-    "actualResult": {
-      "statusType": "BIG_WIN",
-      "statusBadge": "🎯 発走前AI期待値シミュレーション",
-      "roi": "588%",
-      "trustGrade": "S (超高期待値)",
-      "stars": "★★★★★",
-      "payouts": [
-        {
-          "type": "複勝 11番 エスカル",
-          "yen": "1,400円 (想定)",
-          "isHit": true
-        },
-        {
-          "type": "ワイド 12 - 11",
-          "yen": "6,800円 (想定)",
-          "isHit": true
-        },
-        {
-          "type": "3連複 12 - 6 - 11",
-          "yen": "58,000円 (想定)",
-          "isHit": true
-        }
-      ],
-      "podium": [
-        {
-          "rank": 1,
-          "num": 12,
-          "name": "クレーキング (◎本命)",
-          "pop": 2,
-          "odds": 5.1
+          "name": "インブロリオ (◎本命)",
+          "pop": 1,
+          "odds": 3.4
         },
         {
           "rank": 2,
-          "num": 6,
-          "name": "ジェイパームス (◯対抗)",
+          "num": 2,
+          "name": "アスティスプマンテ (◯対抗)",
           "pop": 3,
-          "odds": 6.9
+          "odds": 5.3
         },
         {
           "rank": 3,
-          "num": 11,
-          "name": "エスカル (★AI大穴推奨)",
-          "pop": 15,
-          "odds": 104.6,
+          "num": 6,
+          "name": "カンティーユ (★AI大穴推奨)",
+          "pop": 7,
+          "odds": 23.0,
           "isTarget": true
         }
       ],
-      "review": "【10/31(土) 15:30発走予定・最新オッズ反映シミュレーション】本命◎12番クレーキング（5.1倍）を軸に、AI穴馬筆頭★11番エスカル（104.6倍）の激走を組み込む高期待値シナリオです。"
+      "review": "【11/8(日) 15:20発走予定・最新オッズ反映シミュレーション】本命◎4番インブロリオ（3.4倍）を軸に、AI穴馬筆頭★6番カンティーユ（23.0倍）の激走を組み込む高期待値シナリオです。"
     },
-    "updatedAt": "2026-11-01 08:30:00"
+    "updatedAt": "2026-11-06 18:00:01"
   }
 ]
