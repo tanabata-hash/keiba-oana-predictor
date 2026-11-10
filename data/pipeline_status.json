@@ -1,48 +1,48 @@
 {
-  "lastRunAt": "2026-11-08 08:30:01",
+  "lastRunAt": "2026-11-10 17:03:24",
   "sourceMode": "live_netkeiba",
-  "targetWeekend": "11/7(土) 〜 11/8(日)",
+  "targetWeekend": "11/14(土) 〜 11/15(日)",
   "raceCount": 4,
   "races": [
     {
-      "id": "race-tokyo-0211",
-      "title": "アルゼンチン共和国杯 (G2)",
-      "date_short": "11/8(日)",
-      "postTime": "15:30発走",
-      "runnersCount": 18,
-      "volatilityScore": 96,
-      "oddsSource": "JRA公式リアルタイムオッズ",
-      "confirmedDraw": true
+      "id": "race-elizabeth",
+      "title": "エリザベス女王杯 (G1)",
+      "date_short": "11/15(日)",
+      "postTime": "15:40発走",
+      "runnersCount": 23,
+      "volatilityScore": 72,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": false
     },
     {
-      "id": "race-tokyo-0111",
-      "title": "京王杯2歳S (G2)",
-      "date_short": "11/7(土)",
-      "postTime": "15:35発走",
-      "runnersCount": 10,
-      "volatilityScore": 70,
-      "oddsSource": "JRA公式リアルタイムオッズ",
-      "confirmedDraw": true
-    },
-    {
-      "id": "race-kyoto-0211",
-      "title": "みやこS (G3)",
-      "date_short": "11/8(日)",
+      "id": "race-daily-hai",
+      "title": "デイリー杯2歳S (G2)",
+      "date_short": "11/14(土)",
       "postTime": "15:45発走",
-      "runnersCount": 16,
-      "volatilityScore": 90,
-      "oddsSource": "JRA公式リアルタイムオッズ",
-      "confirmedDraw": true
+      "runnersCount": 13,
+      "volatilityScore": 70,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": false
     },
     {
-      "id": "race-fukushima-0211",
-      "title": "みちのくS (OP)",
-      "date_short": "11/8(日)",
-      "postTime": "15:20発走",
-      "runnersCount": 16,
-      "volatilityScore": 90,
-      "oddsSource": "JRA公式リアルタイムオッズ",
-      "confirmedDraw": true
+      "id": "race-musashino-s",
+      "title": "武蔵野S (G3)",
+      "date_short": "11/14(土)",
+      "postTime": "15:30発走",
+      "runnersCount": 20,
+      "volatilityScore": 76,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": false
+    },
+    {
+      "id": "race-fukushima-minyu",
+      "title": "福島民友C (L)",
+      "date_short": "11/15(日)",
+      "postTime": "15:10発走",
+      "runnersCount": 17,
+      "volatilityScore": 82,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": false
     }
   ]
 }
