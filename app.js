@@ -586,6 +586,8 @@ function renderPlans() {
   const h1 = currentRace.darkHorses[0] || { number: 14, name: "注目穴馬", odds: 30 };
   const h2 = currentRace.darkHorses[1] || { number: 6, name: "相手穴馬", odds: 20 };
   const fav = currentRace.runners.find(r => r.pop === 1) || { num: 1, name: "人気馬" };
+  const bombs = currentRace.bombHorses || [];
+  const bombNums = bombs.map(b => b.number);
 
   // 予算に応じた金額分配
   const b = currentBudget;
@@ -602,9 +604,9 @@ function renderPlans() {
     <!-- プラン1: ローリスク安心 -->
     <div class="plan-card">
       <div class="plan-header">
-        <span class="plan-level-tag" style="color: #10b981;">🔰 初心者おすすめ・負けにくい</span>
+        <span class="plan-level-tag" style="color: #10b981;">🛡️ 守りのセーフティ・元本防衛重視</span>
         <h4 class="plan-title">複勝 ＋ ワイド安心プラン</h4>
-        <p class="plan-desc">大穴馬が3着に滑り込むだけで高配当！最も的中しやすくリスクを抑えた買い方。</p>
+        <p class="plan-desc">大穴馬が3着に滑り込むだけで元本回収＋手堅く利益確保！最も的中率の高い堅実設計。</p>
       </div>
 
       <div class="plan-stats">
@@ -723,7 +725,7 @@ function renderPlans() {
       <div class="plan-header">
         <span class="plan-level-tag" style="color: #ec4899;">🚀 夢の特大万馬券（VIP限定）</span>
         <h4 class="plan-title">3連単フォーメーション一攫千金</h4>
-        <p class="plan-desc">大穴馬が激走した時に数十万〜数百万円の払い戻しを狙う、ハイリスク超ハイリターン型。</p>
+        <p class="plan-desc">大穴馬が激走した時に数十万〜数百万円の払い戻しを狙う、ヒモ抜け防止爆弾枠付きハイリターン型。</p>
       </div>
 
       <div class="plan-stats">
@@ -756,7 +758,7 @@ function renderPlans() {
                 <span class="bet-amount">均等配分</span>
               </li>
               <li class="bet-line">
-                <span class="bet-horses">3着: 伏兵・穴馬へ手広く</span>
+                <span class="bet-horses">3着: 穴馬 ＋ 💣特大爆弾枠（ヒモ抜け防止）</span>
                 <span class="bet-amount">計${p3_ticketCount}点</span>
               </li>
             </ul>
@@ -765,10 +767,10 @@ function renderPlans() {
             <div class="digital-marksheet">
               <div class="marksheet-header">
                 <span>🎫 マークカード確認 (1〜18番)</span>
-                <span>3連単フォーメーション</span>
+                <span>3連単フォーメーション（💣爆弾枠点灯）</span>
               </div>
               <div class="marksheet-grid">
-                ${generateMarksheetCells([fav.num], [h1.number, h2.number])}
+                ${generateMarksheetCells([fav.num], [h1.number, h2.number], bombNums)}
               </div>
             </div>
           </div>
@@ -811,11 +813,13 @@ function renderPlans() {
 }
 
 // デジタルマークシートの1〜18グリッド生成
-function generateMarksheetCells(favNums, oanaNums) {
+function generateMarksheetCells(favNums, oanaNums, bombNums = []) {
   let cellsHtml = "";
   for (let i = 1; i <= 18; i++) {
     let cls = "mark-cell";
-    if (oanaNums.includes(i)) {
+    if (bombNums.includes(i)) {
+      cls += " marked-bomb";
+    } else if (oanaNums.includes(i)) {
       cls += " marked";
     } else if (favNums.includes(i)) {
       cls += " marked-fav";

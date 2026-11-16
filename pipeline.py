@@ -570,17 +570,23 @@ def enrich_ai_predictions(race):
     pace = race["pace"]
     track = race["track_condition"]
 
+    def parse_weight_num(w):
+        try:
+            return float(str(w).replace("kg", "").strip())
+        except (ValueError, TypeError):
+            return 55.0
+
     # 危険な人気馬の特定（知識ベース指定馬、または上位2〜4番人気で外枠・斤量負荷のある馬）
     danger_candidate = next((r for r in runners if r.get("is_danger")), None)
     if not danger_candidate:
         popular_pool = [r for r in runners if 2 <= r["pop"] <= 4]
         if popular_pool:
-            danger_candidate = max(popular_pool, key=lambda r: (r["weight"], r["num"]))
+            danger_candidate = max(popular_pool, key=lambda r: (parse_weight_num(r.get("weight")), r["num"]))
 
     if danger_candidate:
         reason = danger_candidate.get("danger_reason") or (
             f"上位人気（{danger_candidate['pop']}番人気・{danger_candidate['odds']}倍）に推されているものの、"
-            f"枠順・斤量（{danger_candidate['weight']}kg）と展開面の噛み合わせに不安あり。オッズ妙味が薄く過信禁物！"
+            f"枠順・斤量（{danger_candidate['weight']}）と展開面の噛み合わせに不安あり。オッズ妙味が薄く過信禁物！"
         )
         race["dangerHorse"] = {
             "num": danger_candidate["num"],
@@ -590,52 +596,109 @@ def enrich_ai_predictions(race):
             "reason": reason,
         }
         danger_candidate["status"] = "⚠️ 危険な人気馬（過信禁物）"
-        danger_candidate.setdefault("custom_score", 55)
+        danger_candidate.setdefault("custom_score", 50)
 
-    # 全頭AIスコア計算
+    # トップジョッキー定義（舞台巧者・鞍上補正）
+    top_jockeys = ["ルメール", "川田", "武豊", "マーカンド", "松山", "坂井", "戸崎", "横山武", "モレイラ", "レーン", "Cデムーロ"]
+
+    # 全頭AIスコア計算（反省点を踏まえた多面評価アルゴリズム）
     for r in runners:
         if "custom_score" in r:
             ai_score = r["custom_score"]
         else:
-            s = 60
-            odds = r["odds"]
-            pop = r["pop"]
-            if pop == 1:
-                s = 90
-            elif pop == 2:
-                s = 86
-            elif 12.0 <= odds <= 55.0:
-                s += 22
-            elif 7.0 <= odds < 12.0:
-                s += 14
+            s = 55
+            odds = float(r["odds"]) if isinstance(r["odds"], (int, float)) else float(str(r["odds"]).replace("倍", ""))
+            pop = int(r["pop"])
+            weight = parse_weight_num(r.get("weight"))
+            style = r["style"]
+            bracket = r.get("bracket", 5)
 
-            if "ハイペース" in pace and r["style"] in ["差し", "追込"]:
-                s += 8
-            elif "ミドル" in pace and r["style"] in ["先行", "差し"]:
-                s += 6
-            if r["weight"] <= 54.0:
+            # 1. オッズ妙味評価
+            if pop == 1:
+                s += 32
+            elif pop == 2:
+                s += 28
+            elif 12.0 <= odds <= 45.0:
+                s += 26  # ★激走穴馬ゴールデンゾーン
+            elif 7.0 <= odds < 12.0:
+                s += 18  # 妙味中穴ゾーン
+            elif 45.1 <= odds <= 85.0:
+                s += 20  # 💣特大万馬券爆弾ゾーン
+
+            # 2. 展開・ペース適性
+            if "ハイペース" in pace:
+                if style in ["差し", "追込"]:
+                    s += 10
+                elif style == "逃げ":
+                    s -= 6
+            elif "スロー" in pace or "ミドル" in pace:
+                if style in ["先行", "逃げ"]:
+                    s += 8
+
+            # 3. コース・枠順バイアス
+            v_name = race.get("venue", "")
+            b_desc = race.get("badge", "")
+            if "東京" in v_name and "ダ" in b_desc:
+                # 東京ダート1600m: 芝スタートで外枠・末脚型有利
+                if bracket in [7, 8]:
+                    s += 6
+                if style in ["差し", "追込"]:
+                    s += 5
+            elif "京都" in v_name and "芝" in b_desc:
+                # 京都芝外回り: 下り坂の持続力
+                if style in ["先行", "差し"]:
+                    s += 6
+            elif "福島" in v_name:
+                # 福島小回り: 先行力・内枠ロス軽減
+                if bracket in [1, 2, 3]:
+                    s += 6
+                if style in ["逃げ", "先行"]:
+                    s += 8
+
+            # 4. 鞍上・騎手バイアス
+            if any(tj in r.get("jockey", "") for tj in top_jockeys):
                 s += 7
-            ai_score = max(45, min(95, s))
+
+            # 5. 斤量恩恵（ハンデ・軽量牝馬）
+            if weight <= 53.0:
+                s += 10
+            elif weight <= 54.0:
+                s += 6
+
+            ai_score = max(45, min(96, s))
         r["ai_score"] = ai_score
 
-    # 穴馬3選の抽出（明示指定馬 + オッズ11倍以上の高スコア馬で3頭揃える）
+    # 穴馬3選の抽出（明示指定馬 + オッズ10倍以上の高スコア馬で3頭揃える）
     explicit = sorted([r for r in runners if r.get("is_dark_pick")], key=lambda x: x.get("pick_order", 99))
     picked_nums = {r["num"] for r in explicit}
     auto_pool = [
         r for r in runners
         if r["num"] not in picked_nums
-        and r["odds"] >= 11.0
+        and r["odds"] >= 10.0
         and (not danger_candidate or r["num"] != danger_candidate["num"])
     ]
-    auto_pool.sort(key=lambda x: (x["ai_score"], -abs(x["odds"] - 26.0)), reverse=True)
+    auto_pool.sort(key=lambda x: (x["ai_score"], -abs(x["odds"] - 25.0)), reverse=True)
     dark_horses = (explicit + auto_pool)[:3]
+    dark_nums = {d["num"] for d in dark_horses}
+
+    # 💣【新機能】3着ヒモ抜け完全防止用「特大爆弾穴馬（Bomb Pick）」の抽出（単勝30〜90倍の伏兵から最大2頭）
+    bomb_candidates = [
+        r for r in runners
+        if r["num"] not in picked_nums
+        and r["num"] not in dark_nums
+        and 30.0 <= r["odds"] <= 90.0
+        and (not danger_candidate or r["num"] != danger_candidate["num"])
+    ]
+    bomb_candidates.sort(key=lambda x: x["ai_score"], reverse=True)
+    bomb_horses = bomb_candidates[:2]
+    bomb_nums = {b["num"] for b in bomb_horses}
 
     # 各馬のステータス表記補完（危険な人気馬は対抗◯から除外して一貫性を担保）
     danger_num = danger_candidate["num"] if danger_candidate else None
     safe_by_pop = [r for r in sorted(runners, key=lambda x: x["pop"]) if r["num"] != danger_num]
     fav1 = safe_by_pop[0] if safe_by_pop else min(runners, key=lambda x: x["pop"])
     fav2 = safe_by_pop[1] if len(safe_by_pop) > 1 else fav1
-    dark_nums = [d["num"] for d in dark_horses]
+    d_nums_list = [d["num"] for d in dark_horses]
 
     for r in runners:
         if r.get("status"):
@@ -644,10 +707,12 @@ def enrich_ai_predictions(race):
             r["status"] = "◎ 本命筆頭（軸候補）"
         elif r["num"] == fav2["num"]:
             r["status"] = "◯ 対抗有力"
-        elif dark_nums and r["num"] == dark_nums[0]:
+        elif d_nums_list and r["num"] == d_nums_list[0]:
             r["status"] = "★ AI大穴イチオシ"
         elif r["num"] in dark_nums:
             r["status"] = "★ 激走注目穴馬"
+        elif r["num"] in bomb_nums:
+            r["status"] = "💣 特大爆弾ヒモ穴"
         elif r["pop"] <= 5:
             r["status"] = "▲ 上位押さえ"
         elif r["ai_score"] >= 78:
@@ -681,14 +746,14 @@ def enrich_ai_predictions(race):
             f"単勝{dh['odds']}倍のオッズ歪み検知",
         ]
         comment = dh.get("comment") or (
-            f"AI穴馬指数{dh['ai_score']}点！{dh['jockey']}騎手×斤量{dh['weight']}kg。"
+            f"AI穴馬指数{dh['ai_score']}点！{dh['jockey']}騎手×斤量{parse_weight_num(dh['weight'])}kg。"
             f"実力に対して単勝{dh['odds']}倍（{dh['pop']}番人気）は絶好の狙い目です。"
         )
         formatted_dark.append({
             "number": dh["num"],
             "name": dh["name"],
             "frameColor": BRACKET_COLORS.get(b_num, "#f59e0b"),
-            "jockey": f"{dh['jockey']} ({dh['weight']}kg)",
+            "jockey": f"{dh['jockey']} ({parse_weight_num(dh['weight'])}kg)",
             "odds": dh["odds"],
             "popularity": dh["pop"],
             "signals": signals,
@@ -696,8 +761,63 @@ def enrich_ai_predictions(race):
         })
     race["darkHorses"] = formatted_dark
 
-    # 事前期待値シミュレーション結果の自動構成
+    # 爆弾馬カード配列へ整形
+    formatted_bombs = []
+    for b in bomb_horses:
+        b_num = b.get("bracket", 7)
+        formatted_bombs.append({
+            "number": b["num"],
+            "name": b["name"],
+            "frameColor": BRACKET_COLORS.get(b_num, "#ec4899"),
+            "jockey": f"{b['jockey']} ({parse_weight_num(b['weight'])}kg)",
+            "odds": b["odds"],
+            "popularity": b["pop"],
+            "reason": f"単勝{b['odds']}倍の超大穴。展開・末脚シナジーにより3着ヒモ荒れの特大万馬券トリガー候補！",
+        })
+    race["bombHorses"] = formatted_bombs
+
+    # 買い目フォーメーション構造体（betFormations）を明示的に保持
     h1 = formatted_dark[0] if formatted_dark else {"number": fav2["num"], "name": fav2["name"], "odds": fav2["odds"], "popularity": fav2["pop"]}
+    h2 = formatted_dark[1] if len(formatted_dark) > 1 else h1
+    h3 = formatted_dark[2] if len(formatted_dark) > 2 else h2
+    b_nums = [b["number"] for b in formatted_bombs]
+
+    col3_all = sorted(set([fav1["num"], fav2["num"], h1["number"], h2["number"], h3["number"]] + b_nums))
+
+    race["betFormations"] = {
+        "safetyWide": {
+            "title": "元本防衛セーフティ・ワイド",
+            "pairs": [f"{fav1['num']}-{h1['number']}", f"{h1['number']}-{h2['number']}"],
+            "desc": f"◎{fav1['num']}番と★{h1['number']}番（厚め配分）、穴穴の★{h1['number']}-★{h2['number']}で確実にプラス確保。",
+        },
+        "safetyUmaren": {
+            "title": "高回収馬連フォーメーション",
+            "axis": h1["number"],
+            "opponents": [fav1["num"], fav2["num"], h2["number"]],
+            "desc": f"穴馬★{h1['number']}番から◎◯★へ流し、連対時の万馬券（10〜150倍）を直撃。",
+        },
+        "sanrenpuku": {
+            "title": "高配当3連複フォーメーション",
+            "row1": [fav1["num"]],
+            "row2": [h1["number"], h2["number"]],
+            "row3": col3_all,
+            "desc": "軸◎×穴★から、ヒモ抜け防止の💣大穴爆弾馬を含むフォーメーション。",
+        },
+        "sanrentan": {
+            "title": "🚀 特大万馬券3連単フォーメーション",
+            "first": [fav1["num"], fav2["num"], h1["number"]],
+            "second": [h1["number"], h2["number"], fav1["num"]],
+            "third": col3_all,
+            "desc": "大穴2着黄金ゾーン＆3着ヒモ爆弾枠を網羅した万馬券・十万馬券狙い撃ち。",
+        },
+        "strategy": {
+            "safetyBudgetPct": 50,
+            "attackBudgetPct": 50,
+            "advice": "投資金の50%をワイド・馬連に配分して元本回収を担保し、残り50%で3連単・3連複の一撃特大万馬券を狙うハイブリッド戦略を推奨！",
+        },
+    }
+
+    # 事前期待値シミュレーション結果の自動構成
     est_fuku = int(round(max(280, min(1400, h1["odds"] * 22)), -1))
     est_wide = int(round(max(950, min(6800, fav1["odds"] * h1["odds"] * 38)), -1))
     est_sanren = int(round(max(4800, min(58000, fav1["odds"] * fav2["odds"] * h1["odds"] * 55)), -1))
@@ -732,7 +852,7 @@ def enrich_ai_predictions(race):
             "bracket": ru.get("bracket", 1),
             "name": ru["name"],
             "jockey": ru["jockey"],
-            "weight": f"{ru['weight']}kg",
+            "weight": f"{parse_weight_num(ru['weight'])}kg",
             "odds": ru["odds"],
             "pop": ru["pop"],
             "style": ru["style"],
@@ -781,7 +901,9 @@ def generate_note_drafts(races, weekend, generated_at):
         h2 = dhs[1] if len(dhs) > 1 else h1
         h3 = dhs[2] if len(dhs) > 2 else h2
 
-        col3_nums = sorted({fav1["num"], fav2["num"], h1["number"], h2["number"], h3["number"]})
+        bombs = r.get("bombHorses", [])
+        b_nums = [b["number"] for b in bombs]
+        col3_nums = sorted(set([fav1["num"], fav2["num"], h1["number"], h2["number"], h3["number"]] + b_nums))
         col3_str = "・".join(f"{n}番" for n in col3_nums)
 
         lines = [
@@ -795,22 +917,40 @@ def generate_note_drafts(races, weekend, generated_at):
                 f"   - 激走シグナル: {' ／ '.join(dh['signals'])}\n"
                 f"   - 解説: {dh['comment']}"
             )
+
+        if bombs:
+            lines.extend([
+                "",
+                "#### ▼ 💣 3着ヒモ荒れ完全防止！特大爆弾枠（単勝30〜90倍の伏兵）",
+            ])
+            for b in bombs:
+                lines.append(f"- **{b['number']}番 {b['name']}**（単勝{b['odds']}倍・{b['jockey']}）：{b['reason']}")
+
         lines.extend([
             "",
-            "#### ▼ 推奨買い目シート（そのままネット投票・マークカードに使える買い目）",
-            f"- **【本線お守り】ワイド（2点）**: `{fav1['num']} - {h1['number']}`（本線厚め）、`{h1['number']} - {h2['number']}`（穴穴万馬券狙い）",
-            f"- **【高配当狙い】3連複フォーメーション**:",
+            "#### ▼ 【ハイブリッド推奨買い目シート】（そのままネット投票に使える買い目）",
+            "",
+            "**🛡️ 第1段階：守りのセーフティ回収ライン（投資金の50%配分）**",
+            f"- **ワイド（2点）**: `{fav1['num']} - {h1['number']}`（本線厚め・元本回収）、`{h1['number']} - {h2['number']}`（穴穴高配当狙い）",
+            f"- **馬連フォーメーション**: 軸 `{h1['number']}番` ⇄ 相手 `{fav1['num']}番・{fav2['num']}番・{h2['number']}番`（穴馬連対時の万馬券直撃）",
+            "",
+            "**🚀 第2段階：攻めの一撃特大万馬券ライン（投資金の50%配分）**",
+            "- **【高配当狙い】3連複フォーメーション**:",
             f"  - 1頭目（軸）: **{fav1['num']}番（{fav1['name']}）**",
             f"  - 2頭目（穴軸）: **{h1['number']}番（{h1['name']}）・{h2['number']}番（{h2['name']}）**",
-            f"  - 3頭目（ヒモ）: **{col3_str}**",
-            f"- **【🚀 VIP限定・夢の3連単フォーメーション（厳選12〜16点）】**:",
-            f"  - **1着**: **{fav1['num']}番（{fav1['name']}）・{fav2['num']}番（{fav2['name']}）**（※頭一撃狙いで {h1['number']}番 を100円押さえも妙味大）",
-            f"  - **2着**: **{h1['number']}番・{h2['number']}番・{fav1['num']}番**（大穴2着突入が最も配当が跳ねる黄金ゾーン！）",
-            f"  - **3着**: **{col3_str}**",
+            f"  - 3頭目（ヒモ・爆弾網羅）: **{col3_str}**",
+            "- **【VIP限定】3連単フォーメーション（大穴2着黄金ゾーン＆3着爆弾枠）**:",
+            f"  - **1着**: **{fav1['num']}番（{fav1['name']}）・{fav2['num']}番（{fav2['name']}）**（※頭一撃狙いで {h1['number']}番 を100円押さえ推奨）",
+            f"  - **2着**: **{h1['number']}番・{h2['number']}番・{fav1['num']}番**（大穴2着突入で配当が跳ねる黄金ゾーン！）",
+            f"  - **3着**: **{col3_str}**（💣特大爆弾馬を含むヒモ抜け防止網）",
             "",
-            "#### ▼ 予算別・推奨資金配分目安（合計2,000円の場合）",
-            f"- ワイド `{fav1['num']} - {h1['number']}`：600円（的中時に投資元本回収＋利益確保）",
-            f"- 3連単フォーメーション 各100円（計1,400円前後）",
+            "#### ▼ 予算別・推奨資金配分モデル（合計3,000円の場合）",
+            f"- 【セーフティ 1,500円】",
+            f"  - ワイド `{fav1['num']} - {h1['number']}`：1,000円（的中時に元本全額回収＋即黒字化）",
+            f"  - ワイド `{h1['number']} - {h2['number']}`：300円",
+            f"  - 馬連 `{h1['number']} - {fav1['num']}`：200円",
+            f"- 【一攫千金 1,500円】",
+            f"  - 3連単フォーメーション（各100円 × 12〜16点）：1,200〜1,500円（数十万馬券狙い）",
             "---",
         ])
         return "\n".join(lines)
@@ -904,13 +1044,16 @@ AI競馬波乱度・穴馬予測ツール『大穴ナビゲーター PRO』（ {
 
 
 def load_existing_races_fallback():
-    """オフライン環境などで通信取得できない場合、既存の data/races.json を読み込んで安全に継続する"""
+    """オフライン環境などで通信取得できない場合、既存の data/races.json を読み込み、最新ロジックを再適用して安全に継続する"""
     if os.path.exists(OUTPUT_PATH):
         try:
             with open(OUTPUT_PATH, "r", encoding="utf-8") as f:
                 data = json.load(f)
             if isinstance(data, list) and len(data) > 0:
-                return data
+                enriched = []
+                for rc in data:
+                    enriched.append(enrich_ai_predictions(rc))
+                return enriched
         except Exception:
             pass
     return []

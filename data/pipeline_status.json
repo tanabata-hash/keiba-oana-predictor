@@ -1,7 +1,7 @@
 {
-  "lastRunAt": "2026-11-15 08:30:01",
-  "sourceMode": "live_netkeiba",
-  "targetWeekend": "11/14(土) 〜 11/15(日)",
+  "lastRunAt": "2026-11-16 13:44:33",
+  "sourceMode": "cached_fallback",
+  "targetWeekend": "11/21(土) 〜 11/22(日)",
   "raceCount": 4,
   "races": [
     {
