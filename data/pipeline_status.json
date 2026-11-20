@@ -1,47 +1,47 @@
 {
-  "lastRunAt": "2026-11-16 13:44:33",
-  "sourceMode": "cached_fallback",
+  "lastRunAt": "2026-11-20 18:00:01",
+  "sourceMode": "live_netkeiba",
   "targetWeekend": "11/21(土) 〜 11/22(日)",
   "raceCount": 4,
   "races": [
     {
-      "id": "race-elizabeth",
-      "title": "エリザベス女王杯 (G1)",
-      "date_short": "11/15(日)",
+      "id": "race-kyoto-0611",
+      "title": "マイルCS (G1)",
+      "date_short": "11/22(日)",
       "postTime": "15:40発走",
       "runnersCount": 18,
       "volatilityScore": 80,
-      "oddsSource": "JRA公式リアルタイムオッズ",
-      "confirmedDraw": true
-    },
-    {
-      "id": "race-daily-hai",
-      "title": "デイリー杯2歳S (G2)",
-      "date_short": "11/14(土)",
-      "postTime": "15:45発走",
-      "runnersCount": 13,
-      "volatilityScore": 70,
-      "oddsSource": "JRA公式リアルタイムオッズ",
-      "confirmedDraw": true
-    },
-    {
-      "id": "race-musashino-s",
-      "title": "武蔵野S (G3)",
-      "date_short": "11/14(土)",
-      "postTime": "15:30発走",
-      "runnersCount": 16,
-      "volatilityScore": 82,
-      "oddsSource": "JRA公式リアルタイムオッズ",
+      "oddsSource": "最新予想オッズ",
       "confirmedDraw": true
     },
     {
       "id": "race-fukushima-minyu",
-      "title": "福島民友C (L)",
-      "date_short": "11/15(日)",
-      "postTime": "15:11発走",
-      "runnersCount": 15,
-      "volatilityScore": 76,
-      "oddsSource": "JRA公式リアルタイムオッズ",
+      "title": "福島記念 (G3)",
+      "date_short": "11/21(土)",
+      "postTime": "15:20発走",
+      "runnersCount": 16,
+      "volatilityScore": 82,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": true
+    },
+    {
+      "id": "race-tokyo-0511",
+      "title": "霜月S (OP)",
+      "date_short": "11/22(日)",
+      "postTime": "15:20発走",
+      "runnersCount": 16,
+      "volatilityScore": 82,
+      "oddsSource": "最新予想オッズ",
+      "confirmedDraw": false
+    },
+    {
+      "id": "race-kyoto-0511",
+      "title": "シトリンS (OP)",
+      "date_short": "11/21(土)",
+      "postTime": "15:40発走",
+      "runnersCount": 16,
+      "volatilityScore": 82,
+      "oddsSource": "最新予想オッズ",
       "confirmedDraw": true
     }
   ]
