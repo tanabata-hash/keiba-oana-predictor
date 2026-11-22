@@ -1,7 +1,7 @@
 {
-  "lastRunAt": "2026-11-22 08:30:01",
-  "runMode": "predict",
-  "sourceMode": "live_netkeiba",
+  "lastRunAt": "2026-11-22 17:00:01",
+  "runMode": "result",
+  "sourceMode": "result_reflection",
   "targetWeekend": "11/21(土) 〜 11/22(日)",
   "raceCount": 4,
   "races": [
@@ -14,7 +14,7 @@
       "volatilityScore": 80,
       "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
-      "isResultConfirmed": false
+      "isResultConfirmed": true
     },
     {
       "id": "race-fukushima-minyu",
@@ -25,7 +25,7 @@
       "volatilityScore": 54,
       "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
-      "isResultConfirmed": false
+      "isResultConfirmed": true
     },
     {
       "id": "race-tokyo-0511",
@@ -36,7 +36,7 @@
       "volatilityScore": 90,
       "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
-      "isResultConfirmed": false
+      "isResultConfirmed": true
     },
     {
       "id": "race-kyoto-0511",
@@ -47,7 +47,7 @@
       "volatilityScore": 48,
       "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
-      "isResultConfirmed": false
+      "isResultConfirmed": true
     }
   ]
 }
