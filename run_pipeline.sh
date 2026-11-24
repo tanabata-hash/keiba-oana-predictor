@@ -22,13 +22,16 @@ log() {
     echo "$msg" >> "$LOG_FILE"
 }
 
+# 実行モードの設定 (引数がなければ auto)
+MODE="${1:-auto}"
+
 log "=========================================================="
-log "🏇 大穴ナビゲーター PRO パイプライン実行開始"
+log "🏇 大穴ナビゲーター PRO パイプライン実行開始 (モード: $MODE)"
 log "=========================================================="
 
-# 1. pipeline.py の実行
-log "⚙️ ① 出馬表・オッズ取得 & AI解析 (pipeline.py) を実行中..."
-python3 pipeline.py >> "$LOG_FILE" 2>&1
+# 1. pipeline.py の実行 (予想更新 / 結果反映)
+log "⚙️ ① データ取得 & AI解析・結果反映 (pipeline.py --mode $MODE) を実行中..."
+python3 pipeline.py --mode "$MODE" >> "$LOG_FILE" 2>&1
 
 # 2. Git差分チェックとプッシュ
 log "📤 ② 生成データ (races.json / pipeline_status.json / note_drafts.json / note原稿) をコミット＆GitHubへプッシュ中..."
@@ -37,7 +40,7 @@ git add data/races.json data/pipeline_status.json data/note_drafts.json docs/not
 if git diff --staged --quiet; then
     log "ℹ️  データに変更はありませんでした（既に最新データです）。"
 else
-    git commit -m "auto: 週末レース予想・オッズ・note原稿データ自動更新 ($(date '+%Y-%m-%d %H:%M:%S'))" >> "$LOG_FILE" 2>&1
+    git commit -m "auto: 競馬予想・結果反映データ自動更新 [mode: $MODE] ($(date '+%Y-%m-%d %H:%M:%S'))" >> "$LOG_FILE" 2>&1
     if GIT_TERMINAL_PROMPT=0 git push origin main >> "$LOG_FILE" 2>&1; then
         log "🎉 デプロイ完了！ 本番サイト (https://www.oana-navi.com) に数秒で自動即時反映されます。"
     else

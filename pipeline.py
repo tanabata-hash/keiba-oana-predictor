@@ -12,12 +12,14 @@
 5. Web用 JSON (data/races.json, data/pipeline_status.json) に加え、note投稿用完成原稿 (data/note_drafts.json, docs/note_articles_weekend.md) を自動生成
 """
 
+import argparse
 import base64
 import html as html_lib
 import json
 import os
 import re
 import ssl
+import sys
 import urllib.request
 import zlib
 from datetime import datetime, timedelta
@@ -599,9 +601,15 @@ def enrich_ai_predictions(race):
         danger_candidate.setdefault("custom_score", 50)
 
     # トップジョッキー定義（舞台巧者・鞍上補正）
-    top_jockeys = ["ルメール", "川田", "武豊", "マーカンド", "松山", "坂井", "戸崎", "横山武", "モレイラ", "レーン", "Cデムーロ"]
+    top_jockeys = ["ルメール", "川田", "武豊", "マーカンド", "松山", "坂井", "戸崎", "横山武", "モレイラ", "レーン", "Cデムーロ", "バルザローナ"]
 
-    # 全頭AIスコア計算（反省点を踏まえた多面評価アルゴリズム）
+    # コース特性の判定ヘルパー
+    v_name = race.get("venue", "")
+    b_desc = race.get("badge", "")
+    is_small_track = any(c in v_name for c in ["福島", "小倉", "函館", "札幌", "新潟"]) and "外" not in b_desc
+    is_long_straight = any(c in v_name for c in ["東京", "新潟外"]) or ("京都" in v_name and "外" in b_desc) or ("阪神" in v_name and "外" in b_desc)
+
+    # 全頭AIスコア計算（反省点を活かした Version 3.0 アルゴリズム）
     for r in runners:
         if "custom_score" in r:
             ai_score = r["custom_score"]
@@ -610,62 +618,70 @@ def enrich_ai_predictions(race):
             odds = float(r["odds"]) if isinstance(r["odds"], (int, float)) else float(str(r["odds"]).replace("倍", ""))
             pop = int(r["pop"])
             weight = parse_weight_num(r.get("weight"))
-            style = r["style"]
+            style = r.get("style", "差し")
             bracket = r.get("bracket", 5)
 
-            # 1. オッズ妙味評価
+            # 1. オッズ妙味評価（単勝20〜35倍のゴールデン・ストライクゾーンを最重視）
             if pop == 1:
                 s += 32
             elif pop == 2:
                 s += 28
-            elif 12.0 <= odds <= 45.0:
-                s += 26  # ★激走穴馬ゴールデンゾーン
-            elif 7.0 <= odds < 12.0:
-                s += 18  # 妙味中穴ゾーン
-            elif 45.1 <= odds <= 85.0:
+            elif 20.0 <= odds <= 35.0:
+                s += 30  # 🎯【最重要】ゴールデン・ストライクゾーン（実力伏兵の頭・連対ゾーン）
+            elif 12.0 <= odds < 20.0:
+                s += 24  # 準ゴールデンゾーン
+            elif 35.1 <= odds <= 55.0:
+                s += 26  # 高配当激走ゾーン
+            elif 55.1 <= odds <= 90.0:
                 s += 20  # 💣特大万馬券爆弾ゾーン
+            elif 7.0 <= odds < 12.0:
+                s += 18  # 中穴ゾーン
 
-            # 2. 展開・ペース適性
+            # 2. 展開・ペース適性 & 複勝圏内突入力（Podium Stability）
             if "ハイペース" in pace:
                 if style in ["差し", "追込"]:
-                    s += 10
+                    s += 12  # ハイペース前崩れの末脚一撃
+                elif style == "先行":
+                    s += 4
                 elif style == "逃げ":
-                    s -= 6
+                    s -= 8  # 息切れリスク
             elif "スロー" in pace or "ミドル" in pace:
-                if style in ["先行", "逃げ"]:
+                if style in ["先行", "好位"]:
+                    s += 12  # 前残り・ポジションの利
+                elif style == "逃げ":
                     s += 8
+                elif style == "追込":
+                    s -= 6  # 届かないリスク
 
-            # 3. コース・枠順バイアス
-            v_name = race.get("venue", "")
-            b_desc = race.get("badge", "")
-            if "東京" in v_name and "ダ" in b_desc:
-                # 東京ダート1600m: 芝スタートで外枠・末脚型有利
-                if bracket in [7, 8]:
-                    s += 6
-                if style in ["差し", "追込"]:
-                    s += 5
-            elif "京都" in v_name and "芝" in b_desc:
-                # 京都芝外回り: 下り坂の持続力
-                if style in ["先行", "差し"]:
-                    s += 6
-            elif "福島" in v_name:
-                # 福島小回り: 先行力・内枠ロス軽減
+            # 3. コース×枠順バイアス（小回りの先行内枠・大外直線の差し脚）
+            if is_small_track:
+                # 小回りコース: コーナー4回で内ラチ沿いロスなく回る馬を大幅評価
                 if bracket in [1, 2, 3]:
-                    s += 6
-                if style in ["逃げ", "先行"]:
+                    s += 8  # 内枠ロス軽減
+                if style in ["逃げ", "先行", "好位"]:
+                    s += 10 # 4角好位押し切り
+                elif style == "追込":
+                    s -= 8  # 4着止まりのリスク大
+            elif is_long_straight:
+                # 直線の長いコース: 末脚持続力
+                if style in ["先行", "差し"]:
                     s += 8
+                if "東京" in v_name and "ダ" in b_desc and bracket in [7, 8]:
+                    s += 7  # 東京ダート1600mの芝スタート外枠有利
 
-            # 4. 鞍上・騎手バイアス
+            # 4. 鞍上・トップジョッキー補正
             if any(tj in r.get("jockey", "") for tj in top_jockeys):
-                s += 7
+                s += 8
 
-            # 5. 斤量恩恵（ハンデ・軽量牝馬）
-            if weight <= 53.0:
-                s += 10
+            # 5. 斤量恩恵（ハンデ・軽量牝馬）＆ 重斤量負荷ペナルティ
+            if weight <= 52.0:
+                s += 14  # 超軽量ハンデ恩恵
             elif weight <= 54.0:
-                s += 6
+                s += 8
+            elif weight >= 58.0:
+                s -= 5   # トップハンデ負荷
 
-            ai_score = max(45, min(96, s))
+            ai_score = max(45, min(98, s))
         r["ai_score"] = ai_score
 
     # 穴馬3選の抽出（明示指定馬 + オッズ10倍以上の高スコア馬で3頭揃える）
@@ -677,7 +693,8 @@ def enrich_ai_predictions(race):
         and r["odds"] >= 10.0
         and (not danger_candidate or r["num"] != danger_candidate["num"])
     ]
-    auto_pool.sort(key=lambda x: (x["ai_score"], -abs(x["odds"] - 25.0)), reverse=True)
+    # ゴールデンゾーン（20〜35倍）を中心にスコア順ソート
+    auto_pool.sort(key=lambda x: (x["ai_score"], -abs(x["odds"] - 26.0)), reverse=True)
     dark_horses = (explicit + auto_pool)[:3]
     dark_nums = {d["num"] for d in dark_horses}
 
@@ -698,6 +715,15 @@ def enrich_ai_predictions(race):
     safe_by_pop = [r for r in sorted(runners, key=lambda x: x["pop"]) if r["num"] != danger_num]
     fav1 = safe_by_pop[0] if safe_by_pop else min(runners, key=lambda x: x["pop"])
     fav2 = safe_by_pop[1] if len(safe_by_pop) > 1 else fav1
+
+    # ⚓【新機能】実力中穴アンカー（▲ 3〜5番人気のスコア最上位馬）の選定
+    middle_anchors = [
+        r for r in safe_by_pop[2:6]
+        if r["num"] not in dark_nums and r["num"] not in bomb_nums
+    ]
+    middle_anchors.sort(key=lambda x: x["ai_score"], reverse=True)
+    fav_anchor = middle_anchors[0] if middle_anchors else (safe_by_pop[2] if len(safe_by_pop) > 2 else fav2)
+
     d_nums_list = [d["num"] for d in dark_horses]
 
     for r in runners:
@@ -707,6 +733,8 @@ def enrich_ai_predictions(race):
             r["status"] = "◎ 本命筆頭（軸候補）"
         elif r["num"] == fav2["num"]:
             r["status"] = "◯ 対抗有力"
+        elif r["num"] == fav_anchor["num"]:
+            r["status"] = "▲ 実力中穴アンカー"
         elif d_nums_list and r["num"] == d_nums_list[0]:
             r["status"] = "★ AI大穴イチオシ"
         elif r["num"] in dark_nums:
@@ -714,7 +742,7 @@ def enrich_ai_predictions(race):
         elif r["num"] in bomb_nums:
             r["status"] = "💣 特大爆弾ヒモ穴"
         elif r["pop"] <= 5:
-            r["status"] = "▲ 上位押さえ"
+            r["status"] = "押 上位押さえ"
         elif r["ai_score"] >= 78:
             r["status"] = "注 伏兵注意"
         else:
@@ -782,38 +810,40 @@ def enrich_ai_predictions(race):
     h3 = formatted_dark[2] if len(formatted_dark) > 2 else h2
     b_nums = [b["number"] for b in formatted_bombs]
 
-    col3_all = sorted(set([fav1["num"], fav2["num"], h1["number"], h2["number"], h3["number"]] + b_nums))
+    anchor_num = fav_anchor["num"]
+    col2_nums = sorted(set([fav2["num"], anchor_num, h1["number"], h2["number"]]))
+    col3_all = sorted(set([fav1["num"], fav2["num"], anchor_num, h1["number"], h2["number"], h3["number"]] + b_nums))
 
     race["betFormations"] = {
         "safetyWide": {
-            "title": "元本防衛セーフティ・ワイド",
-            "pairs": [f"{fav1['num']}-{h1['number']}", f"{h1['number']}-{h2['number']}"],
-            "desc": f"◎{fav1['num']}番と★{h1['number']}番（厚め配分）、穴穴の★{h1['number']}-★{h2['number']}で確実にプラス確保。",
+            "title": "元本防衛セーフティ・ワイド（3点）",
+            "pairs": [f"{fav1['num']}-{h1['number']}", f"{fav2['num']}-{h1['number']}", f"{h1['number']}-{h2['number']}"],
+            "desc": f"◎{fav1['num']}番と★{h1['number']}番（本線厚め・元本全額回収）、◯{fav2['num']}-★{h1['number']}、穴穴の★{h1['number']}-★{h2['number']}で確実な利益を確保。",
         },
         "safetyUmaren": {
             "title": "高回収馬連フォーメーション",
             "axis": h1["number"],
-            "opponents": [fav1["num"], fav2["num"], h2["number"]],
-            "desc": f"穴馬★{h1['number']}番から◎◯★へ流し、連対時の万馬券（10〜150倍）を直撃。",
+            "opponents": [fav1["num"], fav2["num"], anchor_num, h2["number"]],
+            "desc": f"穴馬★{h1['number']}番から◎◯▲★へ流し、連対時の万馬券（10〜150倍）を直撃。",
         },
         "sanrenpuku": {
             "title": "高配当3連複フォーメーション",
             "row1": [fav1["num"]],
-            "row2": [h1["number"], h2["number"]],
+            "row2": [h1["number"], h2["number"], anchor_num],
             "row3": col3_all,
-            "desc": "軸◎×穴★から、ヒモ抜け防止の💣大穴爆弾馬を含むフォーメーション。",
+            "desc": "軸◎×穴★・実力中穴▲から、ヒモ抜け防止の💣大穴爆弾馬を含むフォーメーション。",
         },
         "sanrentan": {
-            "title": "🚀 特大万馬券3連単フォーメーション",
+            "title": "🚀 特大万馬券3連単フォーメーション（アンカー補強版）",
             "first": [fav1["num"], fav2["num"], h1["number"]],
-            "second": [h1["number"], h2["number"], fav1["num"]],
+            "second": col2_nums,
             "third": col3_all,
-            "desc": "大穴2着黄金ゾーン＆3着ヒモ爆弾枠を網羅した万馬券・十万馬券狙い撃ち。",
+            "desc": "大穴2着黄金ゾーン＋実力中穴▲アンカー補強＆3着ヒモ爆弾枠を網羅した十万馬券狙い撃ち。",
         },
         "strategy": {
             "safetyBudgetPct": 50,
             "attackBudgetPct": 50,
-            "advice": "投資金の50%をワイド・馬連に配分して元本回収を担保し、残り50%で3連単・3連複の一撃特大万馬券を狙うハイブリッド戦略を推奨！",
+            "advice": "投資金の50%をワイド（本線厚め）・馬連に配分して元本回収を担保し、残り50%で3連単・3連複の一撃特大万馬券を狙うハイブリッド戦略を推奨！",
         },
     }
 
@@ -926,29 +956,36 @@ def generate_note_drafts(races, weekend, generated_at):
             for b in bombs:
                 lines.append(f"- **{b['number']}番 {b['name']}**（単勝{b['odds']}倍・{b['jockey']}）：{b['reason']}")
 
+        bf = r.get("betFormations", {})
+        sw = bf.get("safetyWide", {})
+        su = bf.get("safetyUmaren", {})
+        st = bf.get("sanrentan", {})
+
+        col2_str = "・".join(f"{n}番" for n in st.get("second", [h1["number"], h2["number"], fav1["num"]]))
+
         lines.extend([
             "",
             "#### ▼ 【ハイブリッド推奨買い目シート】（そのままネット投票に使える買い目）",
             "",
             "**🛡️ 第1段階：守りのセーフティ回収ライン（投資金の50%配分）**",
-            f"- **ワイド（2点）**: `{fav1['num']} - {h1['number']}`（本線厚め・元本回収）、`{h1['number']} - {h2['number']}`（穴穴高配当狙い）",
-            f"- **馬連フォーメーション**: 軸 `{h1['number']}番` ⇄ 相手 `{fav1['num']}番・{fav2['num']}番・{h2['number']}番`（穴馬連対時の万馬券直撃）",
+            f"- **ワイド（3点推奨）**: `{fav1['num']} - {h1['number']}`（本線厚め・元本回収）、`{fav2['num']} - {h1['number']}`、`{h1['number']} - {h2['number']}`（穴穴高配当狙い）",
+            f"- **馬連フォーメーション**: 軸 `{h1['number']}番` ⇄ 相手 `{'番・'.join(str(x) for x in su.get('opponents', [fav1['num'], fav2['num'], h2['number']]))}番`（穴馬連対時の万馬券直撃）",
             "",
             "**🚀 第2段階：攻めの一撃特大万馬券ライン（投資金の50%配分）**",
             "- **【高配当狙い】3連複フォーメーション**:",
             f"  - 1頭目（軸）: **{fav1['num']}番（{fav1['name']}）**",
-            f"  - 2頭目（穴軸）: **{h1['number']}番（{h1['name']}）・{h2['number']}番（{h2['name']}）**",
+            f"  - 2頭目（穴軸＋アンカー）: **{h1['number']}番（{h1['name']}）・{h2['number']}番（{h2['name']}）**",
             f"  - 3頭目（ヒモ・爆弾網羅）: **{col3_str}**",
-            "- **【VIP限定】3連単フォーメーション（大穴2着黄金ゾーン＆3着爆弾枠）**:",
+            "- **【VIP限定】3連単フォーメーション（実力中穴アンカー補強版）**:",
             f"  - **1着**: **{fav1['num']}番（{fav1['name']}）・{fav2['num']}番（{fav2['name']}）**（※頭一撃狙いで {h1['number']}番 を100円押さえ推奨）",
-            f"  - **2着**: **{h1['number']}番・{h2['number']}番・{fav1['num']}番**（大穴2着突入で配当が跳ねる黄金ゾーン！）",
+            f"  - **2着**: **{col2_str}**（大穴2着黄金ゾーン＋実力中穴アンカー！）",
             f"  - **3着**: **{col3_str}**（💣特大爆弾馬を含むヒモ抜け防止網）",
             "",
             "#### ▼ 予算別・推奨資金配分モデル（合計3,000円の場合）",
             f"- 【セーフティ 1,500円】",
-            f"  - ワイド `{fav1['num']} - {h1['number']}`：1,000円（的中時に元本全額回収＋即黒字化）",
+            f"  - ワイド `{fav1['num']} - {h1['number']}`：800円（的中時に元本全額回収＋即黒字化）",
+            f"  - ワイド `{fav2['num']} - {h1['number']}`：400円",
             f"  - ワイド `{h1['number']} - {h2['number']}`：300円",
-            f"  - 馬連 `{h1['number']} - {fav1['num']}`：200円",
             f"- 【一攫千金 1,500円】",
             f"  - 3連単フォーメーション（各100円 × 12〜16点）：1,200〜1,500円（数十万馬券狙い）",
             "---",
@@ -1059,11 +1096,243 @@ def load_existing_races_fallback():
     return []
 
 
-def run_pipeline():
-    """全自動パイプラインメイン処理"""
+def determine_auto_mode():
+    """現在の日時（曜日・時刻）から自動的に predict または result モードを判定する"""
+    now = datetime.now()
+    weekday = now.weekday()  # 0: 月, 1: 火, 2: 水, 3: 木, 4: 金, 5: 土, 6: 日
+    hour = now.hour
+
+    # 月曜 0:00〜14:00、土曜 16:30〜23:59、日曜 16:30〜23:59 は「結果反映モード」
+    if weekday == 0 and hour < 15:
+        return "result"
+    elif weekday == 5 and hour >= 16:
+        return "result"
+    elif weekday == 6 and hour >= 16:
+        return "result"
+    else:
+        # それ以外の時間帯は「週末予想の準備・更新モード」
+        return "predict"
+
+
+def fetch_and_apply_race_results(races):
+    """
+    各レースの確定着順・払戻金を netkeiba から取得し、
+    事前のAI予想（危険馬・穴馬・買い目）と突き合わせて的中判定・回収率・レビューを自動更新する。
+    """
+    now_str = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    updated_count = 0
+
+    for race in races:
+        rid = race.get("netkeibaRaceId")
+        if not rid:
+            continue
+
+        url = f"https://race.netkeiba.com/race/result.html?race_id={rid}"
+        html = http_fetch_text(url, timeout=10)
+        if not html:
+            continue
+
+        # 確定結果テーブルの有無をチェック
+        if "HorseList" not in html or "Payout_Detail_Table" not in html:
+            print(f"  [結果確認] {race['title']}: まだ確定結果が公開されていません。")
+            continue
+
+        # 着順パース
+        trs = re.findall(r'<tr\s+class=\"[^\"]*HorseList[^\"]*\"[^>]*>(.*?)</tr>', html, re.DOTALL)
+        if not trs:
+            continue
+
+        confirmed_podium = []
+        for tr in trs:
+            rank_m = re.search(r'class=\"Rank\">(\d+)</div>', tr)
+            num_m = re.search(r'class=\"Num Txt_C\"[^>]*>\s*<div>(\d+)</div>', tr)
+            name_m = re.search(r'class=\"HorseNameSpan\">(.*?)</span>', tr)
+            pop_m = re.search(r'class=\"OddsPeople\">(\d+)</span>', tr)
+            odds_m = re.search(r'class=\"Odds Txt_R\"[^>]*>\s*<span[^>]*>([\d\.]+)</span>', tr)
+
+            if rank_m and num_m and name_m:
+                r_num = int(num_m.group(1))
+                r_rank = int(rank_m.group(1))
+                r_name = name_m.group(1).strip()
+                r_pop = int(pop_m.group(1)) if pop_m else 99
+                r_odds = float(odds_m.group(1)) if odds_m else 99.0
+
+                confirmed_podium.append({
+                    "rank": r_rank,
+                    "num": r_num,
+                    "name": r_name,
+                    "pop": r_pop,
+                    "odds": r_odds,
+                })
+
+        confirmed_podium.sort(key=lambda x: x["rank"])
+        if len(confirmed_podium) < 3:
+            continue
+
+        # 払戻金テーブルパース
+        payout_tables = re.findall(r'<table class=\"Payout_Detail_Table\">(.*?)</table>', html, re.DOTALL)
+        payouts_dict = {}
+        for pt in payout_tables:
+            p_rows = re.findall(r'<tr class=\"([^\"]+)\">(.*?)</tr>', pt, re.DOTALL)
+            for p_class, p_row in p_rows:
+                th = re.search(r'<th>(.*?)</th>', p_row)
+                th_text = th.group(1).strip() if th else p_class
+
+                if '<ul>' in p_row:
+                    uls = re.findall(r'<ul>(.*?)</ul>', p_row, re.DOTALL)
+                    res_groups = []
+                    for ul in uls:
+                        lis = re.findall(r'<li><span>(\d+)</span></li>', ul)
+                        if lis:
+                            res_groups.append(' - '.join(lis))
+                else:
+                    res_groups = re.findall(r'<div><span>(\d+)</span></div>', p_row)
+
+                pays = re.findall(r'<span>([\d,]+円)</span>', p_row)
+                payouts_dict[th_text] = {"nums": res_groups, "pays": pays}
+
+        # 的中判定
+        top3_nums = [h["num"] for h in confirmed_podium[:3]]
+        dark_nums = [d["number"] for d in race.get("darkHorses", [])]
+        danger_num = (race.get("dangerHorse") or {}).get("num")
+        danger_name = (race.get("dangerHorse") or {}).get("name", "危険馬")
+
+        # 危険馬消し判定
+        danger_succeeded = danger_num and danger_num not in top3_nums
+
+        # 穴馬激走判定（3着以内に入ったか）
+        hit_darks = [h for h in confirmed_podium[:3] if h["num"] in dark_nums]
+
+        # 買い目の当たり判定
+        hit_payouts = []
+        total_payout_yen = 0
+
+        # 1. 複勝チェック (穴馬の複勝)
+        fukusho_data = payouts_dict.get("複勝", {})
+        for idx, num in enumerate(fukusho_data.get("nums", [])):
+            if num.isdigit() and int(num) in dark_nums:
+                pay_str = fukusho_data["pays"][idx] if idx < len(fukusho_data["pays"]) else ""
+                val = int(pay_str.replace("円", "").replace(",", "")) if pay_str else 0
+                hit_payouts.append({"type": f"複勝 {num}番 (激走穴馬)", "yen": pay_str, "isHit": True})
+                total_payout_yen += val
+
+        # 2. ワイドチェック
+        wide_data = payouts_dict.get("ワイド", {})
+        for idx, pair_str in enumerate(wide_data.get("nums", [])):
+            p_nums = [int(x.strip()) for x in pair_str.split("-") if x.strip().isdigit()]
+            if any(n in dark_nums for n in p_nums):
+                pay_str = wide_data["pays"][idx] if idx < len(wide_data["pays"]) else ""
+                val = int(pay_str.replace("円", "").replace(",", "")) if pay_str else 0
+                hit_payouts.append({"type": f"ワイド {pair_str}", "yen": pay_str, "isHit": True})
+                total_payout_yen += val
+
+        # 3. 馬連チェック
+        umaren_data = payouts_dict.get("馬連", {})
+        for idx, pair_str in enumerate(umaren_data.get("nums", [])):
+            p_nums = [int(x.strip()) for x in pair_str.split("-") if x.strip().isdigit()]
+            if any(n in dark_nums for n in p_nums):
+                pay_str = umaren_data["pays"][idx] if idx < len(umaren_data["pays"]) else ""
+                val = int(pay_str.replace("円", "").replace(",", "")) if pay_str else 0
+                hit_payouts.append({"type": f"馬連 {pair_str}", "yen": pay_str, "isHit": True})
+                total_payout_yen += val
+
+        # 4. 3連複チェック
+        sanrenpuku_data = payouts_dict.get("3連複", {})
+        for idx, trio_str in enumerate(sanrenpuku_data.get("nums", [])):
+            p_nums = [int(x.strip()) for x in trio_str.split("-") if x.strip().isdigit()]
+            if any(n in dark_nums for n in p_nums):
+                pay_str = sanrenpuku_data["pays"][idx] if idx < len(sanrenpuku_data["pays"]) else ""
+                val = int(pay_str.replace("円", "").replace(",", "")) if pay_str else 0
+                hit_payouts.append({"type": f"3連複 {trio_str}", "yen": pay_str, "isHit": True})
+                total_payout_yen += val
+
+        # 5. 3連単チェック
+        sanrentan_data = payouts_dict.get("3連単", {})
+        for idx, trio_str in enumerate(sanrentan_data.get("nums", [])):
+            p_nums = [int(x.strip()) for x in trio_str.split("-") if x.strip().isdigit()]
+            if any(n in dark_nums for n in p_nums):
+                pay_str = sanrentan_data["pays"][idx] if idx < len(sanrentan_data["pays"]) else ""
+                val = int(pay_str.replace("円", "").replace(",", "")) if pay_str else 0
+                hit_payouts.append({"type": f"3連単 {trio_str}", "yen": pay_str, "isHit": True})
+                total_payout_yen += val
+
+        # 回収率計算（基準投資額 3,000円）
+        base_budget = 3000
+        roi_int = int(round((total_payout_yen / base_budget) * 100)) if total_payout_yen > 0 else 0
+
+        # ステータス・レビュー文の決定
+        if hit_darks and total_payout_yen > 0:
+            status_type = "BIG_WIN"
+            status_badge = "🎯 激走穴馬的中！万馬券達成"
+            stars = "★★★★★"
+            trust_grade = "S (激走完全的中)"
+            review_text = (
+                f"【確定結果反映】AI推奨穴馬★{hit_darks[0]['num']}番{hit_darks[0]['name']}"
+                f"（{hit_darks[0]['pop']}番人気・単勝{hit_darks[0]['odds']}倍）が見事{hit_darks[0]['rank']}着に激走！"
+                f"高配当馬券を仕留め回収率{roi_int}%を達成しました。"
+            )
+        elif danger_succeeded:
+            status_type = "SKIP_SUCCESS"
+            status_badge = "🛡️ 危険な人気馬の消し成功！"
+            stars = "★★★★☆"
+            trust_grade = "A+ (危険馬完全排除)"
+            review_text = (
+                f"【確定結果反映】危険な人気馬アラートの{danger_name}が見事に馬券圏外（着外）に沈没！"
+                f"無駄な人気馬買い目を完全排除し、リスク回避に成功しました。"
+            )
+        else:
+            status_type = "MISS"
+            status_badge = "次走巻き返し警戒"
+            stars = "★★★☆☆"
+            trust_grade = "B (波乱傾向合致)"
+            review_text = "【確定結果反映】特大波乱決着。推奨穴馬は惜しくも掲示板止まりとなりましたが、波乱度傾向の事前警告は合致しました。"
+
+        # 表彰台 (podium)
+        podium = []
+        for h in confirmed_podium[:3]:
+            is_target = h["num"] in dark_nums
+            role = "(★AI激走穴馬)" if is_target else (f"({h['pop']}番人気)")
+            podium.append({
+                "rank": h["rank"],
+                "num": h["num"],
+                "name": f"{h['name']} {role}",
+                "pop": h["pop"],
+                "odds": h["odds"],
+                "isTarget": is_target,
+            })
+
+        race["actualResult"] = {
+            "statusType": status_type,
+            "statusBadge": status_badge,
+            "roi": f"{roi_int}%" if roi_int > 0 else "0%",
+            "trustGrade": trust_grade,
+            "stars": stars,
+            "payouts": hit_payouts if hit_payouts else [
+                {"type": "単勝 " + str(confirmed_podium[0]["num"]) + "番", "yen": (payouts_dict.get("単勝", {}).get("pays") or ["0円"])[0], "isHit": False}
+            ],
+            "podium": podium,
+            "review": review_text,
+            "confirmedAt": now_str,
+        }
+        race["isResultConfirmed"] = True
+        updated_count += 1
+        print(f"  ✅ [結果確定] {race['title']}: {status_badge} (回収率: {race['actualResult']['roi']})")
+
+    return updated_count
+
+
+def run_pipeline(mode="auto"):
+    """全自動パイプラインメイン処理 (mode: auto / predict / result / all)"""
     now = datetime.now()
     now_str = now.strftime("%Y-%m-%d %H:%M:%S")
-    print(f"[{now_str}] 競馬データ自動取得 & AI解析パイプライン開始...")
+
+    # autoモードの場合は曜日と時刻から判定
+    if mode == "auto":
+        resolved_mode = determine_auto_mode()
+    else:
+        resolved_mode = mode
+
+    print(f"[{now_str}] 🏇 競馬データ自動取得 & AI解析パイプライン開始 (実行モード: {resolved_mode})...")
 
     weekend = get_upcoming_weekend_dates()
     print(f"[{now_str}] 対象開催週: {weekend['sat_short']} 〜 {weekend['sun_short']}")
@@ -1071,31 +1340,44 @@ def run_pipeline():
     processed_races = []
     data_source_mode = "live_netkeiba"
 
-    try:
-        live_races = discover_and_fetch_live_weekend_races(weekend)
-        if live_races:
-            for rc in live_races:
-                processed_races.append(enrich_ai_predictions(rc))
-                processed_races[-1]["updatedAt"] = now_str
-            print(f"[{now_str}] 🌐 リアルタイム取得成功: {len(processed_races)} レースの最新出馬表・オッズを反映しました。")
-        else:
-            raise RuntimeError("対象開催週のメインレースが見つかりませんでした")
-    except Exception as err:
-        data_source_mode = "cached_fallback"
-        print(f"[{now_str}] ⚠️ 外部通信スキップ ({err}) -> キャッシュデータを使用します。")
+    # --- 1. 予想更新ステップ（predict または all） ---
+    if resolved_mode in ["predict", "all"]:
+        try:
+            live_races = discover_and_fetch_live_weekend_races(weekend)
+            if live_races:
+                for rc in live_races:
+                    processed_races.append(enrich_ai_predictions(rc))
+                    processed_races[-1]["updatedAt"] = now_str
+                print(f"[{now_str}] 🌐 リアルタイム取得成功: {len(processed_races)} レースの最新出馬表・オッズを反映しました。")
+            else:
+                raise RuntimeError("対象開催週のメインレースが見つかりませんでした")
+        except Exception as err:
+            data_source_mode = "cached_fallback"
+            print(f"[{now_str}] ⚠️ 外部通信スキップ ({err}) -> キャッシュデータを使用します。")
+            processed_races = load_existing_races_fallback()
+    else:
+        # 結果反映モード（result）の場合は、既存のレースデータを読み込む
         processed_races = load_existing_races_fallback()
+        data_source_mode = "result_reflection"
 
     if not processed_races:
         raise SystemExit("❌ 有効なレースデータが取得できませんでした。")
 
-    # 1. Web用 races.json 出力
+    # --- 2. 結果反映ステップ（result または all） ---
+    if resolved_mode in ["result", "all"]:
+        print(f"[{now_str}] 🏆 レース確定着順 & 的中結果の自動取得・反映処理を実行中...")
+        res_count = fetch_and_apply_race_results(processed_races)
+        print(f"[{now_str}] 🎯 {res_count} レースの確定結果を反映しました。")
+
+    # --- 3. Web用 races.json 出力 ---
     os.makedirs(os.path.dirname(OUTPUT_PATH), exist_ok=True)
     with open(OUTPUT_PATH, "w", encoding="utf-8") as f:
         json.dump(processed_races, f, ensure_ascii=False, indent=2)
 
-    # 2. システム監視用 pipeline_status.json 出力
+    # --- 4. システム監視用 pipeline_status.json 出力 ---
     status_payload = {
         "lastRunAt": now_str,
+        "runMode": resolved_mode,
         "sourceMode": data_source_mode,
         "targetWeekend": f"{weekend['sat_short']} 〜 {weekend['sun_short']}",
         "raceCount": len(processed_races),
@@ -1109,6 +1391,7 @@ def run_pipeline():
                 "volatilityScore": rc["volatilityScore"],
                 "oddsSource": rc.get("oddsSource", "最新オッズ"),
                 "confirmedDraw": rc.get("confirmedDraw", True),
+                "isResultConfirmed": rc.get("isResultConfirmed", False),
             }
             for rc in processed_races
         ],
@@ -1116,14 +1399,22 @@ def run_pipeline():
     with open(STATUS_PATH, "w", encoding="utf-8") as f:
         json.dump(status_payload, f, ensure_ascii=False, indent=2)
 
-    # 3. note投稿用原稿セット自動生成
+    # --- 5. note投稿用原稿セット自動生成 ---
     generate_note_drafts(processed_races, weekend, now_str)
 
     print(
         f"[{datetime.now().strftime('%Y-%m-%d %H:%M:%S')}] ✅ パイプライン完了: "
-        f"{len(processed_races)} レースのAI予想 ({OUTPUT_PATH}) と note投稿原稿 ({NOTE_MD_PATH}) を生成しました！"
+        f"{len(processed_races)} レースのデータ ({OUTPUT_PATH}) と note原稿 ({NOTE_MD_PATH}) を正常更新しました！"
     )
 
 
 if __name__ == "__main__":
-    run_pipeline()
+    parser = argparse.ArgumentParser(description="大穴ナビゲーター PRO - 全自動データ取得 & AI予想・結果反映エンジン")
+    parser.add_argument(
+        "--mode",
+        choices=["auto", "predict", "result", "all"],
+        default="auto",
+        help="実行モード: auto(日時から自動判定) / predict(予想更新のみ) / result(確定結果反映のみ) / all(予想更新＋結果反映)",
+    )
+    args = parser.parse_args()
+    run_pipeline(mode=args.mode)

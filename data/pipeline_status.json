@@ -1,8 +1,8 @@
 {
-  "lastRunAt": "2026-11-22 17:00:01",
-  "runMode": "result",
-  "sourceMode": "result_reflection",
-  "targetWeekend": "11/21(土) 〜 11/22(日)",
+  "lastRunAt": "2026-11-24 11:04:44",
+  "runMode": "predict",
+  "sourceMode": "cached_fallback",
+  "targetWeekend": "11/28(土) 〜 11/29(日)",
   "raceCount": 4,
   "races": [
     {
