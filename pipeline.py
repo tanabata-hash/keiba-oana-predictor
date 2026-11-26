@@ -314,6 +314,14 @@ def fetch_odds_map(race_id):
 
 def assign_stable_race_id(title, venue_id, round_num, netkeiba_race_id):
     """既存フロントエンド互換の固定レースIDまたは一意IDを割り当てる"""
+    if "ジャパン" in title:
+        return "race-japan-cup"
+    if "京阪" in title:
+        return "race-keihan-hai"
+    if "京都2歳" in title or "京都２歳" in title:
+        return "race-kyoto-nisai"
+    if "キャピタル" in title:
+        return "race-capital-s"
     if "エリザベス" in title:
         return "race-elizabeth"
     if "デイリー" in title:
@@ -503,8 +511,8 @@ def discover_and_fetch_live_weekend_races(weekend):
         list_url = f"https://race.netkeiba.com/top/race_list_sub.html?kaisai_date={ymd}"
         html_txt = http_fetch_text(list_url, timeout=10)
         all_ids = sorted(set(re.findall(r"race_id=(\d{12})", html_txt)))
-        main_11r_ids = [rid for rid in all_ids if rid.endswith("11")]
-        for rid in main_11r_ids:
+        main_race_ids = [rid for rid in all_ids if rid[-2:] in ["11", "12"]]
+        for rid in main_race_ids:
             race_obj = parse_live_race(rid, d_full, d_short)
             if len(race_obj["runners"]) >= 5:
                 discovered.append(race_obj)
