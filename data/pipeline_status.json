@@ -1,5 +1,5 @@
 {
-  "lastRunAt": "2026-11-26 11:15:55",
+  "lastRunAt": "2026-11-26 18:00:01",
   "runMode": "predict",
   "sourceMode": "live_netkeiba",
   "targetWeekend": "11/28(土) 〜 11/29(日)",
@@ -13,7 +13,7 @@
       "runnersCount": 18,
       "volatilityScore": 66,
       "oddsSource": "最新予想オッズ",
-      "confirmedDraw": false,
+      "confirmedDraw": true,
       "isResultConfirmed": false
     },
     {
@@ -21,8 +21,8 @@
       "title": "京阪杯 (G3)",
       "date_short": "11/29(日)",
       "postTime": "16:15発走",
-      "runnersCount": 22,
-      "volatilityScore": 82,
+      "runnersCount": 18,
+      "volatilityScore": 76,
       "oddsSource": "最新予想オッズ",
       "confirmedDraw": false,
       "isResultConfirmed": false
@@ -32,8 +32,8 @@
       "title": "京都2歳S (G3)",
       "date_short": "11/28(土)",
       "postTime": "15:40発走",
-      "runnersCount": 12,
-      "volatilityScore": 70,
+      "runnersCount": 11,
+      "volatilityScore": 66,
       "oddsSource": "最新予想オッズ",
       "confirmedDraw": false,
       "isResultConfirmed": false
@@ -43,7 +43,7 @@
       "title": "キャピタルS (L)",
       "date_short": "11/28(土)",
       "postTime": "15:25発走",
-      "runnersCount": 21,
+      "runnersCount": 18,
       "volatilityScore": 80,
       "oddsSource": "最新予想オッズ",
       "confirmedDraw": false,
