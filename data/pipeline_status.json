@@ -1,5 +1,5 @@
 {
-  "lastRunAt": "2026-11-27 18:00:01",
+  "lastRunAt": "2026-11-28 08:30:01",
   "runMode": "predict",
   "sourceMode": "live_netkeiba",
   "targetWeekend": "11/28(土) 〜 11/29(日)",
@@ -11,8 +11,8 @@
       "date_short": "11/29(日)",
       "postTime": "15:40発走",
       "runnersCount": 18,
-      "volatilityScore": 66,
-      "oddsSource": "最新予想オッズ",
+      "volatilityScore": 80,
+      "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
       "isResultConfirmed": false
     },
@@ -22,8 +22,8 @@
       "date_short": "11/29(日)",
       "postTime": "16:15発走",
       "runnersCount": 18,
-      "volatilityScore": 76,
-      "oddsSource": "最新予想オッズ",
+      "volatilityScore": 82,
+      "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
       "isResultConfirmed": false
     },
@@ -33,8 +33,8 @@
       "date_short": "11/28(土)",
       "postTime": "15:40発走",
       "runnersCount": 11,
-      "volatilityScore": 60,
-      "oddsSource": "最新予想オッズ",
+      "volatilityScore": 66,
+      "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
       "isResultConfirmed": false
     },
@@ -45,7 +45,7 @@
       "postTime": "15:25発走",
       "runnersCount": 18,
       "volatilityScore": 80,
-      "oddsSource": "最新予想オッズ",
+      "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
       "isResultConfirmed": false
     }
