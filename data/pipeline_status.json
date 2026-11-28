@@ -1,7 +1,7 @@
 {
-  "lastRunAt": "2026-11-28 08:30:01",
-  "runMode": "predict",
-  "sourceMode": "live_netkeiba",
+  "lastRunAt": "2026-11-28 17:00:01",
+  "runMode": "result",
+  "sourceMode": "result_reflection",
   "targetWeekend": "11/28(土) 〜 11/29(日)",
   "raceCount": 4,
   "races": [
@@ -36,7 +36,7 @@
       "volatilityScore": 66,
       "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
-      "isResultConfirmed": false
+      "isResultConfirmed": true
     },
     {
       "id": "race-capital-s",
@@ -47,7 +47,7 @@
       "volatilityScore": 80,
       "oddsSource": "JRA公式リアルタイムオッズ",
       "confirmedDraw": true,
-      "isResultConfirmed": false
+      "isResultConfirmed": true
     }
   ]
 }
